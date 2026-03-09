@@ -1,0 +1,46 @@
+name: Sync Release Manifest
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Optional tag to pin instead of the latest stable release
+        required: false
+        type: string
+  schedule:
+    - cron: "17 */6 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Update release manifest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_TAG: ${{ inputs.release_tag }}
+        run: node scripts/update-release-manifest.mjs
+
+      - name: Commit manifest changes
+        run: |
+          if git diff --quiet -- site/release-manifest.json; then
+            echo "No manifest changes to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add site/release-manifest.json
+          git commit -m "chore: sync release manifest"
+          git push
