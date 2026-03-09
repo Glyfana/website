@@ -3,6 +3,7 @@ const MANIFEST_URL = './release-manifest.json';
 const DEFAULT_MANIFEST = {
   productRepoUrl: 'https://github.com/Glyfana/Glyfana',
   websiteRepoUrl: '',
+  notesBranch: 'main',
   assetMatchers: [
     { type: 'exact', value: 'Glyfana-0.1.3 Setup.exe' },
     { type: 'regex', value: 'setup\\.(exe|msi)$' },
@@ -15,20 +16,14 @@ const DEFAULT_MANIFEST = {
   },
   fallbackRelease: {
     version: 'v0.1.3',
-    title: 'Current stable build',
+    title: 'Current tagged build',
     publishedAt: '',
-    setupFileName: 'Glyfana-0.1.3 Setup.exe',
+    setupFileName: '',
     sizeBytes: null,
-    downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.3/Glyfana-0.1.3%20Setup.exe',
-    releaseUrl: 'https://github.com/Glyfana/Glyfana/releases/tag/v0.1.3',
-    notesUrl: 'https://github.com/Glyfana/Glyfana/releases/tag/v0.1.3',
-    assets: [
-      {
-        name: 'Glyfana-0.1.3 Setup.exe',
-        sizeBytes: null,
-        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.3/Glyfana-0.1.3%20Setup.exe',
-      },
-    ],
+    downloadUrl: '',
+    releaseUrl: 'https://github.com/Glyfana/Glyfana/tags',
+    notesUrl: 'https://github.com/Glyfana/Glyfana/blob/main/RELEASE_NOTES_0.1.3.md',
+    assets: [],
   },
 };
 
@@ -185,6 +180,23 @@ function buildReleaseApiUrl(repoUrl) {
   return `https://api.github.com/repos/${info.owner}/${info.repo}/releases/latest`;
 }
 
+function buildTagsApiUrl(repoUrl) {
+  const info = getRepoInfoFromGitHubUrl(repoUrl);
+  if (!info) return '';
+  return `https://api.github.com/repos/${info.owner}/${info.repo}/tags?per_page=20`;
+}
+
+function getVersionNumber(version) {
+  return String(version || '').trim().replace(/^v/i, '');
+}
+
+function buildNotesUrl(productRepo, version, notesBranch) {
+  const normalizedVersion = getVersionNumber(version);
+  if (!productRepo || !normalizedVersion) return '';
+  const branch = String(notesBranch || 'main').trim() || 'main';
+  return `${productRepo}/blob/${branch}/RELEASE_NOTES_${normalizedVersion}.md`;
+}
+
 function getIntegrityValue(asset) {
   const digest = typeof asset?.digest === 'string' ? asset.digest : '';
   if (digest.toLowerCase().startsWith('sha256:')) {
@@ -269,15 +281,16 @@ function applyReleaseModel(model, options) {
   const integrityAlgorithm = options?.integrityAlgorithm || 'SHA256';
   const hasIntegrity = Boolean(model.integrityValue);
   const integrityValue = hasIntegrity ? model.integrityValue : `${integrityAlgorithm} unavailable`;
+  const installerName = model.setupFileName || 'No public installer published';
 
   setText('release-title', model.title || 'Latest stable build');
   setText('release-version', model.version || 'Latest');
   setText('release-date', formatDate(model.publishedAt));
   setText('release-size', formatBytes(model.sizeBytes));
-  setText('installer-name', model.setupFileName || 'See release assets');
+  setText('installer-name', installerName);
   setText('release-sha', integrityValue);
   setText('release-sha-inline', integrityValue);
-  setText('verify-command', buildVerifyCommand(model.setupFileName));
+  setText('verify-command', buildVerifyCommand(model.setupFileName || 'installer.exe'));
 
   setLink('.js-download', model.downloadUrl || '');
   setLink('.js-release', model.releaseUrl || '');
@@ -287,9 +300,10 @@ function applyReleaseModel(model, options) {
 
 function fallbackReleaseToModel(manifest, productRepo) {
   const fallback = manifest.fallbackRelease || {};
-  const releaseUrl = fallback.releaseUrl || `${productRepo}/releases/latest`;
-  const downloadUrl = fallback.downloadUrl || releaseUrl;
-  const notesUrl = fallback.notesUrl || releaseUrl;
+  const releaseUrl = fallback.releaseUrl || `${productRepo}/tags`;
+  const downloadUrl = fallback.downloadUrl || '';
+  const notesUrl =
+    fallback.notesUrl || buildNotesUrl(productRepo, fallback.version, manifest.notesBranch) || releaseUrl;
   const setupFileName = fallback.setupFileName || '';
   const sizeBytes = Number.isFinite(fallback.sizeBytes) ? fallback.sizeBytes : null;
   const assets = Array.isArray(fallback.assets)
@@ -316,6 +330,38 @@ function fallbackReleaseToModel(manifest, productRepo) {
   };
 }
 
+async function loadLatestTaggedModel(manifest, productRepo) {
+  const tagsApiUrl = buildTagsApiUrl(productRepo);
+  if (!tagsApiUrl) throw new Error('GitHub repo is not configured.');
+
+  const response = await fetch(tagsApiUrl, {
+    headers: { Accept: 'application/vnd.github+json' },
+    cache: 'no-store',
+  });
+
+  if (!response.ok) throw new Error(`GitHub tag request failed: ${response.status}`);
+
+  const tags = await response.json();
+  const latestTag = Array.isArray(tags) ? tags[0] : null;
+  if (!latestTag?.name) throw new Error('No tags found.');
+
+  const releaseUrl = `${productRepo}/tree/${encodeURIComponent(latestTag.name)}`;
+  const notesUrl = buildNotesUrl(productRepo, latestTag.name, manifest.notesBranch) || `${productRepo}/tags`;
+
+  return {
+    title: 'Current tagged build',
+    version: latestTag.name,
+    publishedAt: '',
+    setupFileName: '',
+    sizeBytes: null,
+    downloadUrl: '',
+    releaseUrl,
+    notesUrl,
+    integrityValue: '',
+    assets: [],
+  };
+}
+
 async function loadLatestReleaseModel(manifest, productRepo) {
   const apiUrl = buildReleaseApiUrl(productRepo);
   if (!apiUrl) throw new Error('GitHub repo is not configured.');
@@ -324,6 +370,10 @@ async function loadLatestReleaseModel(manifest, productRepo) {
     headers: { Accept: 'application/vnd.github+json' },
     cache: 'no-store',
   });
+
+  if (response.status === 404) {
+    return loadLatestTaggedModel(manifest, productRepo);
+  }
 
   if (!response.ok) throw new Error(`GitHub API request failed: ${response.status}`);
 
@@ -404,8 +454,13 @@ async function init() {
     applyReleaseModel(liveModel, {
       integrityAlgorithm: manifest.integrity?.algorithm,
     });
-    setReleaseStatus('live', 'Latest release loaded from GitHub');
-    updateRepoStatus(productRepo, websiteRepo, 'live GitHub release');
+    if (liveModel.downloadUrl) {
+      setReleaseStatus('live', 'Latest release loaded from GitHub');
+      updateRepoStatus(productRepo, websiteRepo, 'live GitHub release');
+    } else {
+      setReleaseStatus('fallback', 'No public installer published yet');
+      updateRepoStatus(productRepo, websiteRepo, 'latest Git tag');
+    }
   } catch {
     setReleaseStatus('fallback', 'Using pinned release metadata');
     updateRepoStatus(productRepo, websiteRepo, 'fallback metadata');

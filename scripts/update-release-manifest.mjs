@@ -26,6 +26,16 @@ function normalizeVersion(value) {
   return String(value || '').trim().replace(/^refs\/tags\//, '');
 }
 
+function getVersionNumber(value) {
+  return normalizeVersion(value).replace(/^v/i, '');
+}
+
+function buildNotesUrl(productRepoUrl, version, notesBranch = 'main') {
+  const normalizedVersion = getVersionNumber(version);
+  if (!productRepoUrl || !normalizedVersion) return '';
+  return `${productRepoUrl}/blob/${notesBranch}/RELEASE_NOTES_${normalizedVersion}.md`;
+}
+
 function matchesAsset(assetName, matcher) {
   const name = String(assetName || '');
   const value = String(matcher?.value || '');
@@ -80,10 +90,6 @@ async function loadManifest() {
 
 async function fetchRelease(productRepoUrl) {
   const { owner, repo } = parseGitHubRepo(productRepoUrl);
-  const endpoint = releaseTag
-    ? `https://api.github.com/repos/${owner}/${repo}/releases/tags/${encodeURIComponent(releaseTag)}`
-    : `https://api.github.com/repos/${owner}/${repo}/releases/latest`;
-
   const headers = {
     Accept: 'application/vnd.github+json',
     'User-Agent': 'glyfana-website-sync',
@@ -94,16 +100,73 @@ async function fetchRelease(productRepoUrl) {
     headers.Authorization = `Bearer ${token}`;
   }
 
-  const response = await fetch(endpoint, { headers });
-  if (!response.ok) {
-    const body = await response.text();
-    throw new Error(`GitHub API ${response.status}: ${body.slice(0, 200)}`);
+  const releaseEndpoint = releaseTag
+    ? `https://api.github.com/repos/${owner}/${repo}/releases/tags/${encodeURIComponent(releaseTag)}`
+    : `https://api.github.com/repos/${owner}/${repo}/releases/latest`;
+
+  const releaseResponse = await fetch(releaseEndpoint, { headers });
+  if (releaseResponse.ok) {
+    const release = await releaseResponse.json();
+    return { kind: 'release', data: release };
   }
 
-  return response.json();
+  if (releaseResponse.status !== 404) {
+    const body = await releaseResponse.text();
+    throw new Error(`GitHub API ${releaseResponse.status}: ${body.slice(0, 200)}`);
+  }
+
+  const tagsEndpoint = `https://api.github.com/repos/${owner}/${repo}/tags?per_page=20`;
+  const tagsResponse = await fetch(tagsEndpoint, { headers });
+  if (!tagsResponse.ok) {
+    const body = await tagsResponse.text();
+    throw new Error(`GitHub tags API ${tagsResponse.status}: ${body.slice(0, 200)}`);
+  }
+
+  const tags = await tagsResponse.json();
+  const normalizedRequestedTag = normalizeVersion(releaseTag);
+  const tag = normalizedRequestedTag
+    ? tags.find((item) => normalizeVersion(item?.name) === normalizedRequestedTag)
+    : tags[0];
+
+  if (!tag?.name) {
+    throw new Error('No release or tag is available for this repository.');
+  }
+
+  return { kind: 'tag', data: tag };
 }
 
-function buildNextManifest(currentManifest, release, productRepoUrl) {
+function buildNextManifest(currentManifest, payload, productRepoUrl) {
+  const notesBranch = String(currentManifest.notesBranch || 'main').trim() || 'main';
+
+  if (payload.kind === 'tag') {
+    const tag = payload.data;
+    const version = normalizeVersion(tag.name);
+
+    return {
+      ...currentManifest,
+      productRepoUrl,
+      integrity: {
+        algorithm: 'SHA256',
+        value:
+          version === normalizeVersion(currentManifest?.fallbackRelease?.version || '')
+            ? String(currentManifest?.integrity?.value || '').trim()
+            : '',
+      },
+      fallbackRelease: {
+        version,
+        title: 'Current tagged build',
+        publishedAt: '',
+        setupFileName: '',
+        sizeBytes: null,
+        downloadUrl: '',
+        releaseUrl: `${productRepoUrl}/tree/${encodeURIComponent(version)}`,
+        notesUrl: buildNotesUrl(productRepoUrl, version, notesBranch) || `${productRepoUrl}/tags`,
+        assets: [],
+      },
+    };
+  }
+
+  const release = payload.data;
   const assets = Array.isArray(release.assets) ? release.assets : [];
   const installerAsset = pickInstallerAsset(assets, currentManifest.assetMatchers);
   const releaseVersion = normalizeVersion(release.tag_name || release.name || '');
@@ -143,8 +206,8 @@ async function main() {
     throw new Error('productRepoUrl is missing from release-manifest.json');
   }
 
-  const release = await fetchRelease(productRepoUrl);
-  const nextManifest = buildNextManifest(manifest, release, productRepoUrl);
+  const payload = await fetchRelease(productRepoUrl);
+  const nextManifest = buildNextManifest(manifest, payload, productRepoUrl);
   const nextJson = `${JSON.stringify(nextManifest, null, 2)}\n`;
 
   if (dryRun) {
