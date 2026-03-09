@@ -1,4 +1,6 @@
-const MANIFEST_URL = './release-manifest.json';
+const BUILD_ID =
+  document.querySelector('meta[name="build-id"]')?.getAttribute('content')?.trim() || 'dev';
+const MANIFEST_URL = `./release-manifest.json?v=${encodeURIComponent(BUILD_ID)}`;
 
 const DEFAULT_MANIFEST = {
   productRepoUrl: 'https://github.com/Glyfana/Glyfana',
