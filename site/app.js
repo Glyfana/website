@@ -1,7 +1,7 @@
 const RELEASE_NOTES_FILE = 'RELEASE_NOTES_0.1.3.md';
 const SETUP_FILE_NAME = 'Glyfana-0.1.3 Setup.exe';
 const PRODUCT_DEFAULT_BRANCH = 'master';
-const PRODUCT_REPO_URL = 'https://github.com/Glyfana/glyfana';
+const PRODUCT_REPO_URL = 'https://github.com/Glyfana/Glyfana';
 const WEBSITE_REPO_URL = '';
 
 function normalizeRepoUrl(value) {
