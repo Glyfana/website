@@ -26,7 +26,7 @@ This folder contains a static GitHub Pages site for distributing the latest Glyf
 
 1. Keep the `site/` folder in the website repo.
 2. Copy `.github/workflows/pages.yml` into the website repo.
-3. Push to `main` or `master`.
+3. Push to `main`.
 4. Enable GitHub Pages with GitHub Actions as the source.
 
 ## Automation
