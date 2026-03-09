@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Glyfana | Markdown Editor</title>
+    <meta
+      name="description"
+      content="Glyfana is a Typora-style Markdown editor for Windows with autosave, recovery, WYSIWYG and source editing."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="bg-orb bg-orb--one" aria-hidden="true"></div>
+    <div class="bg-orb bg-orb--two" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand__dot" aria-hidden="true"></span>
+        <span class="brand__name">Glyfana</span>
+      </div>
+      <nav class="nav">
+        <a href="#features">Features</a>
+        <a href="#release">Release</a>
+      </nav>
+    </header>
+
+    <main class="layout">
+      <section class="hero reveal">
+        <p class="hero__eyebrow">Markdown Editor for Windows</p>
+        <h1>Write Fast. Keep It Safe. Ship in Markdown.</h1>
+        <p class="hero__desc">
+          Glyfana combines Typora-style writing flow with autosave, conflict handling, and recovery for local-first work.
+        </p>
+        <div class="actions">
+          <a class="btn btn--primary js-download" href="#" target="_blank" rel="noreferrer">Download Setup</a>
+          <a class="btn js-release" href="#" target="_blank" rel="noreferrer">Latest Release</a>
+          <a class="btn btn--ghost js-repo" href="#" target="_blank" rel="noreferrer">GitHub</a>
+        </div>
+      </section>
+
+      <section id="features" class="cards reveal">
+        <article class="card">
+          <h2>Editing Flow</h2>
+          <p>Switch between WYSIWYG and Source mode quickly, and handle multiple documents in tab-based sessions.</p>
+        </article>
+        <article class="card">
+          <h2>Reliability</h2>
+          <p>Idle autosave, draft recovery, and external file conflict checks reduce data-loss risk.</p>
+        </article>
+        <article class="card">
+          <h2>Export + Search</h2>
+          <p>Export to HTML/PDF and run scoped find/replace across current or all open tabs.</p>
+        </article>
+      </section>
+
+      <section id="release" class="release reveal">
+        <div class="release__head">
+          <h2>Current Stable</h2>
+          <span class="pill">v0.1.3</span>
+        </div>
+        <p class="release__meta">Artifact: <code>Glyfana-0.1.3 Setup.exe</code></p>
+        <p class="release__meta">
+          SHA256:
+          <code>BD8DFAAAE44FAF2BD59C060633592F7FB5D2A8888AB52C440629412A5CA8E70B</code>
+        </p>
+        <div class="actions">
+          <a class="btn btn--primary js-download" href="#" target="_blank" rel="noreferrer">Download Setup</a>
+          <a class="btn js-notes" href="#" target="_blank" rel="noreferrer">Release Notes</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>(c) <span id="year"></span> Glyfana</span>
+      <span id="repo-status">Repository link: pending</span>
+    </footer>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
