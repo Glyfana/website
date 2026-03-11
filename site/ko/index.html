@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="build-id" content="20260311-mobile-menu" />
+    <meta name="build-id" content="20260311-feature-copy" />
     <meta name="manifest-path" content="../release-manifest.json" />
     <title>Glyfana 다운로드 | Windows 마크다운 에디터</title>
     <meta
@@ -13,9 +13,9 @@
     <meta name="robots" content="index,follow" />
     <meta name="theme-color" content="#0b7b75" />
     <link rel="canonical" href="https://glyfana.github.io/website/ko/" />
-    <link rel="icon" type="image/svg+xml" href="../assets/glyfana-emblem.svg?v=20260311-mobile-menu" />
-    <link rel="icon" type="image/png" sizes="512x512" href="../assets/glyfana-emblem.png?v=20260311-mobile-menu" />
-    <link rel="apple-touch-icon" href="../assets/glyfana-emblem.png?v=20260311-mobile-menu" />
+    <link rel="icon" type="image/svg+xml" href="../assets/glyfana-emblem.svg?v=20260311-feature-copy" />
+    <link rel="icon" type="image/png" sizes="512x512" href="../assets/glyfana-emblem.png?v=20260311-feature-copy" />
+    <link rel="apple-touch-icon" href="../assets/glyfana-emblem.png?v=20260311-feature-copy" />
     <link rel="alternate" hreflang="en" href="https://glyfana.github.io/website/" />
     <link rel="alternate" hreflang="ko" href="https://glyfana.github.io/website/ko/" />
     <link rel="alternate" hreflang="x-default" href="https://glyfana.github.io/website/" />
@@ -31,7 +31,7 @@
     <meta property="og:url" content="https://glyfana.github.io/website/ko/" />
     <meta
       property="og:image"
-      content="https://glyfana.github.io/website/assets/og-ko.png?v=20260311-mobile-menu"
+      content="https://glyfana.github.io/website/assets/og-ko.png?v=20260311-feature-copy"
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -44,7 +44,7 @@
     />
     <meta
       name="twitter:image"
-      content="https://glyfana.github.io/website/assets/og-ko.png?v=20260311-mobile-menu"
+      content="https://glyfana.github.io/website/assets/og-ko.png?v=20260311-feature-copy"
     />
     <meta name="twitter:image:alt" content="Glyfana 한국어 다운로드 페이지와 에디터 미리보기" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -53,8 +53,8 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap"
       rel="stylesheet"
     />
-    <script src="../locale-router.js?v=20260311-mobile-menu"></script>
-    <link rel="stylesheet" href="../styles.css?v=20260311-mobile-menu" />
+    <script src="../locale-router.js?v=20260311-feature-copy"></script>
+    <link rel="stylesheet" href="../styles.css?v=20260311-feature-copy" />
   </head>
   <body>
     <div class="page-noise" aria-hidden="true"></div>
@@ -63,7 +63,7 @@
 
     <header class="topbar">
       <a class="brand" href="#top" aria-label="Glyfana 홈">
-        <img class="brand__mark" src="../assets/glyfana-emblem.svg?v=20260311-mobile-menu" alt="" aria-hidden="true" />
+        <img class="brand__mark" src="../assets/glyfana-emblem.svg?v=20260311-feature-copy" alt="" aria-hidden="true" />
         <span class="brand__name">Glyfana</span>
       </a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu">
@@ -273,19 +273,77 @@
         </article>
       </section>
 
-      <section id="features" class="feature-grid reveal">
-        <article class="card">
-          <h2>집중형 편집</h2>
-          <p>Glyfana를 Typora 스타일의 Markdown 에디터로 소개하고, 문서에 몰입할 수 있는 흐름을 전면에 둡니다.</p>
-        </article>
-        <article class="card">
-          <h2>복구 기본 탑재</h2>
-          <p>자동 저장, 초안 복구, 충돌 처리 같은 핵심 안정성 기능을 설치 버튼 바로 옆에서 설명합니다.</p>
-        </article>
-        <article class="card">
-          <h2>릴리스 전달</h2>
-          <p>설치 파일, 릴리스 노트, 자산 목록을 GitHub와 연결해 사용자가 설치 전에 근거를 직접 확인하게 합니다.</p>
-        </article>
+      <section id="features" class="features reveal">
+        <div class="section-head">
+          <p class="eyebrow">기능</p>
+          <h2>설치 버튼을 누르기 전에, 패키징된 앱이 실제로 무엇을 하는지 먼저 설명합니다.</h2>
+          <p class="section-copy">
+            Glyfana는 단순한 설치 파일이 아닙니다. 이 섹션에서는 에디터 흐름, 이미지 처리, 복구, 업데이트,
+            검증 방식까지 패키지 앱이 제공하는 기능을 구체적으로 정리합니다.
+          </p>
+        </div>
+        <div class="feature-grid">
+          <article class="card">
+            <p class="card__eyebrow">편집 흐름</p>
+            <h2>Typora 스타일 WYSIWYG 편집과 실제 소스 모드를 함께 제공합니다.</h2>
+            <p>기본 화면은 렌더링된 문서에 가깝게 유지하면서도, 정밀한 수정이 필요할 때는 원문 Markdown으로 바로 내려갈 수 있습니다.</p>
+            <ul class="card-list">
+              <li>Milkdown과 ProseMirror 기반의 WYSIWYG Markdown 편집</li>
+              <li>CodeMirror 6 소스 모드 전환으로 원문 직접 수정 가능</li>
+              <li>Shiki 기반 코드 블록 하이라이트로 기술 문서 가독성 유지</li>
+            </ul>
+          </article>
+          <article class="card">
+            <p class="card__eyebrow">이미지 워크플로</p>
+            <h2>이미지를 드롭하거나 붙여넣고, 노트 옆에 자산을 정리합니다.</h2>
+            <p>로컬 이미지를 앱 내부에 숨기지 않고 문서 옆에 두기 때문에, 파일을 옮겨도 자산 구조를 추적하기 쉽습니다.</p>
+            <ul class="card-list">
+              <li>드래그 앤 드롭이나 붙여넣기로 이미지를 바로 삽입</li>
+              <li>저장된 파일은 같은 위치의 <code>&lt;note&gt;.assets/</code> 폴더에 자산 저장</li>
+              <li>상대 경로와 <code>mdlocal://</code> 렌더링으로 개발 환경과 패키지 앱 모두에서 미리보기 유지</li>
+            </ul>
+          </article>
+          <article class="card">
+            <p class="card__eyebrow">자동 저장</p>
+            <h2>저장된 문서와 새 초안 각각에 맞는 복구 경로가 있습니다.</h2>
+            <p>문서가 실제 파일에 연결돼 있는지 여부에 따라 idle autosave 동작이 달라져, 작업 상태에 맞는 복구가 이뤄집니다.</p>
+            <ul class="card-list">
+              <li>저장 경로가 있는 문서는 유휴 시 자동으로 디스크에 저장</li>
+              <li>새 문서는 앱 userData에 초안 형태로 자동 저장</li>
+              <li>앱 종료나 크래시 이후에도 초안 복구와 복원 흐름 제공</li>
+            </ul>
+          </article>
+          <article class="card">
+            <p class="card__eyebrow">파일 안전성</p>
+            <h2>저장하지 않은 변경과 외부 수정 충돌을 별도 상태로 다룹니다.</h2>
+            <p>디스크 파일이 항상 우선이라고 가정하지 않고, 로컬 작업이 덮어써지기 전에 선택지를 먼저 보여줍니다.</p>
+            <ul class="card-list">
+              <li>저장 안 된 변경이 있으면 창 닫기나 다른 파일 열기 전에 경고</li>
+              <li>문서가 열려 있는 동안 외부 파일 변경을 감시</li>
+              <li>다시 불러오기, 계속 편집, 다른 이름으로 저장, 덮어쓰기 중에서 선택 가능</li>
+            </ul>
+          </article>
+          <article class="card">
+            <p class="card__eyebrow">업데이트</p>
+            <h2>설치 후에도 GitHub 기반 업데이트 흐름이 이어집니다.</h2>
+            <p>이 웹사이트가 보는 릴리스 채널을 앱도 계속 추적할 수 있으므로, 사용자는 새 빌드를 수동으로 찾지 않아도 됩니다.</p>
+            <ul class="card-list">
+              <li>패키징된 빌드는 GitHub Releases 기반 자동 업데이트 가능</li>
+              <li>앱 시작 시와 이후 매시간 백그라운드 업데이트 확인</li>
+              <li>Help 메뉴 확인과 재시작 프롬프트로 수동/인앱 업데이트 모두 지원</li>
+            </ul>
+          </article>
+          <article class="card">
+            <p class="card__eyebrow">검증</p>
+            <h2>설치 전에 신뢰 근거를 같은 페이지에 남깁니다.</h2>
+            <p>사용자는 설치를 실행하기 전에 어떤 변경이 있었는지, 어떤 자산이 올라왔는지, 해시는 무엇인지 한 번에 확인할 수 있습니다.</p>
+            <ul class="card-list">
+              <li>메인 버튼은 현재 안정 <code>Setup.exe</code> 설치 파일을 가리킴</li>
+              <li>릴리스 노트, 자산 목록, SHA256을 같은 페이지에서 확인 가능</li>
+              <li>라이브 GitHub API가 실패해도 pinned manifest로 기본 정보 유지</li>
+            </ul>
+          </article>
+        </div>
       </section>
 
       <section id="install" class="install reveal">

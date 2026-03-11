@@ -90,6 +90,7 @@ body {
 .topbar,
 .hero,
 .signal,
+.features,
 .showcase,
 .release-summary,
 .card,
@@ -526,6 +527,14 @@ body {
   gap: 14px;
 }
 
+.features {
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
 .showcase {
   grid-template-columns: minmax(0, 0.96fr) minmax(0, 1.04fr);
   align-items: center;
@@ -886,6 +895,7 @@ body {
 }
 
 .feature-grid {
+  margin-top: 22px;
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
@@ -896,9 +906,27 @@ body {
   background: rgba(255, 255, 255, 0.74);
 }
 
+.card {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  border: 1px solid rgba(16, 43, 55, 0.1);
+  border-radius: 20px;
+}
+
+.card__eyebrow {
+  margin: 0;
+  color: var(--brand-deep);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .card h2 {
-  margin: 0 0 10px;
-  font-size: 24px;
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.18;
 }
 
 .card p,
@@ -907,6 +935,24 @@ body {
   margin: 0;
   line-height: 1.65;
   font-size: 15px;
+}
+
+.card p:not(.card__eyebrow) {
+  color: var(--muted);
+}
+
+.card-list {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.card-list li::marker {
+  color: var(--accent);
 }
 
 .install,
@@ -1096,7 +1142,10 @@ code {
     grid-template-columns: 1fr;
   }
 
-  .feature-grid,
+  .feature-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .steps,
   .verify__grid {
     grid-template-columns: 1fr;
@@ -1221,6 +1270,10 @@ code {
     grid-template-columns: 1fr;
   }
 
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
   .release-panel {
     order: -1;
   }
@@ -1260,6 +1313,7 @@ code {
   }
 
   .hero,
+  .features,
   .showcase,
   .release-summary,
   .install,
@@ -1321,6 +1375,7 @@ code {
   .workspace-demo__preview ul,
   .release-summary__text,
   .card p,
+  .card-list,
   .step p,
   .verify-card__copy {
     font-size: 14px;
@@ -1371,6 +1426,7 @@ code {
   }
 
   .hero,
+  .features,
   .showcase,
   .release-summary,
   .install,

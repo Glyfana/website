@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="build-id" content="20260311-mobile-menu" />
+    <meta name="build-id" content="20260311-feature-copy" />
     <meta name="manifest-path" content="./release-manifest.json" />
     <title>Glyfana Downloads | Windows Markdown Editor</title>
     <meta
@@ -13,9 +13,9 @@
     <meta name="robots" content="index,follow" />
     <meta name="theme-color" content="#0b7b75" />
     <link rel="canonical" href="https://glyfana.github.io/website/" />
-    <link rel="icon" type="image/svg+xml" href="./assets/glyfana-emblem.svg?v=20260311-mobile-menu" />
-    <link rel="icon" type="image/png" sizes="512x512" href="./assets/glyfana-emblem.png?v=20260311-mobile-menu" />
-    <link rel="apple-touch-icon" href="./assets/glyfana-emblem.png?v=20260311-mobile-menu" />
+    <link rel="icon" type="image/svg+xml" href="./assets/glyfana-emblem.svg?v=20260311-feature-copy" />
+    <link rel="icon" type="image/png" sizes="512x512" href="./assets/glyfana-emblem.png?v=20260311-feature-copy" />
+    <link rel="apple-touch-icon" href="./assets/glyfana-emblem.png?v=20260311-feature-copy" />
     <link rel="alternate" hreflang="en" href="https://glyfana.github.io/website/" />
     <link rel="alternate" hreflang="ko" href="https://glyfana.github.io/website/ko/" />
     <link rel="alternate" hreflang="x-default" href="https://glyfana.github.io/website/" />
@@ -31,7 +31,7 @@
     <meta property="og:url" content="https://glyfana.github.io/website/" />
     <meta
       property="og:image"
-      content="https://glyfana.github.io/website/assets/og-en.png?v=20260311-mobile-menu"
+      content="https://glyfana.github.io/website/assets/og-en.png?v=20260311-feature-copy"
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -44,7 +44,7 @@
     />
     <meta
       name="twitter:image"
-      content="https://glyfana.github.io/website/assets/og-en.png?v=20260311-mobile-menu"
+      content="https://glyfana.github.io/website/assets/og-en.png?v=20260311-feature-copy"
     />
     <meta name="twitter:image:alt" content="Glyfana Windows download page with editor preview" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -53,8 +53,8 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap"
       rel="stylesheet"
     />
-    <script src="./locale-router.js?v=20260311-mobile-menu"></script>
-    <link rel="stylesheet" href="./styles.css?v=20260311-mobile-menu" />
+    <script src="./locale-router.js?v=20260311-feature-copy"></script>
+    <link rel="stylesheet" href="./styles.css?v=20260311-feature-copy" />
   </head>
   <body>
     <div class="page-noise" aria-hidden="true"></div>
@@ -63,7 +63,7 @@
 
     <header class="topbar">
       <a class="brand" href="#top" aria-label="Glyfana home">
-        <img class="brand__mark" src="./assets/glyfana-emblem.svg?v=20260311-mobile-menu" alt="" aria-hidden="true" />
+        <img class="brand__mark" src="./assets/glyfana-emblem.svg?v=20260311-feature-copy" alt="" aria-hidden="true" />
         <span class="brand__name">Glyfana</span>
       </a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu">
@@ -273,19 +273,77 @@
         </article>
       </section>
 
-      <section id="features" class="feature-grid reveal">
-        <article class="card">
-          <h2>Focused Editing</h2>
-          <p>Promote Glyfana as a Typora-style Markdown editor with a writing flow that stays close to the document.</p>
-        </article>
-        <article class="card">
-          <h2>Recovery Built In</h2>
-          <p>Surface the app's autosave, draft recovery, and conflict handling features right next to the installer CTA.</p>
-        </article>
-        <article class="card">
-          <h2>Release Delivery</h2>
-          <p>Keep the installer, release notes, and asset inventory connected to GitHub so users can verify what they are installing.</p>
-        </article>
+      <section id="features" class="features reveal">
+        <div class="section-head">
+          <p class="eyebrow">Features</p>
+          <h2>Spell out what the packaged app can actually do before asking for the install.</h2>
+          <p class="section-copy">
+            Glyfana is more than a setup file. This section explains the editor workflow, image handling, recovery,
+            update path, and verification behavior users get with the packaged build.
+          </p>
+        </div>
+        <div class="feature-grid">
+          <article class="card">
+            <p class="card__eyebrow">Editing Flow</p>
+            <h2>Typora-style Markdown editing with a real source mode.</h2>
+            <p>The main view stays close to the rendered document, but raw Markdown is still one toggle away when precision matters.</p>
+            <ul class="card-list">
+              <li>Milkdown and ProseMirror power the WYSIWYG writing surface</li>
+              <li>CodeMirror 6 source mode lets users drop to plain Markdown instantly</li>
+              <li>Shiki-based code block highlighting keeps technical notes readable</li>
+            </ul>
+          </article>
+          <article class="card">
+            <p class="card__eyebrow">Image Workflow</p>
+            <h2>Drop, paste, and keep images next to the note instead of losing track of assets.</h2>
+            <p>Local media stays portable because Glyfana stores image files beside the document rather than hiding them in app-only storage.</p>
+            <ul class="card-list">
+              <li>Drag and drop or paste images straight into the editor</li>
+              <li>Saved files land in a sibling <code>&lt;note&gt;.assets/</code> directory</li>
+              <li>Relative paths and <code>mdlocal://</code> rendering keep previews working in dev and packaged builds</li>
+            </ul>
+          </article>
+          <article class="card">
+            <p class="card__eyebrow">Autosave</p>
+            <h2>Saved notes and untitled drafts both get their own recovery path.</h2>
+            <p>The app uses idle autosave rules that match whether the note already belongs to a real file on disk.</p>
+            <ul class="card-list">
+              <li>Saved notes write back to disk automatically when the editor is idle</li>
+              <li>Untitled notes are preserved as draft data in the app userData folder</li>
+              <li>Crash recovery and draft restore reduce the odds of losing work between sessions</li>
+            </ul>
+          </article>
+          <article class="card">
+            <p class="card__eyebrow">File Safety</p>
+            <h2>Unsaved changes and external edits are treated as first-class conflicts.</h2>
+            <p>Glyfana does not assume the copy on disk always wins. It surfaces choices before local work gets overwritten.</p>
+            <ul class="card-list">
+              <li>Warns before closing the window or opening another file with unsaved changes</li>
+              <li>Watches for external file changes while the note is open</li>
+              <li>Lets users reload, keep editing, save as, or overwrite intentionally</li>
+            </ul>
+          </article>
+          <article class="card">
+            <p class="card__eyebrow">Updates</p>
+            <h2>Release delivery continues after install with GitHub-backed app updates.</h2>
+            <p>The packaged app can keep checking the same release channel that powers this website, so users do not have to chase new builds manually.</p>
+            <ul class="card-list">
+              <li>Packaged builds can receive automatic updates from GitHub Releases</li>
+              <li>Background checks run on startup and then every hour</li>
+              <li>The Help menu and restart prompt cover manual and in-app update flows</li>
+            </ul>
+          </article>
+          <article class="card">
+            <p class="card__eyebrow">Verification</p>
+            <h2>The install page keeps the trust signals on the surface.</h2>
+            <p>Users can see what changed, which assets were published, and how to verify the build before they run the installer.</p>
+            <ul class="card-list">
+              <li>The main CTA points at the current stable <code>Setup.exe</code> build</li>
+              <li>Release notes, asset inventory, and SHA256 stay on the same page</li>
+              <li>Pinned manifest data remains available when the live GitHub API is unavailable</li>
+            </ul>
+          </article>
+        </div>
       </section>
 
       <section id="install" class="install reveal">

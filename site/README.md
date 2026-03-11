@@ -1,22 +1,55 @@
 # Glyfana Website Deployment
 
-This folder contains a static GitHub Pages site for distributing the latest Glyfana installer.
+This folder contains the static GitHub Pages payload for `https://glyfana.github.io/website/`. The page distributes the latest Glyfana installer and also documents the packaged editor's behavior in enough detail that users can understand the product before installing it.
 
 ## Repo Layout
 
 - App repo with releases: `https://github.com/Glyfana/Glyfana`
 - Website repo for GitHub Pages: `https://github.com/Glyfana/website`
 
-## How It Works
+## User-Facing Sections
 
-1. `site/app.js` requests the latest stable release from the GitHub Releases API.
-2. The page selects the installer asset with the rules from `site/release-manifest.json`.
-3. If the API is unavailable, the page falls back to the pinned release metadata in `site/release-manifest.json`.
+- `Hero`: current Windows installer CTA, release link, source link, and live release metadata
+- `Showcase`: visual mockup of the writing and release workflow
+- `What's New`: structured summary extracted from the latest release notes
+- `Features`: detailed product capabilities including editing flow, image handling, autosave, conflict handling, updates, and verification
+- `Install`: simple download -> verify -> install path
+- `Verify`: published checksum, PowerShell hash command, and release asset inventory
+
+## Product Capabilities Surfaced On The Page
+
+- Typora-style WYSIWYG Markdown editing
+- CodeMirror source mode for raw Markdown
+- Image drag-and-drop and paste support
+- Relative asset storage in `<note>.assets/`
+- Safe local image rendering with `mdlocal://`
+- Code block highlighting
+- Idle autosave for saved notes and draft autosave for untitled notes
+- Crash recovery and draft restore
+- Unsaved changes warnings and external file conflict handling
+- GitHub Release-based in-app update flow
+
+## Runtime Behavior
+
+1. `locale-router.js` selects the English or Korean variant on first visit and remembers explicit user choice.
+2. `app.js` requests the latest stable release from the GitHub Releases API.
+3. The page selects the installer asset with the rules from `release-manifest.json`.
+4. The release body is summarized into the `What's New` card.
+5. The verify section renders the SHA256 value, PowerShell command, and asset list for the current release.
+6. If the API is unavailable, the page falls back to the pinned release metadata in `release-manifest.json`.
 
 ## What To Edit
 
-- `site/release-manifest.json`
-  - `productRepoUrl`: the repository that publishes installer assets
+- `index.html`
+  - English landing page copy and static fallback links
+- `ko/index.html`
+  - Korean landing page copy and static fallback links
+- `styles.css`
+  - layout, motion, responsive behavior, and component styling
+- `app.js`
+  - live release fetch, localization strings, release summary parsing, and mobile menu behavior
+- `release-manifest.json`
+  - `productRepoUrl`: repository that publishes installer assets
   - `websiteRepoUrl`: optional explicit repository URL for the site itself
   - `assetMatchers`: filename rules used to detect the installer asset from the latest release
   - `integrity.value`: published SHA256 for the pinned fallback build
@@ -24,20 +57,21 @@ This folder contains a static GitHub Pages site for distributing the latest Glyf
 
 ## Deployment
 
-1. Keep the `site/` folder in the website repo.
-2. Copy `.github/workflows/pages.yml` into the website repo.
+1. Keep the `site/` folder in the website repo root.
+2. Keep `.github/workflows/pages.yml` in the repository.
 3. Push to `main`.
-4. Enable GitHub Pages with GitHub Actions as the source.
+4. GitHub Pages must be enabled with `GitHub Actions` as the publishing source.
 
 ## Automation
 
-- `.github/workflows/update-release-manifest.yml` refreshes `site/release-manifest.json` every 6 hours.
-- You can also run the workflow manually and optionally provide a tag such as `v0.1.3`.
+- `.github/workflows/update-release-manifest.yml` refreshes `release-manifest.json` every hour.
+- The same workflow can be run manually with `workflow_dispatch`.
 - The workflow commits only when the manifest actually changes.
 - Any manifest commit triggers the Pages deployment workflow because it updates `site/**`.
 
 ## Notes
 
-- The page is static and does not need a backend.
-- For low traffic, the live GitHub API request is usually enough.
-- If you want stronger guarantees at larger scale, generate `release-manifest.json` from CI on every app release.
+- The site is fully static and does not need a backend.
+- For normal traffic, the live GitHub API request is usually sufficient.
+- The pinned manifest exists so downloads and verification details do not disappear when the live API is unavailable.
+- Keep the feature copy aligned with the main app repository when editor capabilities or update behavior change.
