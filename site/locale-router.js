@@ -1,4 +1,5 @@
 const LOCALE_STORAGE_KEY = 'glyfana-locale';
+const AUTO_ROUTE_SESSION_KEY = 'glyfana-locale-autoredirected';
 const SUPPORTED_LOCALES = new Set(['en', 'ko']);
 
 function normalizeLocale(value) {
@@ -11,6 +12,15 @@ function normalizeLocale(value) {
 
 function getCurrentLocale() {
   return document.documentElement.lang?.toLowerCase().startsWith('ko') ? 'ko' : 'en';
+}
+
+function isKoreanPath() {
+  const path = window.location.pathname.replace(/index\.html$/i, '');
+  return /\/ko\/?$/i.test(path);
+}
+
+function isEnglishRootPath() {
+  return !isKoreanPath();
 }
 
 function getStoredLocale() {
@@ -26,6 +36,22 @@ function setStoredLocale(locale) {
 
   try {
     window.localStorage.setItem(LOCALE_STORAGE_KEY, locale);
+  } catch {
+    // Ignore storage errors in private or restricted contexts.
+  }
+}
+
+function hasAutoRoutedThisSession() {
+  try {
+    return window.sessionStorage.getItem(AUTO_ROUTE_SESSION_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+
+function markAutoRoutedThisSession() {
+  try {
+    window.sessionStorage.setItem(AUTO_ROUTE_SESSION_KEY, '1');
   } catch {
     // Ignore storage errors in private or restricted contexts.
   }
@@ -82,9 +108,12 @@ function initLocaleRouting() {
   const requestedLocale = normalizeLocale(new URLSearchParams(window.location.search).get('lang'));
   const currentLocale = getCurrentLocale();
   const storedLocale = getStoredLocale();
+  const onEnglishRoot = isEnglishRootPath();
+  const onKoreanPath = isKoreanPath();
 
   if (requestedLocale) {
     setStoredLocale(requestedLocale);
+    markAutoRoutedThisSession();
     if (requestedLocale === currentLocale) {
       replaceUrlWithoutLangParam();
       return;
@@ -94,14 +123,27 @@ function initLocaleRouting() {
     return;
   }
 
-  if (storedLocale && storedLocale !== currentLocale) {
-    window.location.replace(buildLocaleUrl(storedLocale));
+  if (onKoreanPath) {
+    setStoredLocale('ko');
     return;
   }
 
-  if (currentLocale === 'en') {
+  if (!onEnglishRoot) return;
+
+  if (storedLocale === 'en') {
+    return;
+  }
+
+  if (storedLocale === 'ko' && !hasAutoRoutedThisSession()) {
+    markAutoRoutedThisSession();
+    window.location.replace(buildLocaleUrl('ko'));
+    return;
+  }
+
+  if (currentLocale === 'en' && !storedLocale && !hasAutoRoutedThisSession()) {
     const browserLocale = getBrowserLocale();
     if (browserLocale === 'ko') {
+      markAutoRoutedThisSession();
       window.location.replace(buildLocaleUrl(browserLocale));
     }
   }
