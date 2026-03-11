@@ -26,6 +26,8 @@ body {
 }
 
 body {
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
   font-family: "IBM Plex Sans KR", "Segoe UI", sans-serif;
   color: var(--ink);
   background:
@@ -436,6 +438,7 @@ body {
   margin: 0;
   font-size: 14px;
   line-height: 1.6;
+  overflow-wrap: anywhere;
 }
 
 .signal {
@@ -1026,6 +1029,10 @@ code {
 }
 
 @media (max-width: 1024px) {
+  .layout {
+    gap: 16px;
+  }
+
   .hero {
     grid-template-columns: 1fr;
   }
@@ -1046,8 +1053,15 @@ code {
 }
 
 @media (max-width: 760px) {
+  .layout {
+    margin-top: 14px;
+    gap: 14px;
+  }
+
   .topbar {
     flex-wrap: wrap;
+    gap: 12px;
+    padding: 12px 14px;
   }
 
   .topbar__tools {
@@ -1055,12 +1069,41 @@ code {
     width: 100%;
     margin-left: 0;
     justify-content: space-between;
+    align-items: stretch;
   }
 
   .nav {
     order: 3;
     width: 100%;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .nav a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 0 10px;
+    border: 1px solid rgba(16, 43, 55, 0.12);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.72);
+  }
+
+  .locale-switch {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+
+  .locale-switch__link {
+    min-width: 48px;
+    min-height: 36px;
+  }
+
+  .topbar__cta {
+    flex: 0 0 auto;
+    min-height: 44px;
   }
 
   .signal {
@@ -1074,12 +1117,56 @@ code {
   }
 
   .workspace-demo__sidebar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: flex-start;
     border-right: 0;
     border-bottom: 1px solid rgba(11, 76, 74, 0.10);
   }
 
+  .workspace-demo__sidebar-label {
+    width: 100%;
+  }
+
+  .workspace-demo__note {
+    margin-top: 0;
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+  }
+
   .stat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero__facts,
+  .actions {
+    gap: 8px;
+  }
+
+  .actions .btn,
+  .actions .topbar__cta {
+    width: 100%;
+    min-height: 48px;
+  }
+
+  .hero__facts {
+    display: grid;
     grid-template-columns: 1fr;
+  }
+
+  .release-panel {
+    order: -1;
+  }
+
+  .release-summary__item,
+  .release-summary__empty {
+    padding: 13px 14px 13px 38px;
+  }
+
+  .release-summary__action {
+    min-height: 34px;
   }
 }
 
@@ -1095,9 +1182,16 @@ code {
     padding: 12px 14px;
   }
 
+  .brand {
+    width: 100%;
+  }
+
+  .brand__name {
+    font-size: 20px;
+  }
+
   .nav {
-    gap: 12px;
-    font-size: 13px;
+    grid-template-columns: 1fr;
   }
 
   .hero,
@@ -1117,12 +1211,14 @@ code {
   .verify-card,
   .release-panel,
   .workspace-demo {
-    padding: 18px;
+    padding: 16px;
+    border-radius: 18px;
   }
 
   .workspace-demo__bar {
     flex-direction: column;
     align-items: flex-start;
+    padding: 12px 14px;
   }
 
   .workspace-demo__main,
@@ -1130,9 +1226,50 @@ code {
     padding: 14px;
   }
 
+  .workspace-demo__tabs,
+  .workspace-demo__status {
+    width: 100%;
+  }
+
+  .workspace-demo__tabs {
+    flex-wrap: wrap;
+  }
+
+  .workspace-demo__tab,
+  .workspace-demo__status span,
+  .workspace-demo__pill {
+    min-height: 34px;
+  }
+
+  .workspace-demo__editor,
+  .workspace-demo__preview {
+    min-height: 0;
+    padding: 14px;
+  }
+
   .workspace-demo__editor-title,
   .workspace-demo__preview strong {
     font-size: 20px;
+  }
+
+  .workspace-demo__line,
+  .workspace-demo__preview ul,
+  .release-summary__text,
+  .card p,
+  .step p,
+  .verify-card__copy {
+    font-size: 14px;
+  }
+
+  .hero__desc,
+  .section-copy {
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  .release-summary__card,
+  .signal {
+    padding: 16px;
   }
 
   .footer {
@@ -1154,5 +1291,63 @@ code {
   .asset-list__item {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .asset-list__meta {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 420px) {
+  .topbar,
+  .layout,
+  .footer {
+    width: calc(100% - 16px);
+  }
+
+  .hero,
+  .showcase,
+  .release-summary,
+  .install,
+  .verify {
+    padding: 16px;
+  }
+
+  .hero h1 {
+    font-size: clamp(30px, 10vw, 40px);
+  }
+
+  .release-panel h2,
+  .section-head h2 {
+    font-size: 28px;
+  }
+
+  .stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .topbar__tools {
+    flex-direction: column;
+  }
+
+  .topbar__cta,
+  .locale-switch {
+    width: 100%;
+  }
+
+  .locale-switch {
+    padding: 4px;
+  }
+
+  .workspace-demo {
+    padding: 12px;
+  }
+
+  .workspace-demo__window {
+    border-radius: 20px;
+  }
+
+  .workspace-demo__note {
+    width: 100%;
   }
 }
