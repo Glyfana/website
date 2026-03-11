@@ -14,6 +14,7 @@ This folder contains the static GitHub Pages payload for `https://glyfana.github
 - `What's New`: structured summary extracted from the latest release notes
 - `Features`: detailed product capabilities including editing flow, image handling, autosave, conflict handling, updates, and verification
 - `Install`: simple download -> verify -> install path
+- `FAQ`: answers for image storage, autosave, conflict resolution, updates, and installer verification
 - `Verify`: published checksum, PowerShell hash command, and release asset inventory
 
 ## Product Capabilities Surfaced On The Page
@@ -36,7 +37,8 @@ This folder contains the static GitHub Pages payload for `https://glyfana.github
 3. The page selects the installer asset with the rules from `release-manifest.json`.
 4. The release body is summarized into the `What's New` card.
 5. The verify section renders the SHA256 value, PowerShell command, and asset list for the current release.
-6. If the API is unavailable, the page falls back to the pinned release metadata in `release-manifest.json`.
+6. Clicks on CTA, asset, locale, nav, and FAQ interactions emit analytics hooks for `plausible`, `umami`, `gtag`, and a custom `glyfana:analytics` event when those providers exist.
+7. If the API is unavailable, the page falls back to the pinned release metadata in `release-manifest.json`.
 
 ## What To Edit
 

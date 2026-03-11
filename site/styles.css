@@ -93,6 +93,7 @@ body {
 .features,
 .showcase,
 .release-summary,
+.faq,
 .card,
 .install,
 .verify {
@@ -520,6 +521,7 @@ body {
 
 .feature-grid,
 .steps,
+.faq-list,
 .verify__grid,
 .release-summary,
 .showcase {
@@ -528,6 +530,14 @@ body {
 }
 
 .features {
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.faq {
   padding: 24px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -960,6 +970,60 @@ body {
   padding: 24px;
 }
 
+.faq-list {
+  margin-top: 22px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.faq-item {
+  border: 1px solid rgba(16, 43, 55, 0.1);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.74);
+  overflow: hidden;
+}
+
+.faq-item[open] {
+  border-color: rgba(11, 123, 117, 0.22);
+  box-shadow: 0 18px 34px rgba(11, 76, 74, 0.08);
+}
+
+.faq-item summary {
+  position: relative;
+  padding: 18px 54px 18px 20px;
+  cursor: pointer;
+  list-style: none;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  content: "+";
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--brand-deep);
+  font-size: 24px;
+  line-height: 1;
+}
+
+.faq-item[open] summary::after {
+  content: "-";
+}
+
+.faq-item p {
+  margin: 0;
+  padding: 0 20px 20px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
 .section-head {
   max-width: 760px;
 }
@@ -1146,6 +1210,10 @@ code {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .faq-list {
+    grid-template-columns: 1fr;
+  }
+
   .steps,
   .verify__grid {
     grid-template-columns: 1fr;
@@ -1190,7 +1258,7 @@ code {
   .nav {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 8px;
   }
 
@@ -1316,6 +1384,7 @@ code {
   .features,
   .showcase,
   .release-summary,
+  .faq,
   .install,
   .verify {
     padding: 18px;
@@ -1377,14 +1446,24 @@ code {
   .card p,
   .card-list,
   .step p,
+  .faq-item p,
   .verify-card__copy {
     font-size: 14px;
   }
 
   .hero__desc,
-  .section-copy {
+  .section-copy,
+  .faq-item summary {
     font-size: 16px;
     line-height: 1.55;
+  }
+
+  .faq-item summary {
+    padding: 16px 48px 16px 16px;
+  }
+
+  .faq-item p {
+    padding: 0 16px 16px;
   }
 
   .release-summary__card,
@@ -1429,6 +1508,7 @@ code {
   .features,
   .showcase,
   .release-summary,
+  .faq,
   .install,
   .verify {
     padding: 16px;

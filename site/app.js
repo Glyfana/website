@@ -756,6 +756,112 @@ function wireMobileMenu() {
   }
 }
 
+function trackEvent(name, props = {}) {
+  if (!name) return;
+
+  const payload = { ...props, lang: PAGE_LANG };
+
+  window.dispatchEvent(
+    new CustomEvent('glyfana:analytics', {
+      detail: {
+        name,
+        props: payload,
+      },
+    }),
+  );
+
+  try {
+    if (typeof window.plausible === 'function') {
+      window.plausible(name, { props: payload });
+    }
+  } catch {}
+
+  try {
+    if (typeof window.umami?.track === 'function') {
+      window.umami.track(name, payload);
+    }
+  } catch {}
+
+  try {
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', name, payload);
+    }
+  } catch {}
+}
+
+function getAnalyticsDescriptor(target) {
+  if (!(target instanceof Element)) return null;
+
+  const faqSummary = target.closest('.faq-item summary');
+  if (faqSummary instanceof HTMLElement) {
+    return {
+      name: 'faq_toggle',
+      label: faqSummary.textContent?.trim() || 'faq',
+      href: window.location.href,
+    };
+  }
+
+  const link = target.closest('a');
+  if (!(link instanceof HTMLAnchorElement)) return null;
+
+  if (link.matches('.js-download')) {
+    return { name: 'download_click', label: 'download_setup', href: link.href };
+  }
+
+  if (link.matches('.js-release')) {
+    return { name: 'release_click', label: 'view_release', href: link.href };
+  }
+
+  if (link.matches('.js-notes')) {
+    return { name: 'release_notes_click', label: 'release_notes', href: link.href };
+  }
+
+  if (link.matches('.js-releases')) {
+    return { name: 'release_list_click', label: 'all_releases', href: link.href };
+  }
+
+  if (link.matches('.js-repo')) {
+    return { name: 'repo_click', label: 'source_code', href: link.href };
+  }
+
+  if (link.matches('.asset-list__link')) {
+    return {
+      name: 'release_asset_click',
+      label: link.textContent?.trim() || 'asset',
+      href: link.href,
+    };
+  }
+
+  if (link.matches('.locale-switch__link')) {
+    return {
+      name: 'locale_switch',
+      label: link.textContent?.trim().toLowerCase() || 'locale',
+      href: link.href,
+    };
+  }
+
+  if (link.matches('.nav a')) {
+    return {
+      name: 'nav_jump',
+      label: (link.getAttribute('href') || '').replace(/^#/, '') || 'nav',
+      href: link.href,
+    };
+  }
+
+  return null;
+}
+
+function wireAnalytics() {
+  document.addEventListener('click', (event) => {
+    const descriptor = getAnalyticsDescriptor(event.target);
+    if (!descriptor) return;
+    trackEvent(descriptor.name, {
+      label: descriptor.label,
+      href: descriptor.href,
+    });
+  });
+}
+
 async function init() {
   const manifest = await loadManifest();
   const productRepo = normalizeRepoUrl(manifest.productRepoUrl) || getRepoUrlFromPagesUrl();
@@ -797,6 +903,7 @@ async function init() {
 }
 
 setYear();
+wireAnalytics();
 wireMobileMenu();
 wireRevealAnimations();
 init();

@@ -22,9 +22,11 @@ The product copy on this site is based on the main app repository and the packag
 - A stable download entry point for the latest Windows `Setup.exe`
 - Latest release notes summary parsed from the GitHub release body
 - Published asset inventory and SHA256 verification guidance on the same page
+- FAQ content that explains file handling, recovery, updates, and verification before install
 - English and Korean variants with locale-aware routing
 - Mobile navigation and responsive layout tuned for the installer flow
 - Open Graph images, sitemap, and robots metadata for sharing and indexing
+- Analytics hooks for CTA, asset, FAQ, and locale interactions when a provider is attached
 - A pinned fallback manifest so the page still works when the live GitHub API is unavailable
 
 ## Page Sections
@@ -34,6 +36,7 @@ The product copy on this site is based on the main app repository and the packag
 - `What's New`: summarized release highlights extracted from the latest release body
 - `Features`: detailed product capabilities such as editing, image handling, autosave, conflict handling, updates, and verification
 - `Install`: short download, verification, and update flow
+- `FAQ`: install-time answers for images, autosave, conflicts, updates, and verification
 - `Verify`: SHA256, PowerShell verification command, and full published asset list
 
 ## Release Data Flow

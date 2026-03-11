@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="build-id" content="20260311-feature-copy" />
+    <meta name="build-id" content="20260311-faq-analytics" />
     <meta name="manifest-path" content="../release-manifest.json" />
     <title>Glyfana 다운로드 | Windows 마크다운 에디터</title>
     <meta
@@ -13,9 +13,9 @@
     <meta name="robots" content="index,follow" />
     <meta name="theme-color" content="#0b7b75" />
     <link rel="canonical" href="https://glyfana.github.io/website/ko/" />
-    <link rel="icon" type="image/svg+xml" href="../assets/glyfana-emblem.svg?v=20260311-feature-copy" />
-    <link rel="icon" type="image/png" sizes="512x512" href="../assets/glyfana-emblem.png?v=20260311-feature-copy" />
-    <link rel="apple-touch-icon" href="../assets/glyfana-emblem.png?v=20260311-feature-copy" />
+    <link rel="icon" type="image/svg+xml" href="../assets/glyfana-emblem.svg?v=20260311-faq-analytics" />
+    <link rel="icon" type="image/png" sizes="512x512" href="../assets/glyfana-emblem.png?v=20260311-faq-analytics" />
+    <link rel="apple-touch-icon" href="../assets/glyfana-emblem.png?v=20260311-faq-analytics" />
     <link rel="alternate" hreflang="en" href="https://glyfana.github.io/website/" />
     <link rel="alternate" hreflang="ko" href="https://glyfana.github.io/website/ko/" />
     <link rel="alternate" hreflang="x-default" href="https://glyfana.github.io/website/" />
@@ -31,7 +31,7 @@
     <meta property="og:url" content="https://glyfana.github.io/website/ko/" />
     <meta
       property="og:image"
-      content="https://glyfana.github.io/website/assets/og-ko.png?v=20260311-feature-copy"
+      content="https://glyfana.github.io/website/assets/og-ko.png?v=20260311-faq-analytics"
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -44,7 +44,7 @@
     />
     <meta
       name="twitter:image"
-      content="https://glyfana.github.io/website/assets/og-ko.png?v=20260311-feature-copy"
+      content="https://glyfana.github.io/website/assets/og-ko.png?v=20260311-faq-analytics"
     />
     <meta name="twitter:image:alt" content="Glyfana 한국어 다운로드 페이지와 에디터 미리보기" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -53,8 +53,8 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap"
       rel="stylesheet"
     />
-    <script src="../locale-router.js?v=20260311-feature-copy"></script>
-    <link rel="stylesheet" href="../styles.css?v=20260311-feature-copy" />
+    <script src="../locale-router.js?v=20260311-faq-analytics"></script>
+    <link rel="stylesheet" href="../styles.css?v=20260311-faq-analytics" />
   </head>
   <body>
     <div class="page-noise" aria-hidden="true"></div>
@@ -63,7 +63,7 @@
 
     <header class="topbar">
       <a class="brand" href="#top" aria-label="Glyfana 홈">
-        <img class="brand__mark" src="../assets/glyfana-emblem.svg?v=20260311-feature-copy" alt="" aria-hidden="true" />
+        <img class="brand__mark" src="../assets/glyfana-emblem.svg?v=20260311-faq-analytics" alt="" aria-hidden="true" />
         <span class="brand__name">Glyfana</span>
       </a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu">
@@ -78,6 +78,7 @@
         <nav class="nav">
           <a href="#download">다운로드</a>
           <a href="#install">설치</a>
+          <a href="#faq">FAQ</a>
           <a href="#verify">검증</a>
         </nav>
         <div class="topbar__tools">
@@ -374,6 +375,54 @@
         </div>
       </section>
 
+      <section id="faq" class="faq reveal">
+        <div class="section-head">
+          <p class="eyebrow">FAQ</p>
+          <h2>지원 문의가 오기 전에, 설치 전 질문에 먼저 답합니다.</h2>
+          <p class="section-copy">
+            망설임을 줄이는 가장 빠른 방법은 Glyfana가 파일, 복구, 업데이트, 검증을 어떻게 처리하는지 평이한 언어로
+            먼저 설명하는 것입니다.
+          </p>
+        </div>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>노트에 붙여넣은 이미지는 어디에 저장되나요?</summary>
+            <p>
+              Glyfana는 로컬 이미지를 에디터에 바로 붙여넣거나 드롭할 수 있습니다. 저장된 노트의 경우 이미지 파일은
+              같은 위치의 <code>&lt;note&gt;.assets/</code> 폴더에 기록되고, 상대 경로로 연결되어 문서 이동이 쉬워집니다.
+            </p>
+          </details>
+          <details class="faq-item">
+            <summary>저장하지 않은 상태에서 앱을 닫으면 어떻게 되나요?</summary>
+            <p>
+              저장되지 않은 변경이 남아 있으면 창을 닫거나 다른 파일을 열기 전에 경고합니다. 저장된 문서는 idle
+              autosave가 동작하고, 새 문서는 앱 데이터 폴더에 초안으로 보존되어 다음 실행 때 복원할 수 있습니다.
+            </p>
+          </details>
+          <details class="faq-item">
+            <summary>같은 파일이 다른 프로그램에서 수정되면 어떻게 되나요?</summary>
+            <p>
+              Glyfana는 외부 파일 변경을 감지하고, 로컬 작업을 조용히 덮어쓰지 않습니다. 디스크에서 다시 읽기, 계속
+              편집, 다른 이름으로 저장, 덮어쓰기 중 하나를 선택할 수 있는 충돌 흐름을 보여줍니다.
+            </p>
+          </details>
+          <details class="faq-item">
+            <summary>설치 후 업데이트는 어떻게 오나요?</summary>
+            <p>
+              패키징된 빌드는 시작 시와 이후 매시간 GitHub Releases를 확인할 수 있습니다. Help 메뉴에서 수동 확인도
+              가능하고, 새 빌드가 준비되면 앱 안에서 재시작 업데이트 흐름으로 이어집니다.
+            </p>
+          </details>
+          <details class="faq-item">
+            <summary>설치 파일은 어떻게 검증하면 되나요?</summary>
+            <p>
+              <code>Setup.exe</code>를 받은 뒤, 검증 섹션의 PowerShell 명령으로 SHA256 값을 계산하고 이 페이지에
+              공개된 체크섬과 비교하면 됩니다.
+            </p>
+          </details>
+        </div>
+      </section>
+
       <section id="verify" class="verify reveal">
         <div class="section-head">
           <p class="eyebrow">검증</p>
@@ -415,6 +464,6 @@
       <span id="repo-status">릴리스 저장소: 확인 중</span>
     </footer>
 
-    <script type="module" src="../app.js?v=20260311-mobile-menu"></script>
+    <script type="module" src="../app.js?v=20260311-faq-analytics"></script>
   </body>
 </html>

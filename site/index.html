@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="build-id" content="20260311-feature-copy" />
+    <meta name="build-id" content="20260311-faq-analytics" />
     <meta name="manifest-path" content="./release-manifest.json" />
     <title>Glyfana Downloads | Windows Markdown Editor</title>
     <meta
@@ -13,9 +13,9 @@
     <meta name="robots" content="index,follow" />
     <meta name="theme-color" content="#0b7b75" />
     <link rel="canonical" href="https://glyfana.github.io/website/" />
-    <link rel="icon" type="image/svg+xml" href="./assets/glyfana-emblem.svg?v=20260311-feature-copy" />
-    <link rel="icon" type="image/png" sizes="512x512" href="./assets/glyfana-emblem.png?v=20260311-feature-copy" />
-    <link rel="apple-touch-icon" href="./assets/glyfana-emblem.png?v=20260311-feature-copy" />
+    <link rel="icon" type="image/svg+xml" href="./assets/glyfana-emblem.svg?v=20260311-faq-analytics" />
+    <link rel="icon" type="image/png" sizes="512x512" href="./assets/glyfana-emblem.png?v=20260311-faq-analytics" />
+    <link rel="apple-touch-icon" href="./assets/glyfana-emblem.png?v=20260311-faq-analytics" />
     <link rel="alternate" hreflang="en" href="https://glyfana.github.io/website/" />
     <link rel="alternate" hreflang="ko" href="https://glyfana.github.io/website/ko/" />
     <link rel="alternate" hreflang="x-default" href="https://glyfana.github.io/website/" />
@@ -31,7 +31,7 @@
     <meta property="og:url" content="https://glyfana.github.io/website/" />
     <meta
       property="og:image"
-      content="https://glyfana.github.io/website/assets/og-en.png?v=20260311-feature-copy"
+      content="https://glyfana.github.io/website/assets/og-en.png?v=20260311-faq-analytics"
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -44,7 +44,7 @@
     />
     <meta
       name="twitter:image"
-      content="https://glyfana.github.io/website/assets/og-en.png?v=20260311-feature-copy"
+      content="https://glyfana.github.io/website/assets/og-en.png?v=20260311-faq-analytics"
     />
     <meta name="twitter:image:alt" content="Glyfana Windows download page with editor preview" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -53,8 +53,8 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap"
       rel="stylesheet"
     />
-    <script src="./locale-router.js?v=20260311-feature-copy"></script>
-    <link rel="stylesheet" href="./styles.css?v=20260311-feature-copy" />
+    <script src="./locale-router.js?v=20260311-faq-analytics"></script>
+    <link rel="stylesheet" href="./styles.css?v=20260311-faq-analytics" />
   </head>
   <body>
     <div class="page-noise" aria-hidden="true"></div>
@@ -63,7 +63,7 @@
 
     <header class="topbar">
       <a class="brand" href="#top" aria-label="Glyfana home">
-        <img class="brand__mark" src="./assets/glyfana-emblem.svg?v=20260311-feature-copy" alt="" aria-hidden="true" />
+        <img class="brand__mark" src="./assets/glyfana-emblem.svg?v=20260311-faq-analytics" alt="" aria-hidden="true" />
         <span class="brand__name">Glyfana</span>
       </a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu">
@@ -78,6 +78,7 @@
         <nav class="nav">
           <a href="#download">Download</a>
           <a href="#install">Install</a>
+          <a href="#faq">FAQ</a>
           <a href="#verify">Verify</a>
         </nav>
         <div class="topbar__tools">
@@ -374,6 +375,54 @@
         </div>
       </section>
 
+      <section id="faq" class="faq reveal">
+        <div class="section-head">
+          <p class="eyebrow">FAQ</p>
+          <h2>Answer the install questions before support has to.</h2>
+          <p class="section-copy">
+            The fastest way to reduce hesitation is to explain how Glyfana handles files, recovery, updates, and
+            verification in plain language.
+          </p>
+        </div>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>What happens to images that I paste into a note?</summary>
+            <p>
+              Glyfana can paste or drop local images directly into the editor. For saved notes, image files are written
+              into a sibling <code>&lt;note&gt;.assets/</code> folder and referenced with relative paths so the note stays portable.
+            </p>
+          </details>
+          <details class="faq-item">
+            <summary>What happens if I close the app with unsaved changes?</summary>
+            <p>
+              The app warns before closing or switching files when local changes are still dirty. Saved notes use idle
+              autosave, and untitled notes are preserved as drafts in the app data folder for later restore.
+            </p>
+          </details>
+          <details class="faq-item">
+            <summary>What if the same file changes outside Glyfana?</summary>
+            <p>
+              Glyfana watches for external file changes and opens a conflict flow instead of silently overwriting your
+              work. Users can reload from disk, keep editing, save as a new file, or overwrite intentionally.
+            </p>
+          </details>
+          <details class="faq-item">
+            <summary>How do updates arrive after install?</summary>
+            <p>
+              Packaged builds can check GitHub Releases on startup and then every hour. Users can also trigger a manual
+              check from the Help menu and restart from the in-app update prompt when a new build is ready.
+            </p>
+          </details>
+          <details class="faq-item">
+            <summary>How should I verify the installer before running it?</summary>
+            <p>
+              Download the <code>Setup.exe</code>, compute its SHA256 value with the PowerShell command in the verify
+              section, and compare the result with the published checksum on this page.
+            </p>
+          </details>
+        </div>
+      </section>
+
       <section id="verify" class="verify reveal">
         <div class="section-head">
           <p class="eyebrow">Verify</p>
@@ -415,6 +464,6 @@
       <span id="repo-status">Release repo: pending</span>
     </footer>
 
-    <script type="module" src="./app.js?v=20260311-mobile-menu"></script>
+    <script type="module" src="./app.js?v=20260311-faq-analytics"></script>
   </body>
 </html>
