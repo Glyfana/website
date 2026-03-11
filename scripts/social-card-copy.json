@@ -1,0 +1,24 @@
+{
+  "en": {
+    "eyebrow": "Official Glyfana Downloads",
+    "title": "Install the Windows Markdown editor without extra friction",
+    "description": "Download the latest setup, inspect release notes, and verify integrity checks from one page.",
+    "badgePrimary": "Latest Setup",
+    "badgeSecondary": "Release Checks",
+    "sourceLabel": "Source",
+    "sourceValue": "GitHub Releases",
+    "includesLabel": "Includes",
+    "includesValue": "Notes, assets, checksum"
+  },
+  "ko": {
+    "eyebrow": "Glyfana 공식 다운로드",
+    "title": "Windows Markdown 에디터를 바로 설치하세요",
+    "description": "최신 설치 파일, 릴리스 노트, 무결성 정보를 한 페이지에서 확인할 수 있습니다.",
+    "badgePrimary": "최신 설치 파일",
+    "badgeSecondary": "릴리스 검증",
+    "sourceLabel": "배포 소스",
+    "sourceValue": "GitHub Releases",
+    "includesLabel": "포함 정보",
+    "includesValue": "노트, 자산, 체크섬"
+  }
+}
