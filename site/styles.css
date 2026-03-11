@@ -948,6 +948,16 @@ body {
   box-shadow: 0 18px 42px rgba(9, 30, 32, 0.12);
   color: inherit;
   text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.showcase-gallery__card:hover,
+.showcase-gallery__card:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(11, 123, 117, 0.24);
+  box-shadow: 0 22px 44px rgba(9, 30, 32, 0.16);
+  outline: none;
 }
 
 .showcase-gallery__card.is-featured {
@@ -992,6 +1002,157 @@ body {
   color: var(--muted);
   font-size: 14px;
   line-height: 1.55;
+}
+
+.showcase-gallery__hint {
+  margin: 2px 0 0;
+  color: var(--brand-deep);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.showcase-gallery__link {
+  width: fit-content;
+  color: var(--brand-deep);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.showcase-gallery__link:hover,
+.showcase-gallery__link:focus-visible {
+  text-decoration: underline;
+}
+
+body.is-lightbox-open {
+  overflow: hidden;
+}
+
+.showcase-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.showcase-lightbox[hidden] {
+  display: none;
+}
+
+.showcase-lightbox__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(14, 28, 32, 0.7);
+  backdrop-filter: blur(10px);
+}
+
+.showcase-lightbox__panel {
+  position: relative;
+  z-index: 1;
+  width: min(1100px, calc(100vw - 32px));
+  max-height: calc(100vh - 32px);
+  overflow: auto;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 28px;
+  background: linear-gradient(180deg, rgba(246, 248, 247, 0.97), rgba(235, 241, 239, 0.95));
+  box-shadow: 0 32px 90px rgba(7, 18, 21, 0.38);
+}
+
+.showcase-lightbox__close {
+  position: sticky;
+  top: 0;
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(16, 43, 55, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  color: var(--ink);
+  font: inherit;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.showcase-lightbox__frame {
+  overflow: hidden;
+  border: 1px solid rgba(11, 76, 74, 0.12);
+  border-radius: 24px;
+  background: rgba(229, 237, 235, 0.92);
+}
+
+.showcase-lightbox__image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.showcase-lightbox__meta {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.showcase-lightbox__head,
+.showcase-lightbox__controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.showcase-lightbox__count {
+  margin: 0;
+  color: var(--brand-deep);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.showcase-lightbox__title {
+  margin: 0;
+  font-family: "Space Grotesk", "IBM Plex Sans KR", sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.showcase-lightbox__desc {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.showcase-lightbox__link,
+.showcase-lightbox__nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0 16px;
+  border: 1px solid rgba(16, 43, 55, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  color: var(--ink);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.showcase-lightbox__nav[disabled] {
+  opacity: 0.45;
+  cursor: default;
 }
 
 .showcase.is-gallery-live .workspace-demo {
@@ -1590,6 +1751,35 @@ code {
     font-size: 13px;
   }
 
+  .showcase-lightbox {
+    padding: 12px;
+  }
+
+  .showcase-lightbox__panel {
+    width: min(100vw - 12px, 1100px);
+    max-height: calc(100vh - 12px);
+    padding: 14px;
+    border-radius: 22px;
+  }
+
+  .showcase-lightbox__title {
+    font-size: 21px;
+  }
+
+  .showcase-lightbox__desc {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .showcase-lightbox__controls {
+    gap: 8px;
+  }
+
+  .showcase-lightbox__link,
+  .showcase-lightbox__nav {
+    width: 100%;
+  }
+
   .hero,
   .signal,
   .features,
@@ -1685,5 +1875,26 @@ code {
 
   .showcase-gallery__card {
     padding: 10px;
+  }
+
+  .showcase-lightbox {
+    padding: 8px;
+  }
+
+  .showcase-lightbox__panel {
+    width: calc(100vw - 8px);
+    max-height: calc(100vh - 8px);
+    padding: 12px;
+    border-radius: 18px;
+  }
+
+  .showcase-lightbox__close {
+    width: 38px;
+    height: 38px;
+    font-size: 24px;
+  }
+
+  .showcase-lightbox__title {
+    font-size: 18px;
   }
 }
