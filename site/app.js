@@ -247,6 +247,48 @@ async function loadScreenshotManifest() {
   }
 }
 
+function resolveShowcaseAssetUrl(path) {
+  try {
+    return new URL(String(path || '').trim(), window.location.href).toString();
+  } catch {
+    return '';
+  }
+}
+
+function canLoadImage(src) {
+  return new Promise((resolve) => {
+    if (!src) {
+      resolve(false);
+      return;
+    }
+
+    const image = new Image();
+    image.onload = () => resolve(true);
+    image.onerror = () => resolve(false);
+    image.src = src;
+  });
+}
+
+async function resolveRenderableScreenshots(items) {
+  const candidates = Array.isArray(items) ? items.filter(Boolean) : [];
+  const resolved = await Promise.all(
+    candidates.map(async (item) => {
+      const resolvedSrc = resolveShowcaseAssetUrl(item.src);
+      const resolvedHref = item.href ? resolveShowcaseAssetUrl(item.href) : '';
+      const ok = await canLoadImage(resolvedSrc);
+      if (!ok) return null;
+
+      return {
+        ...item,
+        src: resolvedSrc,
+        href: resolvedHref,
+      };
+    }),
+  );
+
+  return resolved.filter(Boolean);
+}
+
 function renderShowcaseGallery(items) {
   const section = document.querySelector('.showcase');
   const gallery = document.getElementById('showcase-gallery');
@@ -280,7 +322,7 @@ function renderShowcaseGallery(items) {
     media.className = 'showcase-gallery__media';
 
     const image = document.createElement('img');
-    image.src = new URL(item.src, window.location.href).toString();
+    image.src = item.src;
     image.alt = item.alt;
     image.loading = 'lazy';
     image.decoding = 'async';
@@ -1004,7 +1046,8 @@ function wireAnalytics() {
 
 async function init() {
   const [manifest, screenshotManifest] = await Promise.all([loadManifest(), loadScreenshotManifest()]);
-  renderShowcaseGallery(screenshotManifest.items);
+  const screenshots = await resolveRenderableScreenshots(screenshotManifest.items);
+  renderShowcaseGallery(screenshots);
   const productRepo = normalizeRepoUrl(manifest.productRepoUrl) || getRepoUrlFromPagesUrl();
   const websiteRepo = normalizeRepoUrl(manifest.websiteRepoUrl) || getRepoUrlFromPagesUrl();
 

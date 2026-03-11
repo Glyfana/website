@@ -1,0 +1,50 @@
+{
+  "items": [
+    {
+      "src": "./assets/screenshots/editor-main.png",
+      "title": {
+        "en": "Main editing workspace",
+        "ko": "메인 편집 화면"
+      },
+      "caption": {
+        "en": "WYSIWYG editing, note list, and release-focused writing flow in one capture.",
+        "ko": "WYSIWYG 편집, 문서 목록, 릴리스 중심 작업 흐름을 한 화면에 담은 캡처입니다."
+      },
+      "alt": {
+        "en": "Glyfana desktop app main editing workspace",
+        "ko": "Glyfana 데스크톱 앱 메인 편집 화면"
+      },
+      "featured": true
+    },
+    {
+      "src": "./assets/screenshots/editor-source.png",
+      "title": {
+        "en": "Source mode",
+        "ko": "소스 모드"
+      },
+      "caption": {
+        "en": "Raw Markdown stays one toggle away when precise edits matter.",
+        "ko": "정밀한 수정이 필요할 때 raw Markdown으로 바로 전환할 수 있습니다."
+      },
+      "alt": {
+        "en": "Glyfana source mode showing raw Markdown",
+        "ko": "raw Markdown을 보여주는 Glyfana 소스 모드"
+      }
+    },
+    {
+      "src": "./assets/screenshots/editor-image.png",
+      "title": {
+        "en": "Image workflow",
+        "ko": "이미지 작업 흐름"
+      },
+      "caption": {
+        "en": "Dropped or pasted images stay next to the note as portable local assets.",
+        "ko": "드래그하거나 붙여넣은 이미지를 문서 옆 로컬 자산으로 관리합니다."
+      },
+      "alt": {
+        "en": "Glyfana note with local image assets",
+        "ko": "로컬 이미지 자산이 포함된 Glyfana 문서"
+      }
+    }
+  ]
+}

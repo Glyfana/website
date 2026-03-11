@@ -64,6 +64,8 @@ This folder contains the static GitHub Pages payload for `https://glyfana.github
   - `alt.en` / `alt.ko`: accessible image description
   - `featured`: optional flag to let a capture span the full gallery width
   - `href`: optional link target if a screenshot card should open a larger source image
+- `screenshots-manifest.example.json`
+  - copyable starting point with realistic EN/KO screenshot entries and filenames
 
 ## Deployment
 
@@ -86,4 +88,5 @@ This folder contains the static GitHub Pages payload for `https://glyfana.github
 - The pinned manifest exists so downloads and verification details do not disappear when the live API is unavailable.
 - The screenshot manifest is intentionally separate from the release manifest so product imagery can be updated without touching release metadata.
 - If `screenshots-manifest.json` is empty, the showcase stays on the built-in mockup.
+- If a screenshot path is wrong or the file is missing, the page now skips that card instead of exposing a broken image.
 - Keep the feature copy aligned with the main app repository when editor capabilities or update behavior change.
