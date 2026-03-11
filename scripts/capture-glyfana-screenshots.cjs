@@ -8,6 +8,8 @@ const MAIN_BUNDLE = path.join(APP_ROOT, '.vite', 'main', 'main.js');
 const OUTPUT_DIR = 'C:\\Users\\hanwonjong\\Desktop\\blue-layer\\website\\site\\assets\\screenshots';
 const CAPTURE_DIR = path.join(os.tmpdir(), 'glyfana-site-capture');
 const PROFILE_DIR = path.join(os.tmpdir(), 'glyfana-site-profile');
+const RUN_ID = String(Date.now());
+const ASSET_CARD_NAME = `asset-card-${RUN_ID}.svg`;
 
 function wait(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -28,7 +30,7 @@ function prepareCaptureFiles() {
   fs.mkdirSync(PROFILE_DIR, { recursive: true });
 
   writeFile(
-    path.join(CAPTURE_DIR, 'asset-card.svg'),
+    path.join(CAPTURE_DIR, ASSET_CARD_NAME),
     `<svg xmlns="http://www.w3.org/2000/svg" width="720" height="420" viewBox="0 0 720 420" fill="none">
   <defs>
     <linearGradient id="bg" x1="96" y1="52" x2="628" y2="368" gradientUnits="userSpaceOnUse">
@@ -98,7 +100,7 @@ Use local visuals without breaking relative paths or making the note harder to m
 
 ## Included Preview
 
-![Glyfana media preview](./asset-card.svg)
+![Glyfana media preview](./${ASSET_CARD_NAME})
 
 ## Why it matters
 
