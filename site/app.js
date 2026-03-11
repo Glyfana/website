@@ -36,6 +36,12 @@ const STRINGS = {
     unnamedAsset: 'Unnamed asset',
     installerDefault: 'Installer',
     algorithmUnavailable: (algorithm) => `${algorithm} unavailable`,
+    noReleaseHighlights: 'No release highlights were published for the current build.',
+    defaultHighlights: [
+      'Direct Windows installer download from the latest stable release.',
+      'Release notes, asset inventory, and checksum stay linked in one flow.',
+      'Users can verify the published SHA256 value before install.',
+    ],
   },
   ko: {
     pinnedMetadata: '고정 메타데이터',
@@ -64,6 +70,12 @@ const STRINGS = {
     unnamedAsset: '이름 없는 자산',
     installerDefault: '설치 파일',
     algorithmUnavailable: (algorithm) => `${algorithm} 값 없음`,
+    noReleaseHighlights: '현재 빌드에 공개된 릴리스 하이라이트가 없습니다.',
+    defaultHighlights: [
+      '최신 안정 릴리스의 Windows 설치 파일을 바로 내려받을 수 있습니다.',
+      '릴리스 노트, 자산 목록, 체크섬을 한 흐름 안에서 같이 확인할 수 있습니다.',
+      '설치 전에 공개된 SHA256 값으로 무결성을 검증할 수 있습니다.',
+    ],
   },
 };
 
@@ -363,6 +375,66 @@ function updateRepoStatus(productRepo, websiteRepo, sourceLabel) {
   statusEl.textContent = labels.join(' | ');
 }
 
+function stripMarkdownLine(line) {
+  return String(line || '')
+    .replace(/!\[([^\]]*)\]\([^)]+\)/g, '$1')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/`([^`]+)`/g, '$1')
+    .replace(/^[-*+]\s+/, '')
+    .replace(/^\d+\.\s+/, '')
+    .replace(/^#{1,6}\s+/, '')
+    .replace(/[>*_~]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function extractSummaryItems(markdownBody) {
+  const rawLines = String(markdownBody || '')
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+  const summary = [];
+
+  for (const rawLine of rawLines) {
+    if (/^```/.test(rawLine)) continue;
+
+    const cleaned = stripMarkdownLine(rawLine);
+    if (!cleaned || cleaned.length < 16) continue;
+    if (/^(what'?s changed|highlights?|release notes?)$/i.test(cleaned)) continue;
+
+    if (!summary.includes(cleaned)) {
+      summary.push(cleaned);
+    }
+
+    if (summary.length === 4) break;
+  }
+
+  return summary;
+}
+
+function renderReleaseSummary(items) {
+  const list = document.getElementById('release-summary-list');
+  if (!list) return;
+
+  list.textContent = '';
+
+  if (!Array.isArray(items) || items.length === 0) {
+    const empty = document.createElement('li');
+    empty.className = 'release-summary__empty';
+    empty.textContent = t('noReleaseHighlights');
+    list.append(empty);
+    return;
+  }
+
+  items.forEach((item) => {
+    const entry = document.createElement('li');
+    entry.className = 'release-summary__item';
+    entry.textContent = item;
+    list.append(entry);
+  });
+}
+
 function setCommonLinks(productRepo) {
   setLink('.js-repo', productRepo);
   setLink('.js-releases', productRepo ? `${productRepo}/releases` : '');
@@ -382,6 +454,11 @@ function applyReleaseModel(model, options) {
   setText('release-sha', integrityValue);
   setText('release-sha-inline', integrityValue);
   setText('verify-command', buildVerifyCommand(model.setupFileName || 'installer.exe'));
+  renderReleaseSummary(
+    Array.isArray(model.summaryItems) && model.summaryItems.length > 0
+      ? model.summaryItems
+      : t('defaultHighlights'),
+  );
 
   setLink('.js-download', model.downloadUrl || '');
   setLink('.js-release', model.releaseUrl || '');
@@ -418,6 +495,7 @@ function fallbackReleaseToModel(manifest, productRepo) {
     notesUrl,
     integrityValue: String(manifest.integrity?.value || '').trim(),
     assets,
+    summaryItems: [],
   };
 }
 
@@ -450,6 +528,7 @@ async function loadLatestTaggedModel(manifest, productRepo) {
     notesUrl,
     integrityValue: '',
     assets: [],
+    summaryItems: [],
   };
 }
 
@@ -490,6 +569,7 @@ async function loadLatestReleaseModel(manifest, productRepo) {
     notesUrl: release.html_url || `${productRepo}/releases/latest`,
     integrityValue: getIntegrityValue(installerAsset),
     assets: mappedAssets,
+    summaryItems: extractSummaryItems(release.body),
   };
 }
 

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="build-id" content="20260311-showcase" />
+    <meta name="build-id" content="20260311-summary" />
     <meta name="manifest-path" content="../release-manifest.json" />
     <title>Glyfana 다운로드 | Windows 마크다운 에디터</title>
     <meta
@@ -13,9 +13,9 @@
     <meta name="robots" content="index,follow" />
     <meta name="theme-color" content="#0b7b75" />
     <link rel="canonical" href="https://glyfana.github.io/website/ko/" />
-    <link rel="icon" type="image/svg+xml" href="../assets/glyfana-emblem.svg?v=20260311-showcase" />
-    <link rel="icon" type="image/png" sizes="512x512" href="../assets/glyfana-emblem.png?v=20260311-showcase" />
-    <link rel="apple-touch-icon" href="../assets/glyfana-emblem.png?v=20260311-showcase" />
+    <link rel="icon" type="image/svg+xml" href="../assets/glyfana-emblem.svg?v=20260311-summary" />
+    <link rel="icon" type="image/png" sizes="512x512" href="../assets/glyfana-emblem.png?v=20260311-summary" />
+    <link rel="apple-touch-icon" href="../assets/glyfana-emblem.png?v=20260311-summary" />
     <link rel="alternate" hreflang="en" href="https://glyfana.github.io/website/" />
     <link rel="alternate" hreflang="ko" href="https://glyfana.github.io/website/ko/" />
     <link rel="alternate" hreflang="x-default" href="https://glyfana.github.io/website/" />
@@ -31,7 +31,7 @@
     <meta property="og:url" content="https://glyfana.github.io/website/ko/" />
     <meta
       property="og:image"
-      content="https://glyfana.github.io/website/assets/og-ko.png?v=20260311-showcase"
+      content="https://glyfana.github.io/website/assets/og-ko.png?v=20260311-summary"
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -44,7 +44,7 @@
     />
     <meta
       name="twitter:image"
-      content="https://glyfana.github.io/website/assets/og-ko.png?v=20260311-showcase"
+      content="https://glyfana.github.io/website/assets/og-ko.png?v=20260311-summary"
     />
     <meta name="twitter:image:alt" content="Glyfana 한국어 다운로드 페이지와 에디터 미리보기" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -53,8 +53,8 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap"
       rel="stylesheet"
     />
-    <script src="../locale-router.js?v=20260311-showcase"></script>
-    <link rel="stylesheet" href="../styles.css?v=20260311-showcase" />
+    <script src="../locale-router.js?v=20260311-summary"></script>
+    <link rel="stylesheet" href="../styles.css?v=20260311-summary" />
   </head>
   <body>
     <div class="page-noise" aria-hidden="true"></div>
@@ -63,7 +63,7 @@
 
     <header class="topbar">
       <a class="brand" href="#top" aria-label="Glyfana 홈">
-        <img class="brand__mark" src="../assets/glyfana-emblem.svg?v=20260311-showcase" alt="" aria-hidden="true" />
+        <img class="brand__mark" src="../assets/glyfana-emblem.svg?v=20260311-summary" alt="" aria-hidden="true" />
         <span class="brand__name">Glyfana</span>
       </a>
       <nav class="nav">
@@ -237,6 +237,32 @@
         </div>
       </section>
 
+      <section class="release-summary reveal">
+        <div class="section-head release-summary__head">
+          <p class="eyebrow">최신 변경점</p>
+          <h2>다운로드 페이지 안에서 최신 릴리스 핵심 내용을 바로 확인할 수 있습니다.</h2>
+          <p class="section-copy">
+            GitHub에 릴리스 노트가 게시되면 이 영역에서 중요한 줄을 먼저 보여주고, 전체 노트는 한 번에 열 수 있게
+            연결합니다.
+          </p>
+        </div>
+
+        <article class="release-summary__card">
+          <div class="release-summary__meta">
+            <span class="release-summary__label">최신 릴리스 노트</span>
+            <a
+              class="text-link js-notes"
+              href="https://github.com/Glyfana/Glyfana/releases/tag/v0.1.4"
+              target="_blank"
+              rel="noreferrer"
+            >전체 노트 열기</a>
+          </div>
+          <ul id="release-summary-list" class="release-summary__list">
+            <li class="release-summary__empty">릴리스 하이라이트를 불러오는 중...</li>
+          </ul>
+        </article>
+      </section>
+
       <section id="features" class="feature-grid reveal">
         <article class="card">
           <h2>집중형 편집</h2>
@@ -321,6 +347,6 @@
       <span id="repo-status">릴리스 저장소: 확인 중</span>
     </footer>
 
-    <script type="module" src="../app.js?v=20260311-showcase"></script>
+    <script type="module" src="../app.js?v=20260311-summary"></script>
   </body>
 </html>
