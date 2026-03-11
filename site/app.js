@@ -1,6 +1,76 @@
 const BUILD_ID =
   document.querySelector('meta[name="build-id"]')?.getAttribute('content')?.trim() || 'dev';
-const MANIFEST_URL = `./release-manifest.json?v=${encodeURIComponent(BUILD_ID)}`;
+const PAGE_LANG = document.documentElement.lang?.toLowerCase().startsWith('ko') ? 'ko' : 'en';
+const MANIFEST_PATH =
+  document.querySelector('meta[name="manifest-path"]')?.getAttribute('content')?.trim() ||
+  './release-manifest.json';
+const manifestUrl = new URL(MANIFEST_PATH, window.location.href);
+manifestUrl.searchParams.set('v', BUILD_ID);
+const MANIFEST_URL = manifestUrl.toString();
+
+const STRINGS = {
+  en: {
+    pinnedMetadata: 'Pinned metadata',
+    unknown: 'Unknown',
+    pending: 'Pending',
+    noReleaseAssets: 'No release assets were published for the current release.',
+    installerBadge: 'Installer',
+    releaseRepoLabel: 'Release repo',
+    siteRepoLabel: 'Site repo',
+    dataLabel: 'Data',
+    notConfigured: 'not configured',
+    latestStableBuild: 'Latest stable build',
+    currentStableBuild: 'Current stable build',
+    currentTaggedBuild: 'Current tagged build',
+    pinnedRelease: 'Pinned release',
+    latest: 'Latest',
+    noPublicInstallerPublished: 'No public installer published',
+    loadingLatestRelease: 'Loading latest release...',
+    latestReleaseLoaded: 'Latest release loaded from GitHub',
+    usingPinnedMetadata: 'Using pinned release metadata',
+    configureProductRepo: 'Configure productRepoUrl in release-manifest.json',
+    configurationRequired: 'configuration required',
+    fallbackMetadata: 'fallback metadata',
+    liveGitHubRelease: 'live GitHub release',
+    latestGitTag: 'latest Git tag',
+    unnamedAsset: 'Unnamed asset',
+    installerDefault: 'Installer',
+    algorithmUnavailable: (algorithm) => `${algorithm} unavailable`,
+  },
+  ko: {
+    pinnedMetadata: '고정 메타데이터',
+    unknown: '알 수 없음',
+    pending: '대기 중',
+    noReleaseAssets: '현재 공개된 릴리스 자산이 없습니다.',
+    installerBadge: '설치 파일',
+    releaseRepoLabel: '릴리스 저장소',
+    siteRepoLabel: '사이트 저장소',
+    dataLabel: '데이터',
+    notConfigured: '설정 없음',
+    latestStableBuild: '최신 안정 빌드',
+    currentStableBuild: '현재 안정 빌드',
+    currentTaggedBuild: '현재 태그 빌드',
+    pinnedRelease: '고정 릴리스',
+    latest: '최신',
+    noPublicInstallerPublished: '공개 설치 파일이 없습니다',
+    loadingLatestRelease: '최신 릴리스를 불러오는 중...',
+    latestReleaseLoaded: 'GitHub에서 최신 릴리스를 불러왔습니다',
+    usingPinnedMetadata: '고정 릴리스 메타데이터를 사용 중입니다',
+    configureProductRepo: 'release-manifest.json에 productRepoUrl을 설정하세요',
+    configurationRequired: '설정 필요',
+    fallbackMetadata: '고정 메타데이터',
+    liveGitHubRelease: '실시간 GitHub 릴리스',
+    latestGitTag: '최신 Git 태그',
+    unnamedAsset: '이름 없는 자산',
+    installerDefault: '설치 파일',
+    algorithmUnavailable: (algorithm) => `${algorithm} 값 없음`,
+  },
+};
+
+function t(key, ...args) {
+  const entry = STRINGS[PAGE_LANG]?.[key] ?? STRINGS.en[key];
+  return typeof entry === 'function' ? entry(...args) : entry;
+}
 
 const DEFAULT_MANIFEST = {
   productRepoUrl: 'https://github.com/Glyfana/Glyfana',
@@ -136,19 +206,19 @@ function setLink(selector, href) {
 }
 
 function formatDate(value) {
-  if (!value) return 'Pinned metadata';
+  if (!value) return t('pinnedMetadata');
   const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return 'Unknown';
+  if (Number.isNaN(date.getTime())) return t('unknown');
 
-  return new Intl.DateTimeFormat('en', {
+  return new Intl.DateTimeFormat(PAGE_LANG === 'ko' ? 'ko-KR' : 'en-US', {
     year: 'numeric',
-    month: 'short',
+    month: PAGE_LANG === 'ko' ? 'long' : 'short',
     day: 'numeric',
   }).format(date);
 }
 
 function formatBytes(value) {
-  if (!Number.isFinite(value) || value <= 0) return 'Pending';
+  if (!Number.isFinite(value) || value <= 0) return t('pending');
 
   const units = ['B', 'KB', 'MB', 'GB'];
   let size = value;
@@ -241,7 +311,7 @@ function renderAssetList(assets) {
   if (!Array.isArray(assets) || assets.length === 0) {
     const empty = document.createElement('li');
     empty.className = 'asset-list__empty';
-    empty.textContent = 'No release assets were published for the current release.';
+    empty.textContent = t('noReleaseAssets');
     list.append(empty);
     return;
   }
@@ -258,13 +328,13 @@ function renderAssetList(assets) {
     link.href = asset.downloadUrl || asset.releaseUrl || '#';
     link.target = '_blank';
     link.rel = 'noreferrer';
-    link.textContent = asset.name || 'Unnamed asset';
+    link.textContent = asset.name || t('unnamedAsset');
     nameWrap.append(link);
 
     if (asset.isPrimary) {
       const badge = document.createElement('span');
       badge.className = 'asset-badge';
-      badge.textContent = 'Installer';
+      badge.textContent = t('installerBadge');
       nameWrap.append(badge);
     }
 
@@ -287,9 +357,9 @@ function updateRepoStatus(productRepo, websiteRepo, sourceLabel) {
   const statusEl = document.getElementById('repo-status');
   if (!statusEl) return;
 
-  const labels = [`Release repo: ${productRepo || 'not configured'}`];
-  if (websiteRepo && websiteRepo !== productRepo) labels.push(`Site repo: ${websiteRepo}`);
-  labels.push(`Data: ${sourceLabel}`);
+  const labels = [`${t('releaseRepoLabel')}: ${productRepo || t('notConfigured')}`];
+  if (websiteRepo && websiteRepo !== productRepo) labels.push(`${t('siteRepoLabel')}: ${websiteRepo}`);
+  labels.push(`${t('dataLabel')}: ${sourceLabel}`);
   statusEl.textContent = labels.join(' | ');
 }
 
@@ -301,11 +371,11 @@ function setCommonLinks(productRepo) {
 function applyReleaseModel(model, options) {
   const integrityAlgorithm = options?.integrityAlgorithm || 'SHA256';
   const hasIntegrity = Boolean(model.integrityValue);
-  const integrityValue = hasIntegrity ? model.integrityValue : `${integrityAlgorithm} unavailable`;
-  const installerName = model.setupFileName || 'No public installer published';
+  const integrityValue = hasIntegrity ? model.integrityValue : t('algorithmUnavailable', integrityAlgorithm);
+  const installerName = model.setupFileName || t('noPublicInstallerPublished');
 
-  setText('release-title', model.title || 'Latest stable build');
-  setText('release-version', model.version || 'Latest');
+  setText('release-title', model.title || t('latestStableBuild'));
+  setText('release-version', model.version || t('latest'));
   setText('release-date', formatDate(model.publishedAt));
   setText('release-size', formatBytes(model.sizeBytes));
   setText('installer-name', installerName);
@@ -329,7 +399,7 @@ function fallbackReleaseToModel(manifest, productRepo) {
   const sizeBytes = Number.isFinite(fallback.sizeBytes) ? fallback.sizeBytes : null;
   const assets = Array.isArray(fallback.assets)
     ? fallback.assets.map((asset) => ({
-        name: asset.name || setupFileName || 'Installer',
+        name: asset.name || setupFileName || t('installerDefault'),
         sizeBytes: Number.isFinite(asset.sizeBytes) ? asset.sizeBytes : null,
         downloadUrl: asset.downloadUrl || downloadUrl,
         releaseUrl,
@@ -338,8 +408,8 @@ function fallbackReleaseToModel(manifest, productRepo) {
     : [];
 
   return {
-    title: fallback.title || 'Current stable build',
-    version: fallback.version || 'Pinned release',
+    title: fallback.title || t('currentStableBuild'),
+    version: fallback.version || t('pinnedRelease'),
     publishedAt: fallback.publishedAt || '',
     setupFileName,
     sizeBytes,
@@ -370,7 +440,7 @@ async function loadLatestTaggedModel(manifest, productRepo) {
   const notesUrl = buildNotesUrl(productRepo, latestTag.name, manifest.notesBranch) || `${productRepo}/tags`;
 
   return {
-    title: 'Current tagged build',
+    title: t('currentTaggedBuild'),
     version: latestTag.name,
     publishedAt: '',
     setupFileName: '',
@@ -402,7 +472,7 @@ async function loadLatestReleaseModel(manifest, productRepo) {
   const assets = Array.isArray(release.assets) ? release.assets : [];
   const installerAsset = pickInstallerAsset(assets, manifest.assetMatchers);
   const mappedAssets = assets.map((asset) => ({
-    name: asset.name || 'Unnamed asset',
+    name: asset.name || t('unnamedAsset'),
     sizeBytes: Number.isFinite(asset.size) ? asset.size : null,
     downloadUrl: asset.browser_download_url || release.html_url || '',
     releaseUrl: release.html_url || '',
@@ -410,8 +480,8 @@ async function loadLatestReleaseModel(manifest, productRepo) {
   }));
 
   return {
-    title: release.name || 'Latest stable build',
-    version: release.tag_name || release.name || 'Latest',
+    title: release.name || t('latestStableBuild'),
+    version: release.tag_name || release.name || t('latest'),
     publishedAt: release.published_at || release.created_at || '',
     setupFileName: installerAsset?.name || manifest.fallbackRelease?.setupFileName || '',
     sizeBytes: Number.isFinite(installerAsset?.size) ? installerAsset.size : null,
@@ -454,9 +524,9 @@ async function init() {
   const websiteRepo = normalizeRepoUrl(manifest.websiteRepoUrl) || getRepoUrlFromPagesUrl();
 
   if (!productRepo) {
-    setReleaseStatus('fallback', 'Configure productRepoUrl in release-manifest.json');
+    setReleaseStatus('fallback', t('configureProductRepo'));
     setCommonLinks('');
-    updateRepoStatus('', websiteRepo, 'configuration required');
+    updateRepoStatus('', websiteRepo, t('configurationRequired'));
     applyReleaseModel(fallbackReleaseToModel(manifest, ''), {
       integrityAlgorithm: manifest.integrity?.algorithm,
     });
@@ -467,8 +537,8 @@ async function init() {
   applyReleaseModel(fallbackReleaseToModel(manifest, productRepo), {
     integrityAlgorithm: manifest.integrity?.algorithm,
   });
-  setReleaseStatus('loading', 'Loading latest release...');
-  updateRepoStatus(productRepo, websiteRepo, 'fallback metadata');
+  setReleaseStatus('loading', t('loadingLatestRelease'));
+  updateRepoStatus(productRepo, websiteRepo, t('fallbackMetadata'));
 
   try {
     const liveModel = await loadLatestReleaseModel(manifest, productRepo);
@@ -476,15 +546,15 @@ async function init() {
       integrityAlgorithm: manifest.integrity?.algorithm,
     });
     if (liveModel.downloadUrl) {
-      setReleaseStatus('live', 'Latest release loaded from GitHub');
-      updateRepoStatus(productRepo, websiteRepo, 'live GitHub release');
+      setReleaseStatus('live', t('latestReleaseLoaded'));
+      updateRepoStatus(productRepo, websiteRepo, t('liveGitHubRelease'));
     } else {
-      setReleaseStatus('fallback', 'No public installer published yet');
-      updateRepoStatus(productRepo, websiteRepo, 'latest Git tag');
+      setReleaseStatus('fallback', t('noPublicInstallerPublished'));
+      updateRepoStatus(productRepo, websiteRepo, t('latestGitTag'));
     }
   } catch {
-    setReleaseStatus('fallback', 'Using pinned release metadata');
-    updateRepoStatus(productRepo, websiteRepo, 'fallback metadata');
+    setReleaseStatus('fallback', t('usingPinnedMetadata'));
+    updateRepoStatus(productRepo, websiteRepo, t('fallbackMetadata'));
   }
 }
 

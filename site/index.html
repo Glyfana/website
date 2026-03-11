@@ -3,22 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="build-id" content="20260310-emblem-sync" />
+    <meta name="build-id" content="20260311-ko" />
+    <meta name="manifest-path" content="./release-manifest.json" />
     <title>Glyfana Downloads | Windows Markdown Editor</title>
     <meta
       name="description"
       content="Official Glyfana download page for the latest Windows installer, release notes, release assets, and integrity checks."
     />
-    <link rel="icon" type="image/svg+xml" href="./assets/glyfana-emblem.svg?v=20260310-emblem-sync" />
-    <link rel="icon" type="image/png" sizes="512x512" href="./assets/glyfana-emblem.png?v=20260310-emblem-sync" />
-    <link rel="apple-touch-icon" href="./assets/glyfana-emblem.png?v=20260310-emblem-sync" />
+    <link rel="icon" type="image/svg+xml" href="./assets/glyfana-emblem.svg?v=20260311-ko" />
+    <link rel="icon" type="image/png" sizes="512x512" href="./assets/glyfana-emblem.png?v=20260311-ko" />
+    <link rel="apple-touch-icon" href="./assets/glyfana-emblem.png?v=20260311-ko" />
+    <link rel="alternate" hreflang="en" href="./" />
+    <link rel="alternate" hreflang="ko" href="./ko/" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css?v=20260310-emblem-sync" />
+    <link rel="stylesheet" href="./styles.css?v=20260311-ko" />
   </head>
   <body>
     <div class="page-noise" aria-hidden="true"></div>
@@ -27,7 +30,7 @@
 
     <header class="topbar">
       <a class="brand" href="#top" aria-label="Glyfana home">
-        <img class="brand__mark" src="./assets/glyfana-emblem.svg?v=20260310-emblem-sync" alt="" aria-hidden="true" />
+        <img class="brand__mark" src="./assets/glyfana-emblem.svg?v=20260311-ko" alt="" aria-hidden="true" />
         <span class="brand__name">Glyfana</span>
       </a>
       <nav class="nav">
@@ -35,12 +38,18 @@
         <a href="#install">Install</a>
         <a href="#verify">Verify</a>
       </nav>
-      <a
-        class="topbar__cta js-releases"
-        href="https://github.com/Glyfana/Glyfana/releases"
-        target="_blank"
-        rel="noreferrer"
-      >All Releases</a>
+      <div class="topbar__tools">
+        <nav class="locale-switch" aria-label="Language selector">
+          <a class="locale-switch__link is-active" href="./" aria-current="page">EN</a>
+          <a class="locale-switch__link" href="./ko/">KO</a>
+        </nav>
+        <a
+          class="topbar__cta js-releases"
+          href="https://github.com/Glyfana/Glyfana/releases"
+          target="_blank"
+          rel="noreferrer"
+        >All Releases</a>
+      </div>
     </header>
 
     <main id="top" class="layout">
@@ -207,6 +216,6 @@
       <span id="repo-status">Release repo: pending</span>
     </footer>
 
-    <script type="module" src="./app.js?v=20260310-emblem-sync"></script>
+    <script type="module" src="./app.js?v=20260311-ko"></script>
   </body>
 </html>
