@@ -37,6 +37,7 @@ const STRINGS = {
     installerDefault: 'Installer',
     algorithmUnavailable: (algorithm) => `${algorithm} unavailable`,
     noReleaseHighlights: 'No release highlights were published for the current build.',
+    openLink: 'Open link',
     defaultHighlights: [
       'Direct Windows installer download from the latest stable release.',
       'Release notes, asset inventory, and checksum stay linked in one flow.',
@@ -71,6 +72,7 @@ const STRINGS = {
     installerDefault: '설치 파일',
     algorithmUnavailable: (algorithm) => `${algorithm} 값 없음`,
     noReleaseHighlights: '현재 빌드에 공개된 릴리스 하이라이트가 없습니다.',
+    openLink: '링크 열기',
     defaultHighlights: [
       '최신 안정 릴리스의 Windows 설치 파일을 바로 내려받을 수 있습니다.',
       '릴리스 노트, 자산 목록, 체크섬을 한 흐름 안에서 같이 확인할 수 있습니다.',
@@ -388,23 +390,99 @@ function stripMarkdownLine(line) {
     .trim();
 }
 
-function extractSummaryItems(markdownBody) {
+function resolveReleaseLink(href, productRepo, releaseUrl) {
+  const value = String(href || '').trim();
+  if (!value) return '';
+  if (/^https?:\/\//i.test(value)) return value;
+  if (value.startsWith('/')) return `https://github.com${value}`;
+  if (value.startsWith('#')) return `${releaseUrl || ''}${value}`;
+
+  try {
+    return new URL(value, `${normalizeRepoUrl(productRepo)}/`).toString();
+  } catch {
+    return '';
+  }
+}
+
+function parseMarkdownLink(line, productRepo, releaseUrl) {
+  const match = String(line || '').match(/\[([^\]]+)\]\(([^)]+)\)/);
+  if (!match) return null;
+
+  const href = resolveReleaseLink(match[2], productRepo, releaseUrl);
+  if (!href) return null;
+
+  return {
+    label: stripMarkdownLine(match[1]),
+    href,
+  };
+}
+
+function normalizeSummaryEntry(item) {
+  if (typeof item === 'string') {
+    return {
+      label: '',
+      text: item,
+      checked: null,
+      href: '',
+      linkLabel: '',
+    };
+  }
+
+  if (!item || typeof item !== 'object') return null;
+
+  return {
+    label: String(item.label || '').trim(),
+    text: String(item.text || '').trim(),
+    checked: typeof item.checked === 'boolean' ? item.checked : null,
+    href: String(item.href || '').trim(),
+    linkLabel: String(item.linkLabel || '').trim(),
+  };
+}
+
+function extractSummaryItems(markdownBody, productRepo, releaseUrl) {
   const rawLines = String(markdownBody || '')
     .split(/\r?\n/)
-    .map((line) => line.trim())
-    .filter(Boolean);
+    .map((line) => line.trim());
 
   const summary = [];
+  let currentLabel = '';
+  let inCodeBlock = false;
 
   for (const rawLine of rawLines) {
-    if (/^```/.test(rawLine)) continue;
+    if (!rawLine) continue;
 
-    const cleaned = stripMarkdownLine(rawLine);
+    if (/^```/.test(rawLine)) {
+      inCodeBlock = !inCodeBlock;
+      continue;
+    }
+
+    if (inCodeBlock || /^---+$/.test(rawLine)) continue;
+
+    const headingMatch = rawLine.match(/^#{1,6}\s+(.+)$/);
+    if (headingMatch) {
+      currentLabel = stripMarkdownLine(headingMatch[1]);
+      continue;
+    }
+
+    const checklistMatch = rawLine.match(/^[-*+]\s+\[([ xX])\]\s+(.+)$/);
+    const listMatch = rawLine.match(/^(?:[-*+]\s+|\d+\.\s+)(.+)$/);
+    const contentSource = checklistMatch?.[2] || listMatch?.[1] || rawLine;
+    const cleaned = stripMarkdownLine(contentSource);
+
     if (!cleaned || cleaned.length < 16) continue;
     if (/^(what'?s changed|highlights?|release notes?)$/i.test(cleaned)) continue;
 
-    if (!summary.includes(cleaned)) {
-      summary.push(cleaned);
+    const link = parseMarkdownLink(contentSource, productRepo, releaseUrl);
+    const entry = {
+      label: currentLabel,
+      text: cleaned,
+      checked: checklistMatch ? /x/i.test(checklistMatch[1]) : null,
+      href: link?.href || '',
+      linkLabel: link?.label || '',
+    };
+
+    if (!summary.some((item) => item.label === entry.label && item.text === entry.text)) {
+      summary.push(entry);
     }
 
     if (summary.length === 4) break;
@@ -418,8 +496,9 @@ function renderReleaseSummary(items) {
   if (!list) return;
 
   list.textContent = '';
+  const normalizedItems = Array.isArray(items) ? items.map(normalizeSummaryEntry).filter(Boolean) : [];
 
-  if (!Array.isArray(items) || items.length === 0) {
+  if (normalizedItems.length === 0) {
     const empty = document.createElement('li');
     empty.className = 'release-summary__empty';
     empty.textContent = t('noReleaseHighlights');
@@ -427,10 +506,40 @@ function renderReleaseSummary(items) {
     return;
   }
 
-  items.forEach((item) => {
+  normalizedItems.forEach((item) => {
     const entry = document.createElement('li');
     entry.className = 'release-summary__item';
-    entry.textContent = item;
+
+    if (item.checked === true) entry.classList.add('is-checked');
+    if (item.checked === false) entry.classList.add('is-unchecked');
+
+    const body = document.createElement('div');
+    body.className = 'release-summary__item-main';
+
+    if (item.label) {
+      const tag = document.createElement('span');
+      tag.className = 'release-summary__tag';
+      tag.textContent = item.label;
+      body.append(tag);
+    }
+
+    const text = document.createElement('p');
+    text.className = 'release-summary__text';
+    text.textContent = item.text;
+    body.append(text);
+
+    entry.append(body);
+
+    if (item.href) {
+      const action = document.createElement('a');
+      action.className = 'release-summary__action';
+      action.href = item.href;
+      action.target = '_blank';
+      action.rel = 'noreferrer';
+      action.textContent = item.linkLabel || t('openLink');
+      entry.append(action);
+    }
+
     list.append(entry);
   });
 }
@@ -569,7 +678,7 @@ async function loadLatestReleaseModel(manifest, productRepo) {
     notesUrl: release.html_url || `${productRepo}/releases/latest`,
     integrityValue: getIntegrityValue(installerAsset),
     assets: mappedAssets,
-    summaryItems: extractSummaryItems(release.body),
+    summaryItems: extractSummaryItems(release.body, productRepo, release.html_url),
   };
 }
 
