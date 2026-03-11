@@ -7,12 +7,12 @@
         "ko": "메인 편집 화면"
       },
       "caption": {
-        "en": "WYSIWYG editing, note list, and release-focused writing flow in one capture.",
-        "ko": "WYSIWYG 편집, 문서 목록, 릴리스 중심 작업 흐름을 한 화면에 담은 캡처입니다."
+        "en": "WYSIWYG editing, document flow, and the main workspace layout in one capture.",
+        "ko": "WYSIWYG 편집, 문서 흐름, 작업 공간 구성을 한 번에 보여주는 캡처입니다."
       },
       "alt": {
         "en": "Glyfana desktop app main editing workspace",
-        "ko": "Glyfana 데스크톱 앱 메인 편집 화면"
+        "ko": "Glyfana 데스크톱 앱의 메인 편집 화면"
       },
       "featured": true
     },
@@ -39,7 +39,7 @@
       },
       "caption": {
         "en": "Dropped or pasted images stay next to the note as portable local assets.",
-        "ko": "드래그하거나 붙여넣은 이미지를 문서 옆 로컬 자산으로 관리합니다."
+        "ko": "드래그하거나 붙여넣은 이미지는 문서 옆의 로컬 자산으로 관리됩니다."
       },
       "alt": {
         "en": "Glyfana note with local image assets",

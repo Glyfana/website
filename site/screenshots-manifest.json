@@ -1,3 +1,50 @@
 {
-  "items": []
+  "items": [
+    {
+      "src": "./assets/screenshots/editor-main.png",
+      "title": {
+        "en": "Focused editing workspace",
+        "ko": "집중형 편집 워크스페이스"
+      },
+      "caption": {
+        "en": "The main editor view keeps Markdown, code blocks, and tables readable without crowding the UI.",
+        "ko": "메인 편집 화면에서 Markdown, 코드 블록, 표를 한 번에 읽기 좋게 유지합니다."
+      },
+      "alt": {
+        "en": "Glyfana desktop editor showing the main WYSIWYG workspace",
+        "ko": "메인 WYSIWYG 작업 화면을 보여주는 Glyfana 데스크톱 에디터"
+      },
+      "featured": true
+    },
+    {
+      "src": "./assets/screenshots/editor-image.png",
+      "title": {
+        "en": "Local image workflow",
+        "ko": "로컬 이미지 작업 흐름"
+      },
+      "caption": {
+        "en": "Images stay next to the note as local assets so files remain portable between folders and machines.",
+        "ko": "이미지는 문서 옆의 로컬 자산으로 관리되어 폴더나 기기를 옮겨도 구조가 유지됩니다."
+      },
+      "alt": {
+        "en": "Glyfana note rendering a local image asset inside the editor",
+        "ko": "에디터 안에서 로컬 이미지 자산을 렌더링하는 Glyfana 문서"
+      }
+    },
+    {
+      "src": "./assets/screenshots/editor-source.png",
+      "title": {
+        "en": "Source mode and tabs",
+        "ko": "소스 모드와 탭 편집"
+      },
+      "caption": {
+        "en": "Raw Markdown stays one toggle away, with multiple open tabs visible for quick document switching.",
+        "ko": "raw Markdown은 한 번의 전환으로 열 수 있고, 여러 탭을 보면서 문서를 빠르게 오갈 수 있습니다."
+      },
+      "alt": {
+        "en": "Glyfana source mode showing raw Markdown with multiple open tabs",
+        "ko": "여러 탭과 raw Markdown 소스 모드를 보여주는 Glyfana 편집 화면"
+      }
+    }
+  ]
 }
