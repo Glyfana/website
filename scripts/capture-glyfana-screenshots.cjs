@@ -1,4 +1,5 @@
 const { app, BrowserWindow } = require('electron');
+const fsSync = require('node:fs');
 const fs = require('node:fs/promises');
 const os = require('node:os');
 const path = require('node:path');
@@ -8,6 +9,8 @@ const MAIN_BUNDLE = path.join(APP_ROOT, '.vite', 'main', 'main.js');
 const OUTPUT_DIR = 'C:\\Users\\hanwonjong\\Desktop\\blue-layer\\website\\site\\assets\\screenshots';
 const CAPTURE_DIR = path.join(os.tmpdir(), 'glyfana-site-capture');
 const FIXTURE_IMAGE = path.join(APP_ROOT, 'qa-fixtures', 'sample-image.svg');
+const RECENT_FILE = 'C:\\Users\\hanwonjong\\AppData\\Roaming\\Glyfana\\recent-files.json';
+const RECENT_BACKUP = path.join(os.tmpdir(), 'glyfana-recent-files.backup.json');
 
 function wait(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -111,16 +114,23 @@ async function clickButton(win, querySource, timeoutMs = 5000) {
 async function capture(win, name) {
   await wait(500);
   const image = await win.webContents.capturePage();
+  const size = image.getSize();
+  const cropped = image.crop({
+    x: 0,
+    y: 0,
+    width: size.width,
+    height: Math.max(size.height - 82, 1),
+  });
   await fs.mkdir(OUTPUT_DIR, { recursive: true });
-  await fs.writeFile(path.join(OUTPUT_DIR, name), image.toPNG());
+  await fs.writeFile(path.join(OUTPUT_DIR, name), cropped.toPNG());
 }
 
-async function prepareCaptureFiles() {
-  await fs.rm(CAPTURE_DIR, { recursive: true, force: true });
-  await fs.mkdir(CAPTURE_DIR, { recursive: true });
-  await fs.copyFile(FIXTURE_IMAGE, path.join(CAPTURE_DIR, 'sample-image.svg'));
+function prepareCaptureFilesSync() {
+  fsSync.rmSync(CAPTURE_DIR, { recursive: true, force: true });
+  fsSync.mkdirSync(CAPTURE_DIR, { recursive: true });
+  fsSync.copyFileSync(FIXTURE_IMAGE, path.join(CAPTURE_DIR, 'sample-image.svg'));
 
-  await fs.writeFile(
+  fsSync.writeFileSync(
     path.join(CAPTURE_DIR, 'editor-main.md'),
     `# Glyfana Capture Main
 
@@ -152,7 +162,7 @@ function publishRelease(version: string) {
 `,
   );
 
-  await fs.writeFile(
+  fsSync.writeFileSync(
     path.join(CAPTURE_DIR, 'editor-image.md'),
     `# Glyfana Capture Image
 
@@ -170,7 +180,7 @@ This capture shows local image rendering inside a markdown document.
 `,
   );
 
-  await fs.writeFile(
+  fsSync.writeFileSync(
     path.join(CAPTURE_DIR, 'editor-tabs.md'),
     `# Glyfana Capture Multi Tab
 
@@ -187,8 +197,32 @@ The final screenshot should make tabs and editor chrome visible.
   );
 }
 
+function seedRecentFile(filePath) {
+  fsSync.mkdirSync(path.dirname(RECENT_BACKUP), { recursive: true });
+  if (fsSync.existsSync(RECENT_FILE)) {
+    fsSync.copyFileSync(RECENT_FILE, RECENT_BACKUP);
+  }
+
+  fsSync.mkdirSync(path.dirname(RECENT_FILE), { recursive: true });
+  fsSync.writeFileSync(
+    RECENT_FILE,
+    JSON.stringify({
+      recentFiles: [filePath],
+      lastOpenFile: filePath,
+      updatedAtMs: Date.now(),
+    }),
+  );
+}
+
+async function restoreRecentFile() {
+  try {
+    await fs.copyFile(RECENT_BACKUP, RECENT_FILE);
+  } catch {
+    // ignore
+  }
+}
+
 async function main() {
-  await prepareCaptureFiles();
   const win = await waitForWindow();
   await waitForLoad(win);
   win.setBounds({ x: 60, y: 60, width: 1440, height: 900 });
@@ -201,7 +235,11 @@ async function main() {
     15000,
   );
 
-  await openPath(win, path.join(CAPTURE_DIR, 'editor-main.md'));
+  await waitForPage(
+    win,
+    `(() => [...document.querySelectorAll('.tab-chip__label')].some((node) => (node.textContent || '').includes('editor-main.md')))()`,
+    15000,
+  );
   await capture(win, 'editor-main.png');
 
   await openPath(win, path.join(CAPTURE_DIR, 'editor-image.md'));
@@ -226,15 +264,25 @@ async function main() {
   await capture(win, 'editor-source.png');
 }
 
-process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true';
-require(MAIN_BUNDLE);
+(async () => {
+  process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true';
+  prepareCaptureFilesSync();
+  seedRecentFile(path.join(CAPTURE_DIR, 'editor-main.md'));
+  require(MAIN_BUNDLE);
 
-app.whenReady().then(async () => {
-  try {
-    await main();
-    await app.quit();
-  } catch (error) {
-    console.error(error);
-    await app.exit(1);
-  }
+  app.whenReady().then(async () => {
+    try {
+      await main();
+      await restoreRecentFile();
+      await app.quit();
+    } catch (error) {
+      await restoreRecentFile();
+      console.error(error);
+      await app.exit(1);
+    }
+  });
+})().catch(async (error) => {
+  await restoreRecentFile();
+  console.error(error);
+  app.exit(1);
 });
