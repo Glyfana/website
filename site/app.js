@@ -4,9 +4,15 @@ const PAGE_LANG = document.documentElement.lang?.toLowerCase().startsWith('ko') 
 const MANIFEST_PATH =
   document.querySelector('meta[name="manifest-path"]')?.getAttribute('content')?.trim() ||
   './release-manifest.json';
+const SCREENSHOT_MANIFEST_PATH =
+  document.querySelector('meta[name="screenshots-path"]')?.getAttribute('content')?.trim() ||
+  './screenshots-manifest.json';
 const manifestUrl = new URL(MANIFEST_PATH, window.location.href);
 manifestUrl.searchParams.set('v', BUILD_ID);
 const MANIFEST_URL = manifestUrl.toString();
+const screenshotManifestUrl = new URL(SCREENSHOT_MANIFEST_PATH, window.location.href);
+screenshotManifestUrl.searchParams.set('v', BUILD_ID);
+const SCREENSHOT_MANIFEST_URL = screenshotManifestUrl.toString();
 
 const STRINGS = {
   en: {
@@ -132,6 +138,10 @@ const DEFAULT_MANIFEST = {
   },
 };
 
+const DEFAULT_SCREENSHOT_MANIFEST = {
+  items: [],
+};
+
 function normalizeRepoUrl(value) {
   return String(value || '').trim().replace(/\/+$/, '').replace(/\.git$/, '');
 }
@@ -196,6 +206,110 @@ async function loadManifest() {
   } catch {
     return DEFAULT_MANIFEST;
   }
+}
+
+function localizeManifestValue(value, fallback = '') {
+  if (typeof value === 'string') return value.trim();
+  if (!value || typeof value !== 'object') return fallback;
+
+  return String(value[PAGE_LANG] || value.en || fallback || '').trim();
+}
+
+function normalizeScreenshotEntry(item) {
+  if (!item || typeof item !== 'object') return null;
+
+  const src = String(item.src || '').trim();
+  if (!src) return null;
+
+  return {
+    src,
+    href: String(item.href || '').trim(),
+    title: localizeManifestValue(item.title),
+    caption: localizeManifestValue(item.caption),
+    alt: localizeManifestValue(item.alt, localizeManifestValue(item.title, 'Glyfana screenshot')),
+    featured: Boolean(item.featured),
+  };
+}
+
+async function loadScreenshotManifest() {
+  try {
+    const response = await fetch(SCREENSHOT_MANIFEST_URL, {
+      headers: { Accept: 'application/json' },
+      cache: 'no-store',
+    });
+
+    if (!response.ok) throw new Error(`Screenshot manifest request failed: ${response.status}`);
+    const data = await response.json();
+    const items = Array.isArray(data?.items) ? data.items.map(normalizeScreenshotEntry).filter(Boolean) : [];
+    return { items };
+  } catch {
+    return DEFAULT_SCREENSHOT_MANIFEST;
+  }
+}
+
+function renderShowcaseGallery(items) {
+  const section = document.querySelector('.showcase');
+  const gallery = document.getElementById('showcase-gallery');
+  const mockup = section?.querySelector('.workspace-demo');
+
+  if (!(section instanceof HTMLElement) || !(gallery instanceof HTMLElement)) return;
+
+  gallery.textContent = '';
+  const normalizedItems = Array.isArray(items) ? items.filter(Boolean) : [];
+
+  if (normalizedItems.length === 0) {
+    section.classList.remove('is-gallery-live');
+    gallery.hidden = true;
+    if (mockup instanceof HTMLElement) mockup.hidden = false;
+    return;
+  }
+
+  normalizedItems.forEach((item, index) => {
+    const card = document.createElement(item.href ? 'a' : 'article');
+    card.className = 'showcase-gallery__card';
+    if (item.featured || index === 0) card.classList.add('is-featured');
+
+    if (card instanceof HTMLAnchorElement) {
+      card.href = item.href;
+      card.target = '_blank';
+      card.rel = 'noreferrer';
+      card.dataset.label = item.title || `screenshot_${index + 1}`;
+    }
+
+    const media = document.createElement('div');
+    media.className = 'showcase-gallery__media';
+
+    const image = document.createElement('img');
+    image.src = new URL(item.src, window.location.href).toString();
+    image.alt = item.alt;
+    image.loading = 'lazy';
+    image.decoding = 'async';
+    media.append(image);
+
+    const body = document.createElement('div');
+    body.className = 'showcase-gallery__copy';
+
+    if (item.title) {
+      const title = document.createElement('p');
+      title.className = 'showcase-gallery__title';
+      title.textContent = item.title;
+      body.append(title);
+    }
+
+    if (item.caption) {
+      const caption = document.createElement('p');
+      caption.className = 'showcase-gallery__desc';
+      caption.textContent = item.caption;
+      body.append(caption);
+    }
+
+    card.append(media, body);
+    gallery.append(card);
+  });
+
+  section.classList.add('is-gallery-live');
+  gallery.hidden = false;
+  if (mockup instanceof HTMLElement) mockup.hidden = true;
 }
 
 function setText(id, value) {
@@ -822,6 +936,14 @@ function getAnalyticsDescriptor(target) {
   const link = target.closest('a');
   if (!(link instanceof HTMLAnchorElement)) return null;
 
+  if (link.matches('.showcase-gallery__card')) {
+    return {
+      name: 'showcase_screenshot_click',
+      label: link.dataset.label || 'screenshot',
+      href: link.href,
+    };
+  }
+
   if (link.matches('.js-download')) {
     return { name: 'download_click', label: 'download_setup', href: link.href };
   }
@@ -881,7 +1003,8 @@ function wireAnalytics() {
 }
 
 async function init() {
-  const manifest = await loadManifest();
+  const [manifest, screenshotManifest] = await Promise.all([loadManifest(), loadScreenshotManifest()]);
+  renderShowcaseGallery(screenshotManifest.items);
   const productRepo = normalizeRepoUrl(manifest.productRepoUrl) || getRepoUrlFromPagesUrl();
   const websiteRepo = normalizeRepoUrl(manifest.websiteRepoUrl) || getRepoUrlFromPagesUrl();
 

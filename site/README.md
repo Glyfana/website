@@ -10,7 +10,7 @@ This folder contains the static GitHub Pages payload for `https://glyfana.github
 ## User-Facing Sections
 
 - `Hero`: current Windows installer CTA, release link, source link, and live release metadata
-- `Showcase`: visual mockup of the writing and release workflow
+- `Showcase`: visual mockup by default, or a real screenshot gallery when `screenshots-manifest.json` has items
 - `What's New`: structured summary extracted from the latest release notes
 - `Features`: detailed product capabilities including editing flow, image handling, autosave, conflict handling, updates, and verification
 - `Install`: simple download -> verify -> install path
@@ -49,13 +49,21 @@ This folder contains the static GitHub Pages payload for `https://glyfana.github
 - `styles.css`
   - layout, motion, responsive behavior, and component styling
 - `app.js`
-  - live release fetch, localization strings, release summary parsing, and mobile menu behavior
+  - live release fetch, localization strings, release summary parsing, mobile menu behavior, and screenshot gallery rendering
 - `release-manifest.json`
   - `productRepoUrl`: repository that publishes installer assets
   - `websiteRepoUrl`: optional explicit repository URL for the site itself
   - `assetMatchers`: filename rules used to detect the installer asset from the latest release
   - `integrity.value`: published SHA256 for the pinned fallback build
   - `fallbackRelease`: pinned metadata used when the live API is unavailable
+- `screenshots-manifest.json`
+  - `items[]`: ordered showcase screenshots
+  - `src`: relative path to the image, usually under `assets/screenshots/`
+  - `title.en` / `title.ko`: short card title for each screenshot
+  - `caption.en` / `caption.ko`: short explanatory copy under the image
+  - `alt.en` / `alt.ko`: accessible image description
+  - `featured`: optional flag to let a capture span the full gallery width
+  - `href`: optional link target if a screenshot card should open a larger source image
 
 ## Deployment
 
@@ -76,4 +84,6 @@ This folder contains the static GitHub Pages payload for `https://glyfana.github
 - The site is fully static and does not need a backend.
 - For normal traffic, the live GitHub API request is usually sufficient.
 - The pinned manifest exists so downloads and verification details do not disappear when the live API is unavailable.
+- The screenshot manifest is intentionally separate from the release manifest so product imagery can be updated without touching release metadata.
+- If `screenshots-manifest.json` is empty, the showcase stays on the built-in mockup.
 - Keep the feature copy aligned with the main app repository when editor capabilities or update behavior change.
