@@ -417,6 +417,24 @@ function parseMarkdownLink(line, productRepo, releaseUrl) {
   };
 }
 
+function parseBareUrlLink(line, productRepo, releaseUrl) {
+  const source = String(line || '').trim();
+  const match = source.match(/(https?:\/\/[^\s)]+)/i);
+  if (!match) return null;
+
+  const href = resolveReleaseLink(match[1], productRepo, releaseUrl);
+  if (!href) return null;
+
+  const before = stripMarkdownLine(source.slice(0, match.index)).replace(/[:\-\s]+$/, '').trim();
+  const after = stripMarkdownLine(source.slice((match.index || 0) + match[1].length)).replace(/^[:\-\s]+/, '').trim();
+
+  return {
+    label: '',
+    href,
+    text: before || after || stripMarkdownLine(match[1]),
+  };
+}
+
 function normalizeSummaryEntry(item) {
   if (typeof item === 'string') {
     return {
@@ -467,12 +485,12 @@ function extractSummaryItems(markdownBody, productRepo, releaseUrl) {
     const checklistMatch = rawLine.match(/^[-*+]\s+\[([ xX])\]\s+(.+)$/);
     const listMatch = rawLine.match(/^(?:[-*+]\s+|\d+\.\s+)(.+)$/);
     const contentSource = checklistMatch?.[2] || listMatch?.[1] || rawLine;
-    const cleaned = stripMarkdownLine(contentSource);
+    const link = parseMarkdownLink(contentSource, productRepo, releaseUrl) || parseBareUrlLink(contentSource, productRepo, releaseUrl);
+    const cleaned = link?.text || stripMarkdownLine(contentSource);
 
-    if (!cleaned || cleaned.length < 16) continue;
+    if (!cleaned || (cleaned.length < 16 && !link?.href)) continue;
     if (/^(what'?s changed|highlights?|release notes?)$/i.test(cleaned)) continue;
 
-    const link = parseMarkdownLink(contentSource, productRepo, releaseUrl);
     const entry = {
       label: currentLabel,
       text: cleaned,

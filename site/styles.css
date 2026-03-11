@@ -649,6 +649,7 @@ body {
 .release-summary__item-main {
   display: grid;
   gap: 8px;
+  min-width: 0;
 }
 
 .release-summary__tag {
@@ -670,6 +671,8 @@ body {
 .release-summary__text {
   margin: 0;
   color: var(--ink);
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .release-summary__action {
@@ -1374,7 +1377,7 @@ code {
   .topbar,
   .layout,
   .footer {
-    width: calc(100% - 24px);
+    width: calc(100% - 16px);
   }
 
   .topbar {
@@ -1527,7 +1530,7 @@ code {
   .topbar,
   .layout,
   .footer {
-    width: calc(100% - 20px);
+    width: calc(100% - 12px);
   }
 
   .hero,
