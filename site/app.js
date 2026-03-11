@@ -707,6 +707,55 @@ function setYear() {
   setText('year', String(new Date().getFullYear()));
 }
 
+function wireMobileMenu() {
+  const topbar = document.querySelector('.topbar');
+  const toggle = document.querySelector('.menu-toggle');
+
+  if (!(topbar instanceof HTMLElement) || !(toggle instanceof HTMLButtonElement)) return;
+
+  const menuId = toggle.getAttribute('aria-controls');
+  const menu = menuId ? document.getElementById(menuId) : null;
+  if (!(menu instanceof HTMLElement)) return;
+
+  const mobileMedia = window.matchMedia('(max-width: 760px)');
+
+  const setMenuState = (open) => {
+    const isMobile = mobileMedia.matches;
+    const shouldOpen = isMobile && open;
+
+    topbar.classList.toggle('is-menu-open', shouldOpen);
+    toggle.setAttribute('aria-expanded', String(shouldOpen));
+    menu.hidden = isMobile ? !shouldOpen : false;
+  };
+
+  setMenuState(false);
+
+  toggle.addEventListener('click', () => {
+    setMenuState(!topbar.classList.contains('is-menu-open'));
+  });
+
+  menu.addEventListener('click', (event) => {
+    if (!mobileMedia.matches) return;
+    if (!(event.target instanceof Element)) return;
+    if (event.target.closest('a')) {
+      setMenuState(false);
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      setMenuState(false);
+    }
+  });
+
+  const syncMenu = () => setMenuState(topbar.classList.contains('is-menu-open'));
+  if (typeof mobileMedia.addEventListener === 'function') {
+    mobileMedia.addEventListener('change', syncMenu);
+  } else {
+    window.addEventListener('resize', syncMenu);
+  }
+}
+
 async function init() {
   const manifest = await loadManifest();
   const productRepo = normalizeRepoUrl(manifest.productRepoUrl) || getRepoUrlFromPagesUrl();
@@ -748,5 +797,6 @@ async function init() {
 }
 
 setYear();
+wireMobileMenu();
 wireRevealAnimations();
 init();
