@@ -78,8 +78,8 @@
       <div class="topbar__menu" id="site-menu">
         <nav class="nav">
           <a href="#download">Download</a>
-          <a href="#install">Install</a>
-          <a href="#faq">FAQ</a>
+          <a href="#showcase">Preview</a>
+          <a href="#features">Features</a>
           <a href="#verify">Verify</a>
         </nav>
         <div class="topbar__tools">
@@ -100,12 +100,24 @@
     <main id="top" class="layout">
       <section class="hero reveal">
         <div class="hero__copy">
-          <p class="eyebrow">Official Windows Installer</p>
-          <h1>One page for the latest Glyfana setup, release notes, and integrity checks.</h1>
+          <p class="eyebrow">Windows Markdown Editor</p>
+          <p class="hero__kicker">Local-first writing with WYSIWYG editing, source mode, and recovery-aware file handling.</p>
+          <h1>Download Glyfana and understand the product before you install it.</h1>
           <p class="hero__desc">
-            Keep GitHub Releases as the artifact source, but give users a direct, trustworthy download page that always
-            points at the latest stable Windows build.
+            Glyfana is built for fast Markdown writing on local files. This page gives users the latest stable Windows
+            installer, shows how the editor actually looks, and keeps release notes and verification details close to
+            the download.
           </p>
+          <div class="hero__proof">
+            <div class="hero-proof-card">
+              <span class="hero-proof-card__label">Best for</span>
+              <strong>Release notes, docs, and local knowledge work</strong>
+            </div>
+            <div class="hero-proof-card">
+              <span class="hero-proof-card__label">Why it stands out</span>
+              <strong>Real editor preview, source mode, and checksum verification in one flow</strong>
+            </div>
+          </div>
           <div class="actions">
             <a
               class="btn btn--primary js-download"
@@ -113,18 +125,13 @@
               target="_blank"
               rel="noreferrer"
             >Download Latest Setup</a>
-            <a
-              class="btn js-release"
-              href="https://github.com/Glyfana/Glyfana/releases/tag/v0.1.7"
-              target="_blank"
-              rel="noreferrer"
-            >View Release</a>
-            <a class="btn btn--ghost js-repo" href="https://github.com/Glyfana/Glyfana" target="_blank" rel="noreferrer">Source Code</a>
+            <a class="btn btn--ghost" href="#showcase">See Product Preview</a>
+            <a class="text-link js-releases" href="https://github.com/Glyfana/Glyfana/releases" target="_blank" rel="noreferrer">Browse all releases</a>
           </div>
           <ul class="hero__facts">
-            <li>Windows-first installer delivery</li>
-            <li>Latest stable release pulled from GitHub</li>
-            <li>Checksum and asset list on the same page</li>
+            <li>Local-first Markdown files with portable assets</li>
+            <li>WYSIWYG editing plus raw Markdown source mode</li>
+            <li>Installer, release notes, checksum, and asset list in one place</li>
           </ul>
         </div>
 
@@ -177,7 +184,7 @@
         </p>
       </section>
 
-      <section class="showcase reveal">
+      <section id="showcase" class="showcase reveal">
         <div class="showcase__copy">
           <p class="eyebrow">Product Preview</p>
           <h2>Show the editor, not just the installer.</h2>

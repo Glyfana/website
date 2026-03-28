@@ -46,6 +46,12 @@ const STRINGS = {
     algorithmUnavailable: (algorithm) => `${algorithm} unavailable`,
     noReleaseHighlights: 'No release highlights were published for the current build.',
     openLink: 'Open link',
+    previewImage: 'Preview image',
+    clickToEnlarge: 'Click to enlarge',
+    viewSourceImage: 'Open source image',
+    closePreview: 'Close preview',
+    previousImage: 'Previous image',
+    nextImage: 'Next image',
     defaultHighlights: [
       'Direct Windows installer download from the latest stable release.',
       'Release notes, asset inventory, and checksum stay linked in one flow.',
@@ -81,6 +87,12 @@ const STRINGS = {
     algorithmUnavailable: (algorithm) => `${algorithm} 값 없음`,
     noReleaseHighlights: '현재 빌드에 공개된 릴리스 하이라이트가 없습니다.',
     openLink: '링크 열기',
+    previewImage: '이미지 미리보기',
+    clickToEnlarge: '클릭해서 크게 보기',
+    viewSourceImage: '원본 이미지 열기',
+    closePreview: '미리보기 닫기',
+    previousImage: '이전 이미지',
+    nextImage: '다음 이미지',
     defaultHighlights: [
       '최신 안정 릴리스의 Windows 설치 파일을 바로 내려받을 수 있습니다.',
       '릴리스 노트, 자산 목록, 체크섬을 한 흐름 안에서 같이 확인할 수 있습니다.',
@@ -142,6 +154,12 @@ const DEFAULT_MANIFEST = {
 
 const DEFAULT_SCREENSHOT_MANIFEST = {
   items: [],
+};
+
+const showcaseLightboxState = {
+  items: [],
+  activeIndex: -1,
+  lastTrigger: null,
 };
 
 function normalizeRepoUrl(value) {
@@ -308,17 +326,16 @@ function renderShowcaseGallery(items) {
     return;
   }
 
-  normalizedItems.forEach((item, index) => {
-    const card = document.createElement(item.href ? 'a' : 'article');
-    card.className = 'showcase-gallery__card';
-    if (item.featured || index === 0) card.classList.add('is-featured');
+  showcaseLightboxState.items = normalizedItems;
 
-    if (card instanceof HTMLAnchorElement) {
-      card.href = item.href;
-      card.target = '_blank';
-      card.rel = 'noreferrer';
-      card.dataset.label = item.title || `screenshot_${index + 1}`;
-    }
+  normalizedItems.forEach((item, index) => {
+    const card = document.createElement('article');
+    card.className = 'showcase-gallery__card';
+    card.tabIndex = 0;
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-label', `${t('previewImage')}: ${item.title || `Screenshot ${index + 1}`}`);
+    card.dataset.index = String(index);
+    if (item.featured || index === 0) card.classList.add('is-featured');
 
     const media = document.createElement('div');
     media.className = 'showcase-gallery__media';
@@ -347,6 +364,21 @@ function renderShowcaseGallery(items) {
       body.append(caption);
     }
 
+    const hint = document.createElement('p');
+    hint.className = 'showcase-gallery__hint';
+    hint.textContent = t('clickToEnlarge');
+    body.append(hint);
+
+    if (item.href) {
+      const sourceLink = document.createElement('a');
+      sourceLink.className = 'showcase-gallery__link';
+      sourceLink.href = item.href;
+      sourceLink.target = '_blank';
+      sourceLink.rel = 'noreferrer';
+      sourceLink.textContent = t('viewSourceImage');
+      body.append(sourceLink);
+    }
+
     card.append(media, body);
     gallery.append(card);
   });
@@ -354,6 +386,125 @@ function renderShowcaseGallery(items) {
   section.classList.add('is-gallery-live');
   gallery.hidden = false;
   if (mockup instanceof HTMLElement) mockup.hidden = true;
+}
+
+function getShowcaseLightboxElements() {
+  return {
+    root: document.getElementById('showcase-lightbox'),
+    image: document.getElementById('showcase-lightbox-image'),
+    count: document.getElementById('showcase-lightbox-count'),
+    title: document.getElementById('showcase-lightbox-title'),
+    desc: document.getElementById('showcase-lightbox-desc'),
+    sourceLink: document.getElementById('showcase-lightbox-source'),
+    closeButton: document.getElementById('showcase-lightbox-close'),
+    prevButton: document.getElementById('showcase-lightbox-prev'),
+    nextButton: document.getElementById('showcase-lightbox-next'),
+  };
+}
+
+function ensureShowcaseLightbox() {
+  if (document.getElementById('showcase-lightbox')) return;
+
+  const root = document.createElement('div');
+  root.id = 'showcase-lightbox';
+  root.className = 'showcase-lightbox';
+  root.hidden = true;
+  root.innerHTML = `
+    <div class="showcase-lightbox__backdrop" data-close-lightbox="true"></div>
+    <div class="showcase-lightbox__panel" role="dialog" aria-modal="true" aria-labelledby="showcase-lightbox-title" aria-describedby="showcase-lightbox-desc">
+      <button id="showcase-lightbox-close" class="showcase-lightbox__close" type="button" aria-label="${t('closePreview')}">&times;</button>
+      <div class="showcase-lightbox__frame">
+        <img id="showcase-lightbox-image" class="showcase-lightbox__image" alt="" />
+      </div>
+      <div class="showcase-lightbox__meta">
+        <div class="showcase-lightbox__head">
+          <p id="showcase-lightbox-count" class="showcase-lightbox__count"></p>
+          <h3 id="showcase-lightbox-title" class="showcase-lightbox__title"></h3>
+        </div>
+        <p id="showcase-lightbox-desc" class="showcase-lightbox__desc"></p>
+        <div class="showcase-lightbox__controls">
+          <a id="showcase-lightbox-source" class="showcase-lightbox__link" href="#" target="_blank" rel="noreferrer" hidden>${t('viewSourceImage')}</a>
+          <button id="showcase-lightbox-prev" class="showcase-lightbox__nav" type="button">${t('previousImage')}</button>
+          <button id="showcase-lightbox-next" class="showcase-lightbox__nav" type="button">${t('nextImage')}</button>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.body.append(root);
+
+  root.addEventListener('click', (event) => {
+    if (!(event.target instanceof Element)) return;
+    if (event.target.closest('[data-close-lightbox="true"]')) {
+      closeShowcaseLightbox();
+    }
+  });
+
+  const { closeButton, prevButton, nextButton } = getShowcaseLightboxElements();
+  closeButton?.addEventListener('click', () => closeShowcaseLightbox());
+  prevButton?.addEventListener('click', () => stepShowcaseLightbox(-1));
+  nextButton?.addEventListener('click', () => stepShowcaseLightbox(1));
+}
+
+function renderShowcaseLightbox() {
+  const { items, activeIndex } = showcaseLightboxState;
+  const item = items[activeIndex];
+  const els = getShowcaseLightboxElements();
+  if (!item || !els.root || !els.image || !els.count || !els.title || !els.desc || !els.sourceLink || !els.prevButton || !els.nextButton) {
+    return;
+  }
+
+  els.image.src = item.src;
+  els.image.alt = item.alt || item.title || t('previewImage');
+  els.count.textContent = `${activeIndex + 1} / ${items.length}`;
+  els.title.textContent = item.title || t('previewImage');
+  els.desc.textContent = item.caption || '';
+
+  if (item.href) {
+    els.sourceLink.href = item.href;
+    els.sourceLink.hidden = false;
+  } else {
+    els.sourceLink.hidden = true;
+    els.sourceLink.removeAttribute('href');
+  }
+
+  els.prevButton.disabled = items.length <= 1;
+  els.nextButton.disabled = items.length <= 1;
+}
+
+function openShowcaseLightbox(index, trigger = null) {
+  if (!showcaseLightboxState.items[index]) return;
+  ensureShowcaseLightbox();
+
+  showcaseLightboxState.activeIndex = index;
+  showcaseLightboxState.lastTrigger = trigger instanceof HTMLElement ? trigger : null;
+  renderShowcaseLightbox();
+
+  const { root, closeButton } = getShowcaseLightboxElements();
+  if (!root) return;
+
+  root.hidden = false;
+  document.body.classList.add('is-lightbox-open');
+  closeButton?.focus();
+}
+
+function closeShowcaseLightbox() {
+  const { root } = getShowcaseLightboxElements();
+  if (!root || root.hidden) return;
+
+  root.hidden = true;
+  document.body.classList.remove('is-lightbox-open');
+  showcaseLightboxState.activeIndex = -1;
+  showcaseLightboxState.lastTrigger?.focus();
+}
+
+function stepShowcaseLightbox(direction) {
+  const items = showcaseLightboxState.items;
+  if (items.length <= 1 || showcaseLightboxState.activeIndex < 0) return;
+
+  const nextIndex = (showcaseLightboxState.activeIndex + direction + items.length) % items.length;
+  showcaseLightboxState.activeIndex = nextIndex;
+  renderShowcaseLightbox();
 }
 
 function setText(id, value) {
@@ -932,6 +1083,49 @@ function wireMobileMenu() {
   }
 }
 
+function wireShowcaseInteractions() {
+  ensureShowcaseLightbox();
+
+  document.addEventListener('click', (event) => {
+    if (!(event.target instanceof Element)) return;
+
+    const sourceLink = event.target.closest('.showcase-gallery__link');
+    if (sourceLink) {
+      event.stopPropagation();
+      return;
+    }
+
+    const card = event.target.closest('.showcase-gallery__card');
+    if (!(card instanceof HTMLElement)) return;
+
+    const index = Number.parseInt(card.dataset.index || '', 10);
+    if (!Number.isFinite(index)) return;
+    openShowcaseLightbox(index, card);
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.target instanceof HTMLElement && event.target.matches('.showcase-gallery__card')) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        const index = Number.parseInt(event.target.dataset.index || '', 10);
+        if (Number.isFinite(index)) openShowcaseLightbox(index, event.target);
+        return;
+      }
+    }
+
+    const { root } = getShowcaseLightboxElements();
+    if (!root || root.hidden) return;
+
+    if (event.key === 'Escape') {
+      closeShowcaseLightbox();
+    } else if (event.key === 'ArrowLeft') {
+      stepShowcaseLightbox(-1);
+    } else if (event.key === 'ArrowRight') {
+      stepShowcaseLightbox(1);
+    }
+  });
+}
+
 function trackEvent(name, props = {}) {
   if (!name) return;
 
@@ -1091,5 +1285,6 @@ async function init() {
 setYear();
 wireAnalytics();
 wireMobileMenu();
+wireShowcaseInteractions();
 wireRevealAnimations();
 init();
