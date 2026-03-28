@@ -1,3 +1,5 @@
+document.documentElement.classList.add('js-enhanced');
+
 const BUILD_ID =
   document.querySelector('meta[name="build-id"]')?.getAttribute('content')?.trim() || 'dev';
 const PAGE_LANG = document.documentElement.lang?.toLowerCase().startsWith('ko') ? 'ko' : 'en';
@@ -104,34 +106,34 @@ const DEFAULT_MANIFEST = {
   ],
   integrity: {
     algorithm: 'SHA256',
-    value: '1268C18B59B58CB5B19CEBE8F4D4D3761D0AA3931B1D0B09373CB9C6A5961EB1',
+    value: '953765934C5DD589E6567369293679097CBFE4940A432B83841793E29D275514',
   },
   fallbackRelease: {
-    version: 'v0.1.4',
-    title: 'v0.1.4',
-    publishedAt: '2026-03-09T14:42:46Z',
-    setupFileName: 'Glyfana-0.1.4.Setup.exe',
-    sizeBytes: 114885632,
-    downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.4/Glyfana-0.1.4.Setup.exe',
-    releaseUrl: 'https://github.com/Glyfana/Glyfana/releases/tag/v0.1.4',
-    notesUrl: 'https://github.com/Glyfana/Glyfana/releases/tag/v0.1.4',
+    version: 'v0.1.7',
+    title: 'v0.1.7',
+    publishedAt: '2026-03-20T14:04:38Z',
+    setupFileName: 'Glyfana-0.1.7.Setup.exe',
+    sizeBytes: 84350156,
+    downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.7/Glyfana-0.1.7.Setup.exe',
+    releaseUrl: 'https://github.com/Glyfana/Glyfana/releases/tag/v0.1.7',
+    notesUrl: 'https://github.com/Glyfana/Glyfana/releases/tag/v0.1.7',
     assets: [
       {
-        name: 'glyfana-0.1.4-full.nupkg',
-        sizeBytes: 114292139,
-        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.4/glyfana-0.1.4-full.nupkg',
-        isPrimary: false,
-      },
-      {
-        name: 'Glyfana-0.1.4.Setup.exe',
-        sizeBytes: 114885632,
-        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.4/Glyfana-0.1.4.Setup.exe',
+        name: 'Glyfana-0.1.7.Setup.exe',
+        sizeBytes: 84350156,
+        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.7/Glyfana-0.1.7.Setup.exe',
         isPrimary: true,
       },
       {
-        name: 'RELEASES',
-        sizeBytes: 78,
-        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.4/RELEASES',
+        name: 'Glyfana-0.1.7.Setup.exe.blockmap',
+        sizeBytes: 88721,
+        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.7/Glyfana-0.1.7.Setup.exe.blockmap',
+        isPrimary: false,
+      },
+      {
+        name: 'latest.yml',
+        sizeBytes: 342,
+        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.7/latest.yml',
         isPrimary: false,
       },
     ],

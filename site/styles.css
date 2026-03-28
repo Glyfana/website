@@ -388,6 +388,17 @@ body {
   border-color: rgba(11, 123, 117, 0.38);
 }
 
+.btn:focus-visible,
+.topbar__cta:focus-visible,
+.nav a:focus-visible,
+.text-link:focus-visible,
+.locale-switch__link:focus-visible,
+.menu-toggle:focus-visible,
+.faq-item summary:focus-visible {
+  outline: 3px solid rgba(11, 123, 117, 0.34);
+  outline-offset: 3px;
+}
+
 .btn--primary {
   border-color: rgba(11, 123, 117, 0.3);
   background: linear-gradient(135deg, rgba(11, 123, 117, 0.18), rgba(239, 131, 84, 0.16));
@@ -1434,12 +1445,17 @@ code {
 }
 
 .reveal {
+  opacity: 1;
+  transform: none;
+}
+
+.js-enhanced .reveal {
   opacity: 0;
   transform: translateY(14px);
   transition: opacity 0.45s ease, transform 0.45s ease;
 }
 
-.reveal.is-visible {
+.js-enhanced .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
