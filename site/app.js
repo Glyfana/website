@@ -74,9 +74,9 @@ const STRINGS = {
     pinnedRelease: '고정 릴리스',
     latest: '최신',
     noPublicInstallerPublished: '공개 설치 파일이 없습니다',
-    loadingLatestRelease: '최신 릴리스를 불러오는 중...',
-    latestReleaseLoaded: 'GitHub에서 최신 릴리스를 불러왔습니다',
-    usingPinnedMetadata: '고정 릴리스 메타데이터를 사용 중입니다',
+    loadingLatestRelease: '최신 릴리스 정보를 불러오는 중...',
+    latestReleaseLoaded: '최신 릴리스 정보가 반영되었습니다',
+    usingPinnedMetadata: '현재 공개 릴리스 정보를 표시하고 있습니다',
     configureProductRepo: 'release-manifest.json에 productRepoUrl을 설정하세요',
     configurationRequired: '설정 필요',
     fallbackMetadata: '고정 메타데이터',
@@ -887,6 +887,7 @@ function applyReleaseModel(model, options) {
   setText('release-date', formatDate(model.publishedAt));
   setText('release-size', formatBytes(model.sizeBytes));
   setText('installer-name', installerName);
+  setText('installer-name-inline', installerName);
   setText('release-sha', integrityValue);
   setText('release-sha-inline', integrityValue);
   setText('verify-command', buildVerifyCommand(model.setupFileName || 'installer.exe'));

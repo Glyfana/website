@@ -6,10 +6,10 @@
     <meta name="build-id" content="20260312-showcase-lightbox" />
     <meta name="manifest-path" content="../release-manifest.json" />
     <meta name="screenshots-path" content="../screenshots-manifest.json" />
-    <title>Glyfana 다운로드 | Windows 마크다운 에디터</title>
+    <title>Glyfana | Windows 로컬 Markdown 에디터</title>
     <meta
       name="description"
-      content="최신 Glyfana Windows 설치 마법사, 릴리스 노트, 배포 자산, 무결성 확인 정보를 한 페이지에서 제공하는 공식 다운로드 페이지입니다."
+      content="Glyfana는 Windows용 로컬 Markdown 에디터입니다. 읽기 좋은 작성 화면, 빠른 소스 모드 전환, 공식 다운로드와 SHA256 검증 정보를 제공합니다."
     />
     <meta name="robots" content="index,follow" />
     <meta name="theme-color" content="#0b7b75" />
@@ -24,10 +24,10 @@
     <meta property="og:site_name" content="Glyfana" />
     <meta property="og:locale" content="ko_KR" />
     <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:title" content="Glyfana 다운로드 | Windows 마크다운 에디터" />
+    <meta property="og:title" content="Glyfana | Windows 로컬 Markdown 에디터" />
     <meta
       property="og:description"
-      content="최신 Glyfana Windows 설치 파일, 릴리스 노트, 배포 자산, 무결성 확인 정보를 한 페이지에서 확인하세요."
+      content="읽기 좋은 작성 화면, 빠른 소스 모드, 공식 다운로드와 SHA256 검증 정보를 한 페이지에서 확인하세요."
     />
     <meta property="og:url" content="https://glyfana.github.io/website/ko/" />
     <meta
@@ -36,18 +36,18 @@
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Glyfana Windows 다운로드 페이지와 에디터 미리보기" />
+    <meta property="og:image:alt" content="Glyfana Windows 로컬 Markdown 에디터 미리보기" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Glyfana 다운로드 | Windows 마크다운 에디터" />
+    <meta name="twitter:title" content="Glyfana | Windows 로컬 Markdown 에디터" />
     <meta
       name="twitter:description"
-      content="최신 Glyfana Windows 설치 파일을 릴리스 노트와 무결성 정보와 함께 내려받으세요."
+      content="Glyfana의 공식 Windows 설치 파일, 릴리스 노트, SHA256 검증 정보를 확인하세요."
     />
     <meta
       name="twitter:image"
       content="https://glyfana.github.io/website/assets/og-ko.png?v=20260312-showcase-lightbox"
     />
-    <meta name="twitter:image:alt" content="Glyfana Windows 다운로드 페이지와 에디터 미리보기" />
+    <meta name="twitter:image:alt" content="Glyfana Windows 로컬 Markdown 에디터 미리보기" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -57,7 +57,7 @@
     <script src="../locale-router.js?v=20260312-showcase-lightbox"></script>
     <link rel="stylesheet" href="../styles.css?v=20260312-showcase-lightbox" />
   </head>
-  <body>
+  <body id="top">
     <div class="page-noise" aria-hidden="true"></div>
     <div class="halo halo--left" aria-hidden="true"></div>
     <div class="halo halo--right" aria-hidden="true"></div>
@@ -77,10 +77,9 @@
       </button>
       <div class="topbar__menu" id="site-menu">
         <nav class="nav" aria-label="주요 탐색">
-          <a href="#download">다운로드</a>
-          <a href="#showcase">미리보기</a>
           <a href="#features">기능</a>
-          <a href="#verify">검증</a>
+          <a href="#release">다운로드</a>
+          <a href="#faq">FAQ</a>
         </nav>
         <div class="topbar__tools">
           <nav class="locale-switch" aria-label="언어 선택">
@@ -97,39 +96,15 @@
       </div>
     </header>
 
-    <main id="top" class="layout">
+    <main class="layout">
       <section class="hero reveal">
         <div class="hero__copy">
-          <p class="eyebrow">Windows 마크다운 에디터</p>
-          <p class="hero__kicker">차분한 읽기 화면, raw Markdown 제어, 복구 중심 파일 처리 흐름을 함께 제공하는 로컬 우선 에디터입니다.</p>
-          <h1>조용한 작업 화면에서 쓰고, 같은 파일에서 바로 배포까지 이어갑니다.</h1>
+          <p class="eyebrow">Windows 로컬 Markdown 에디터</p>
+          <h1>읽기 좋은 화면으로 쓰고, 필요할 때만 Markdown 원본을 다루세요.</h1>
           <p class="hero__desc">
-            Glyfana는 릴리스 노트, 문서, 내부 글쓰기를 위한 로컬 우선 Markdown 에디터입니다. 이 페이지는 먼저 실제 제품 화면을
-            보여주고, 그 다음 최신 Windows 설치 파일과 릴리스 노트, 검증 정보를 같은 흐름 안에 배치합니다.
+            Glyfana는 편안한 작성 화면과 빠른 소스 모드를 함께 제공하는 Windows용 Markdown 에디터입니다.
+            노트와 이미지를 로컬 파일 기준으로 관리해 작업 흐름을 단순하게 유지합니다.
           </p>
-          <div class="hero__spotlight">
-            <div class="hero__spotlight-head">
-              <span class="hero__spotlight-label">에디터 미리보기</span>
-              <span class="hero__spotlight-note">실제 앱 캡처</span>
-            </div>
-            <img
-              class="hero__spotlight-image"
-              src="../assets/screenshots/editor-main.png"
-              alt="릴리스 노트 문서를 메인 작업 화면에서 보여주는 Glyfana 에디터"
-              loading="eager"
-              decoding="async"
-            />
-          </div>
-          <div class="hero__proof">
-            <div class="hero-proof-card">
-              <span class="hero-proof-card__label">적합한 작업</span>
-              <strong>릴리스 노트, 문서, 변경 기록, 로컬 지식 정리</strong>
-            </div>
-            <div class="hero-proof-card">
-              <span class="hero-proof-card__label">강점</span>
-              <strong>제품 중심 다운로드 페이지에 소스 모드, 스크린샷, 신뢰 신호를 함께 배치</strong>
-            </div>
-          </div>
           <div class="actions">
             <a
               class="btn btn--primary js-download"
@@ -137,14 +112,27 @@
               target="_blank"
               rel="noreferrer"
             >Windows 설치 파일 다운로드</a>
-            <a class="btn btn--ghost" href="#showcase">제품 미리보기 보기</a>
-            <a class="text-link js-releases" href="https://github.com/Glyfana/Glyfana/releases" target="_blank" rel="noreferrer">전체 릴리스 보기</a>
+            <a
+              class="btn btn--ghost js-notes"
+              href="https://github.com/Glyfana/Glyfana/releases/tag/v0.1.7"
+              target="_blank"
+              rel="noreferrer"
+            >릴리스 노트</a>
+            <a class="text-link js-repo" href="https://github.com/Glyfana/Glyfana" target="_blank" rel="noreferrer">GitHub</a>
           </div>
-          <ul class="hero__facts">
-            <li>로컬 파일과 휴대 가능한 자산 폴더 중심 Markdown 작업</li>
-            <li>WYSIWYG 편집과 raw Markdown 소스 모드 동시 제공</li>
-            <li>설치 파일, 릴리스 노트, 체크섬, 자산 목록을 한 화면에 정리</li>
-          </ul>
+          <div class="hero__spotlight">
+            <div class="hero__spotlight-head">
+              <span class="hero__spotlight-label">실제 편집 화면</span>
+              <span class="hero__spotlight-note">앱 스크린샷</span>
+            </div>
+            <img
+              class="hero__spotlight-image"
+              src="../assets/screenshots/editor-main.png"
+              alt="Glyfana 편집 화면"
+              loading="eager"
+              decoding="async"
+            />
+          </div>
         </div>
 
         <aside id="download" class="release-panel" aria-live="polite" data-state="loading">
@@ -152,7 +140,7 @@
             <span class="status-dot" aria-hidden="true"></span>
             <span id="release-status">최신 릴리스를 불러오는 중...</span>
           </div>
-          <h2 id="release-title">현재 Windows 설치 파일</h2>
+          <h2>현재 Windows 설치 파일</h2>
           <div class="stat-grid">
             <div class="stat">
               <span class="stat__label">버전</span>
@@ -169,7 +157,7 @@
           </div>
           <div class="release-panel__meta">
             <p>설치 파일 <code id="installer-name">-</code></p>
-            <p>무결성 <code id="release-sha">대기 중</code></p>
+            <p>SHA256 <code id="release-sha">대기 중</code></p>
           </div>
           <div class="actions actions--tight">
             <a
@@ -177,220 +165,68 @@
               href="https://github.com/Glyfana/Glyfana/releases/download/v0.1.7/Glyfana-0.1.7.Setup.exe"
               target="_blank"
               rel="noreferrer"
-            >Windows 설치 파일 다운로드</a>
-            <a
-              class="btn js-notes"
-              href="https://github.com/Glyfana/Glyfana/releases/tag/v0.1.7"
-              target="_blank"
-              rel="noreferrer"
-            >릴리스 노트</a>
+            >지금 다운로드</a>
           </div>
         </aside>
       </section>
 
-      <section class="signal reveal">
-        <div class="signal__badge">신뢰 기준</div>
-        <p>
-          이 페이지는 먼저 GitHub Releases API에서 최신 정보를 가져오고, API에 접근할 수 없을 때만 고정 메타데이터로 내려가서 다운로드 경로를 계속 유지합니다.
-        </p>
-      </section>
-
-      <section id="showcase" class="showcase reveal">
-        <div class="showcase__copy">
-          <p class="eyebrow">제품 미리보기</p>
-          <h2>다운로드 페이지는 릴리스 보관소가 아니라 제품 페이지처럼 보여야 합니다.</h2>
-          <p class="section-copy">
-            Glyfana는 에디터가 먼저 보여야 설득력이 생깁니다. 체크섬보다 먼저 쓰기 화면, 소스 모드, 로컬 파일 중심 워크플로우를
-            앞으로 끌어와서 사용자가 무엇을 설치하는지 바로 이해하게 만듭니다.
-          </p>
-          <ul class="showcase__points">
-            <li>유틸리티 화면보다 읽기 쉬운 장문 편집 경험</li>
-            <li>구조 정리가 필요할 때 한 단계 안에 있는 소스 모드</li>
-            <li>로컬 파일 신뢰와 배포 흐름이 같은 작업면 안에서 이어짐</li>
-          </ul>
-        </div>
-
-        <div class="showcase__visual">
-          <div class="workspace-demo" aria-hidden="true">
-            <div class="workspace-demo__window">
-              <div class="workspace-demo__bar">
-                <div class="workspace-demo__meta">
-                  <span class="workspace-demo__dots">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                  </span>
-                  <span class="workspace-demo__label">Glyfana 작업공간</span>
-                </div>
-                <span class="workspace-demo__pill">현재 Windows 설치 파일</span>
-              </div>
-
-              <div class="workspace-demo__body">
-                <aside class="workspace-demo__sidebar">
-                  <span class="workspace-demo__sidebar-label">최근 노트</span>
-                  <div class="workspace-demo__note is-active">릴리스 개요</div>
-                  <div class="workspace-demo__note">설치 QA</div>
-                  <div class="workspace-demo__note">복구 체크리스트</div>
-                </aside>
-
-                <div class="workspace-demo__main">
-                  <div class="workspace-demo__tabs">
-                    <span class="workspace-demo__tab is-active">Markdown</span>
-                    <span class="workspace-demo__tab">미리보기</span>
-                  </div>
-
-                  <div class="workspace-demo__panes">
-                    <article class="workspace-demo__editor">
-                      <span class="workspace-demo__editor-title"># Glyfana 0.1.7</span>
-                      <span class="workspace-demo__line">최신 Windows 설치 파일을 배포합니다</span>
-                      <span class="workspace-demo__line">릴리스 노트와 체크섬을 함께 제공합니다</span>
-                      <span class="workspace-demo__line">복구 관련 정보도 화면에 유지합니다</span>
-                    </article>
-
-                    <article class="workspace-demo__preview">
-                      <span class="workspace-demo__preview-label">미리보기</span>
-                      <strong>사용자가 보게 되는 정보</strong>
-                      <ul>
-                        <li>직접 설치 파일 다운로드</li>
-                        <li>맥락이 붙은 릴리스 노트</li>
-                        <li>설치 전 체크섬 확인</li>
-                      </ul>
-                    </article>
-                  </div>
-
-                  <div class="workspace-demo__status">
-                    <span>집중된 편집 흐름</span>
-                    <span>배포 준비 완료 전달</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div id="showcase-gallery" class="showcase-gallery" hidden></div>
-        </div>
-      </section>
-
-      <section class="release-summary reveal">
-        <div class="section-head release-summary__head">
-          <p class="eyebrow">이번 릴리스</p>
-          <h2>다운로드 페이지 안에서 바로 최신 변경점을 읽을 수 있습니다.</h2>
-          <p class="section-copy">
-            GitHub에 릴리스 노트가 올라오면, 이 영역이 중요한 항목을 먼저 요약해 보여주고 전체 문서는 한 번에 열 수 있게 유지합니다.
-          </p>
-        </div>
-
-        <article class="release-summary__card">
-          <div class="release-summary__meta">
-            <span class="release-summary__label">최신 릴리스 노트</span>
-            <a
-              class="text-link js-notes"
-              href="https://github.com/Glyfana/Glyfana/releases/tag/v0.1.7"
-              target="_blank"
-              rel="noreferrer"
-            >전체 노트 열기</a>
-          </div>
-          <ul id="release-summary-list" class="release-summary__list">
-            <li class="release-summary__empty">릴리스 하이라이트를 불러오는 중...</li>
-          </ul>
-        </article>
-      </section>
-
       <section id="features" class="features reveal">
         <div class="section-head">
-          <p class="eyebrow">기능</p>
-          <h2>설치를 요청하기 전에, 패키지된 앱이 실제로 무엇을 하는지 분명하게 보여줍니다.</h2>
-          <p class="section-copy">
-            Glyfana는 단순한 설치 파일이 아닙니다. 이 영역은 패키지된 빌드에서 제공되는 편집 흐름, 이미지 처리, 복구, 업데이트, 검증 동작을 사용자에게 설명합니다.
-          </p>
+          <p class="eyebrow">핵심 기능</p>
+          <h2>처음 써도 바로 이해되는 세 가지에 집중했습니다.</h2>
+          <p class="section-copy">복잡한 구현 설명보다, 실제로 자주 쓰는 작업 흐름만 먼저 보여줍니다.</p>
         </div>
         <div class="feature-grid">
           <article class="card">
-            <p class="card__eyebrow">편집 흐름</p>
-            <h2>실제 소스 모드를 갖춘 Typora 스타일 마크다운 편집.</h2>
-            <p>기본 화면은 렌더링 결과에 가깝게 유지되지만, 정밀한 편집이 필요할 때는 언제든 원본 Markdown으로 내려갈 수 있습니다.</p>
-            <ul class="card-list">
-              <li>Milkdown과 ProseMirror 기반의 WYSIWYG 작성 화면</li>
-              <li>CodeMirror 6 소스 모드로 일반 Markdown 즉시 전환</li>
-              <li>Shiki 기반 코드 블록 하이라이팅으로 기술 문서 가독성 유지</li>
-            </ul>
+            <p class="card__eyebrow">작성 경험</p>
+            <h2>읽기 좋은 화면에서 바로 쓸 수 있습니다.</h2>
+            <p>문서 흐름을 보면서 바로 쓰고 다듬을 수 있어 긴 글도 끊기지 않고 이어집니다.</p>
           </article>
           <article class="card">
-            <p class="card__eyebrow">이미지 워크플로우</p>
-            <h2>붙여넣은 이미지를 잃어버리지 않고 노트 옆에 함께 보관합니다.</h2>
-            <p>로컬 이미지는 앱 내부 저장소에 숨기지 않고 문서 옆에 저장해서, 파일 자체를 이동해도 휴대성이 유지됩니다.</p>
-            <ul class="card-list">
-              <li>이미지를 바로 드래그 앤 드롭하거나 붙여넣기 가능</li>
-              <li>저장된 파일은 같은 위치의 <code>&lt;note&gt;.assets/</code> 폴더에 이미지 저장</li>
-              <li>상대 경로와 <code>mdlocal://</code> 렌더링으로 개발/패키지 빌드 모두에서 미리보기 유지</li>
-            </ul>
+            <p class="card__eyebrow">소스 모드</p>
+            <h2>필요할 때만 Markdown 원본으로 전환합니다.</h2>
+            <p>구조를 직접 만져야 할 때는 소스 모드로 바로 전환해 세밀하게 수정할 수 있습니다.</p>
           </article>
           <article class="card">
-            <p class="card__eyebrow">자동 저장</p>
-            <h2>저장된 문서와 제목 없는 초안 모두 별도의 복구 경로를 가집니다.</h2>
-            <p>앱은 문서가 실제 파일에 연결되어 있는지에 따라 다른 idle autosave 규칙을 적용합니다.</p>
-            <ul class="card-list">
-              <li>저장된 문서는 편집기가 쉬는 동안 자동으로 디스크에 반영</li>
-              <li>제목 없는 문서는 앱 userData 폴더에 draft 형태로 보존</li>
-              <li>충돌 복구와 draft 복원으로 세션 사이 데이터 손실을 완화</li>
-            </ul>
-          </article>
-          <article class="card">
-            <p class="card__eyebrow">파일 안전성</p>
-            <h2>저장되지 않은 변경과 외부 수정 충돌을 우선적으로 다룹니다.</h2>
-            <p>Glyfana는 디스크 복사본이 항상 우선이라고 가정하지 않습니다. 로컬 작업이 덮이지 않도록 선택지를 먼저 보여줍니다.</p>
-            <ul class="card-list">
-              <li>저장되지 않은 변경이 있으면 창 닫기나 다른 파일 열기 전에 경고</li>
-              <li>문서를 열어 둔 동안 외부 파일 변경 감지</li>
-              <li>디스크에서 다시 읽기, 계속 편집, 다른 이름으로 저장, 의도적 덮어쓰기 지원</li>
-            </ul>
-          </article>
-          <article class="card">
-            <p class="card__eyebrow">업데이트</p>
-            <h2>설치 이후에도 GitHub 기반 업데이트 흐름이 이어집니다.</h2>
-            <p>패키지 앱은 이 사이트가 참고하는 동일한 릴리스 채널을 추적할 수 있어서, 사용자가 새 빌드를 수동으로 찾지 않아도 됩니다.</p>
-            <ul class="card-list">
-              <li>패키지된 빌드는 GitHub Releases 기반 자동 업데이트 가능</li>
-              <li>앱 시작 시와 이후 1시간마다 백그라운드 확인</li>
-              <li>도움말 메뉴와 재시작 프롬프트로 수동/인앱 업데이트 흐름 제공</li>
-            </ul>
-          </article>
-          <article class="card">
-            <p class="card__eyebrow">검증</p>
-            <h2>설치 전에 신뢰 신호를 화면 위에 남겨 둡니다.</h2>
-            <p>사용자는 무엇이 바뀌었는지, 어떤 자산이 올라왔는지, 설치 전에 어떻게 검증할지 한 페이지에서 확인할 수 있습니다.</p>
-            <ul class="card-list">
-              <li>메인 CTA는 현재 안정 <code>Setup.exe</code> 빌드를 직접 가리킴</li>
-              <li>릴리스 노트, 자산 목록, SHA256 값을 한 화면에서 제공</li>
-              <li>GitHub API가 불가능할 때도 고정 manifest 데이터 유지</li>
-            </ul>
+            <p class="card__eyebrow">로컬 파일</p>
+            <h2>노트와 이미지를 파일 기준으로 안전하게 다룹니다.</h2>
+            <p>자동 저장과 변경 감지로 작업 손실을 줄이고, 로컬 파일 흐름을 단순하게 유지합니다.</p>
           </article>
         </div>
       </section>
 
-      <section id="install" class="install reveal">
+      <section id="release" class="verify reveal">
         <div class="section-head">
-          <p class="eyebrow">설치</p>
-          <h2>추가 패키징 인프라 없이 Windows 설치 파일을 배포합니다.</h2>
-          <p class="section-copy">
-            GitHub Releases는 그대로 산출물 저장소로 사용하고, 이 페이지는 다운로드, 설치, 검증 안내를 한 곳에서 정리한 진입점을 제공합니다.
-          </p>
+          <p class="eyebrow">다운로드 및 검증</p>
+          <h2>공식 Windows 설치 파일과 확인 정보</h2>
+          <p class="section-copy">릴리스 노트, SHA256, 설치 전 참고 사항만 간단히 확인할 수 있습니다.</p>
         </div>
-        <div class="steps">
-          <article class="step">
-            <span class="step__index">01</span>
-            <h3>현재 설치 파일 다운로드</h3>
-            <p>메인 버튼으로 현재 릴리스에 첨부된 안정 <code>.exe</code> 파일을 가져옵니다.</p>
+        <div class="verify__grid">
+          <article class="verify-card">
+            <h3>릴리스 정보</h3>
+            <p class="verify-card__copy">최신 변경 사항은 릴리스 노트에서 바로 확인할 수 있습니다.</p>
+            <p class="verify-card__meta">
+              릴리스 노트
+              <a
+                class="text-link js-notes"
+                href="https://github.com/Glyfana/Glyfana/releases/tag/v0.1.7"
+                target="_blank"
+                rel="noreferrer"
+              >열기</a>
+            </p>
+            <p class="verify-card__meta">설치 파일 <code id="installer-name-inline">Glyfana-0.1.7.Setup.exe</code></p>
+            <p class="verify-card__meta">영어/한국어 설치 지원, 설치 경로 선택 가능</p>
           </article>
-          <article class="step">
-            <span class="step__index">02</span>
-            <h3>파일 해시 검증</h3>
-            <p>설치 전에 로컬 SHA256 값을 이 페이지에 공개된 체크섬과 비교합니다.</p>
-          </article>
-          <article class="step">
-            <span class="step__index">03</span>
-            <h3>설치 마법사 실행</h3>
-            <p>설치 언어와 경로를 고른 뒤, 릴리스 노트와 자산 목록을 열어 둔 채 후속 검증까지 이어갈 수 있습니다.</p>
+
+          <article class="verify-card">
+            <h3>설치 전 확인</h3>
+            <p class="verify-card__copy">PowerShell로 SHA256 값을 확인한 뒤 설치할 수 있습니다.</p>
+            <p class="verify-card__meta">SHA256 <code id="release-sha-inline">대기 중</code></p>
+            <p class="verify-card__meta">PowerShell <code id="verify-command">Get-FileHash ".\installer.exe" -Algorithm SHA256</code></p>
+            <p class="verify-card__meta">
+              현재 공개 설치 파일은 코드 서명이 없어 첫 실행 시 Windows SmartScreen 경고가 나타날 수 있습니다.
+              안내가 뜨면 <strong>추가 정보</strong> → <strong>실행</strong>을 선택하세요.
+            </p>
           </article>
         </div>
       </section>
@@ -398,88 +234,28 @@
       <section id="faq" class="faq reveal">
         <div class="section-head">
           <p class="eyebrow">FAQ</p>
-          <h2>설치 전에 나올 질문을 먼저 답합니다.</h2>
-          <p class="section-copy">
-            망설임을 줄이는 가장 빠른 방법은 Glyfana가 파일, 복구, 업데이트, 검증을 어떻게 다루는지 평이한 말로 설명하는 것입니다.
-          </p>
+          <h2>자주 묻는 질문</h2>
+          <p class="section-copy">다운로드 전에 많이 묻는 내용만 짧게 정리했습니다.</p>
         </div>
         <div class="faq-list">
           <details class="faq-item">
-            <summary>노트에 이미지를 붙여넣으면 어떻게 되나요?</summary>
-            <p>
-              Glyfana는 로컬 이미지를 바로 붙여넣거나 드롭할 수 있습니다. 저장된 노트의 경우 이미지 파일은 같은 위치의
-              <code>&lt;note&gt;.assets/</code> 폴더에 저장되고 상대 경로로 참조되어 문서 휴대성이 유지됩니다.
-            </p>
+            <summary>클라우드 계정이 필요한가요?</summary>
+            <p>아니요. 로컬 Markdown 파일을 바로 열고 저장할 수 있습니다.</p>
           </details>
           <details class="faq-item">
-            <summary>저장하지 않은 채 앱을 닫으면 어떻게 되나요?</summary>
-            <p>
-              로컬 변경이 남아 있으면 창을 닫거나 다른 파일로 전환하기 전에 경고가 표시됩니다. 저장된 문서는 idle autosave를 쓰고,
-              제목 없는 문서는 앱 데이터 폴더에 draft 형태로 보존되어 다음 세션에서 복구할 수 있습니다.
-            </p>
+            <summary>기존 Markdown 파일도 열 수 있나요?</summary>
+            <p>네. 이미 쓰고 있는 <code>.md</code> 파일을 열어 그대로 이어서 작업할 수 있습니다.</p>
           </details>
           <details class="faq-item">
-            <summary>같은 파일이 Glyfana 밖에서 바뀌면 어떻게 되나요?</summary>
-            <p>
-              Glyfana는 외부 파일 변경을 감지하고 조용히 덮어쓰지 않습니다. 사용자는 디스크에서 다시 읽기, 계속 편집, 다른 이름으로 저장,
-              의도적으로 덮어쓰기 중 하나를 선택할 수 있습니다.
-            </p>
+            <summary>현재 지원하는 플랫폼은 무엇인가요?</summary>
+            <p>이 페이지에서 제공하는 공개 설치 파일은 현재 Windows용입니다.</p>
           </details>
-          <details class="faq-item">
-            <summary>설치 이후 업데이트는 어떻게 들어오나요?</summary>
-            <p>
-              패키지 빌드는 앱 시작 시와 이후 1시간마다 GitHub Releases를 확인할 수 있습니다. 도움말 메뉴에서 수동 확인도 가능하고,
-              새 빌드가 준비되면 인앱 프롬프트에서 재시작 흐름까지 이어집니다.
-            </p>
-          </details>
-          <details class="faq-item">
-            <summary>설치 전에 파일 검증은 어떻게 하나요?</summary>
-            <p>
-              <code>Setup.exe</code>를 내려받은 뒤, 검증 섹션의 PowerShell 명령으로 SHA256 값을 계산해서 이 페이지에 표시된 값과 비교하면 됩니다.
-            </p>
-          </details>
-        </div>
-      </section>
-
-      <section id="verify" class="verify reveal">
-        <div class="section-head">
-          <p class="eyebrow">검증</p>
-          <h2>빌드를 쉽게 신뢰할 수 있게 만듭니다.</h2>
-          <p class="section-copy">
-            체크섬, PowerShell 검증 명령, 공개된 모든 자산 목록을 설치 전에 바로 확인할 수 있게 제공합니다.
-          </p>
-        </div>
-        <div class="verify__grid">
-          <article class="verify-card">
-            <h3>무결성</h3>
-            <p class="verify-card__copy">PowerShell로 설치 파일 해시를 계산해 공개된 SHA256 값과 비교하세요.</p>
-            <p class="verify-card__meta">SHA256 <code id="release-sha-inline">대기 중</code></p>
-            <p class="verify-card__meta">
-              PowerShell <code id="verify-command">Get-FileHash ".\installer.exe" -Algorithm SHA256</code>
-            </p>
-          </article>
-
-          <article class="verify-card">
-            <div class="verify-card__head">
-              <h3>릴리스 자산</h3>
-              <a
-                class="text-link js-releases"
-                href="https://github.com/Glyfana/Glyfana/releases"
-                target="_blank"
-                rel="noreferrer"
-              >전체 릴리스 열기</a>
-            </div>
-            <ul id="asset-list" class="asset-list">
-              <li class="asset-list__empty">릴리스 자산을 불러오는 중...</li>
-            </ul>
-          </article>
         </div>
       </section>
     </main>
 
     <footer class="footer">
       <span>(c) <span id="year"></span> Glyfana</span>
-      <span id="repo-status">릴리스 저장소: 확인 중</span>
     </footer>
 
     <script type="module" src="../app.js?v=20260312-showcase-lightbox"></script>
