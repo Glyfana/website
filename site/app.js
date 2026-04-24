@@ -53,7 +53,7 @@ const STRINGS = {
     previousImage: 'Previous image',
     nextImage: 'Next image',
     defaultHighlights: [
-      'Official Windows and Linux downloads stay attached to the latest stable release.',
+      'Official Windows, macOS, and Linux downloads stay attached to the latest stable release.',
       'Release notes, asset inventory, and checksum stay linked in one flow.',
       'Users can verify the published SHA256 value before install.',
     ],
@@ -94,7 +94,7 @@ const STRINGS = {
     previousImage: '이전 이미지',
     nextImage: '다음 이미지',
     defaultHighlights: [
-      '최신 안정 릴리스의 Windows와 Linux 빌드를 바로 내려받을 수 있습니다.',
+      '최신 안정 릴리스의 Windows, macOS, Linux 빌드를 바로 내려받을 수 있습니다.',
       '릴리스 노트, 자산 목록, 체크섬을 한 흐름 안에서 같이 확인할 수 있습니다.',
       '설치 전에 공개된 SHA256 값으로 무결성을 검증할 수 있습니다.',
     ],
@@ -112,6 +112,8 @@ const DEFAULT_PLATFORM_ASSET_MATCHERS = {
     { type: 'regex', value: 'setup\\.(exe|msi)$' },
     { type: 'regex', value: '\\.(exe|msi)$' },
   ],
+  macDmg: [{ type: 'regex', value: '\\.dmg$' }],
+  macZip: [{ type: 'regex', value: '\\.zip$' }],
   linuxAppImage: [{ type: 'regex', value: '\\.appimage$' }],
   linuxDeb: [{ type: 'regex', value: '\\.deb$' }],
 };
@@ -129,58 +131,72 @@ const DEFAULT_MANIFEST = {
   platformAssetMatchers: DEFAULT_PLATFORM_ASSET_MATCHERS,
   integrity: {
     algorithm: 'SHA256',
-    value: '2787F6A1A3AC4839BADAC31EB01BC460501DC860ACE9841D9B2F5DE2A1436AD8',
+    value: '2409822E41301128F8E586BB116006E9C7599B884C1D7636191854754651CDF7',
   },
   fallbackRelease: {
-    version: 'v0.1.8',
-    title: 'v0.1.8',
-    publishedAt: '2026-04-24T08:18:48Z',
-    setupFileName: 'Glyfana-0.1.8.Setup.exe',
-    sizeBytes: 84360458,
-    downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.8/Glyfana-0.1.8.Setup.exe',
-    releaseUrl: 'https://github.com/Glyfana/Glyfana/releases/tag/v0.1.8',
-    notesUrl: 'https://github.com/Glyfana/Glyfana/releases/tag/v0.1.8',
+    version: 'v0.1.9',
+    title: 'v0.1.9',
+    publishedAt: '2026-04-24T09:07:33Z',
+    setupFileName: 'Glyfana-0.1.9.Setup.exe',
+    sizeBytes: 84275204,
+    downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/Glyfana-0.1.9.Setup.exe',
+    releaseUrl: 'https://github.com/Glyfana/Glyfana/releases/tag/v0.1.9',
+    notesUrl: 'https://github.com/Glyfana/Glyfana/releases/tag/v0.1.9',
     assets: [
       {
-        name: 'Glyfana-0.1.8.Setup.exe',
-        sizeBytes: 84360458,
-        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.8/Glyfana-0.1.8.Setup.exe',
-        integrityValue: '2787F6A1A3AC4839BADAC31EB01BC460501DC860ACE9841D9B2F5DE2A1436AD8',
+        name: 'Glyfana-0.1.9.Setup.exe',
+        sizeBytes: 84275204,
+        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/Glyfana-0.1.9.Setup.exe',
+        integrityValue: '2409822E41301128F8E586BB116006E9C7599B884C1D7636191854754651CDF7',
         isPrimary: true,
       },
       {
-        name: 'Glyfana-0.1.8-x86_64.AppImage',
-        sizeBytes: 114267356,
-        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.8/Glyfana-0.1.8-x86_64.AppImage',
-        integrityValue: 'C420A2CDB081F84BFEBCBA8D8DE0FF349F0504CFD7EC6D477C27B4683EBF3DBA',
+        name: 'Glyfana-0.1.9-x64.dmg',
+        sizeBytes: 109315649,
+        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/Glyfana-0.1.9-x64.dmg',
+        integrityValue: '381AA0E27046C5A79C985452EA23F38099D1C83E8EC3675EE3A90776FADBBE90',
         isPrimary: false,
       },
       {
-        name: 'Glyfana-0.1.8-amd64.deb',
-        sizeBytes: 89674692,
-        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.8/Glyfana-0.1.8-amd64.deb',
-        integrityValue: '0CA8C9B93B126BC891CE03577DBE33E590BE8B695F9525D28AC9DFDF90176004',
+        name: 'Glyfana-0.1.9-x64.zip',
+        sizeBytes: 106076260,
+        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/Glyfana-0.1.9-x64.zip',
+        integrityValue: 'B28903ACFD125B497306D3D5C81AF75EF759109129D7A1743E1BF51405F284F7',
         isPrimary: false,
       },
       {
-        name: 'Glyfana-0.1.8.Setup.exe.blockmap',
-        sizeBytes: 88849,
-        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.8/Glyfana-0.1.8.Setup.exe.blockmap',
-        integrityValue: 'B01C9ABB3CF2B2EAD53B9EB00CD94197986704713381BF545A2837FB2D7399FF',
+        name: 'Glyfana-0.1.9-x86_64.AppImage',
+        sizeBytes: 114164946,
+        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/Glyfana-0.1.9-x86_64.AppImage',
+        integrityValue: '4BE5F3D892C10EE95E2CD16ED32591D62F63E27BCA32D75C2C83FFDA38E545AE',
+        isPrimary: false,
+      },
+      {
+        name: 'Glyfana-0.1.9-amd64.deb',
+        sizeBytes: 89580088,
+        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/Glyfana-0.1.9-amd64.deb',
+        integrityValue: '8CD5AA45F14B1BE31AFC54AC632C19101FE1209888FF3D982BC0A9484C623A92',
+        isPrimary: false,
+      },
+      {
+        name: 'Glyfana-0.1.9.Setup.exe.blockmap',
+        sizeBytes: 88826,
+        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/Glyfana-0.1.9.Setup.exe.blockmap',
+        integrityValue: '19727BE10AE1598FBE1A392A8FD097F968789A505D3C9E1CFB28CA2CADC4A1EB',
         isPrimary: false,
       },
       {
         name: 'latest-linux.yml',
         sizeBytes: 533,
-        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.8/latest-linux.yml',
-        integrityValue: '29F839BA02D3C6E3950B591FAF68416793C247FE91716E51AC9ABE4E74562789',
+        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/latest-linux.yml',
+        integrityValue: 'A89583C89D8C23D443BBA77A8B34B4FB7015A376D4DE1D4A5D37DEEC50E3C815',
         isPrimary: false,
       },
       {
         name: 'latest.yml',
         sizeBytes: 342,
-        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.8/latest.yml',
-        integrityValue: '1FF730AB250819E3234760CE01D4D0962C141E94D036297A8380A3F6C6246A12',
+        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/latest.yml',
+        integrityValue: '51E46CBA11F3DC41D4BA1A84FC7FD1C7FB247643E7C5E9A9752E655A579491AE',
         isPrimary: false,
       },
     ],
@@ -240,6 +256,14 @@ function mergeManifest(base, override) {
         Array.isArray(overridePlatformMatchers.windows) && overridePlatformMatchers.windows.length > 0
           ? overridePlatformMatchers.windows
           : base.platformAssetMatchers.windows,
+      macDmg:
+        Array.isArray(overridePlatformMatchers.macDmg) && overridePlatformMatchers.macDmg.length > 0
+          ? overridePlatformMatchers.macDmg
+          : base.platformAssetMatchers.macDmg,
+      macZip:
+        Array.isArray(overridePlatformMatchers.macZip) && overridePlatformMatchers.macZip.length > 0
+          ? overridePlatformMatchers.macZip
+          : base.platformAssetMatchers.macZip,
       linuxAppImage:
         Array.isArray(overridePlatformMatchers.linuxAppImage) && overridePlatformMatchers.linuxAppImage.length > 0
           ? overridePlatformMatchers.linuxAppImage
@@ -620,6 +644,11 @@ function buildSha256sumCommand(fileName) {
   return `sha256sum ./${safeName}`;
 }
 
+function buildShasumCommand(fileName) {
+  const safeName = String(fileName || 'Glyfana.dmg').replace(/"/g, '');
+  return `shasum -a 256 ./${safeName}`;
+}
+
 function matchesAsset(assetName, matcher) {
   const name = String(assetName || '');
   const value = String(matcher?.value || '');
@@ -671,18 +700,29 @@ function pickAssetByMatchers(assets, matchers, fallbackPattern) {
 function extractPlatformAssets(assets, platformAssetMatchers) {
   return {
     windows: pickAssetByMatchers(assets, platformAssetMatchers?.windows, /\.(exe|msi)$/i),
+    macDmg: pickAssetByMatchers(assets, platformAssetMatchers?.macDmg, /\.dmg$/i),
+    macZip: pickAssetByMatchers(assets, platformAssetMatchers?.macZip, /\.zip$/i),
     linuxAppImage: pickAssetByMatchers(assets, platformAssetMatchers?.linuxAppImage, /\.appimage$/i),
     linuxDeb: pickAssetByMatchers(assets, platformAssetMatchers?.linuxDeb, /\.deb$/i),
   };
 }
 
 function getPrimaryReleaseAsset(platformAssets, assets) {
-  return platformAssets.windows || platformAssets.linuxAppImage || platformAssets.linuxDeb || assets[0] || null;
+  return (
+    platformAssets.windows ||
+    platformAssets.macDmg ||
+    platformAssets.macZip ||
+    platformAssets.linuxAppImage ||
+    platformAssets.linuxDeb ||
+    assets[0] ||
+    null
+  );
 }
 
 function buildPlatformSummary(platformAssets) {
   const labels = [];
   if (platformAssets.windows) labels.push('Windows');
+  if (platformAssets.macDmg || platformAssets.macZip) labels.push('macOS');
   if (platformAssets.linuxAppImage || platformAssets.linuxDeb) labels.push('Linux');
   return labels.join(', ');
 }
@@ -995,6 +1035,9 @@ function applyReleaseModel(model, options) {
   const integrityAlgorithm = options?.integrityAlgorithm || 'SHA256';
   const platformAssets = model.platformAssets || {};
   const windowsAsset = platformAssets.windows || null;
+  const macDmgAsset = platformAssets.macDmg || null;
+  const macZipAsset = platformAssets.macZip || null;
+  const macPrimaryAsset = macDmgAsset || macZipAsset || null;
   const linuxAppImageAsset = platformAssets.linuxAppImage || null;
   const linuxDebAsset = platformAssets.linuxDeb || null;
   const linuxPrimaryAsset = linuxAppImageAsset || linuxDebAsset || null;
@@ -1012,6 +1055,7 @@ function applyReleaseModel(model, options) {
   const installerName = primaryAsset.name || model.setupFileName || t('noPublicInstallerPublished');
   const platformSummary = buildPlatformSummary(platformAssets) || t('unknown');
   const windowsIntegrity = windowsAsset?.integrityValue || t('algorithmUnavailable', integrityAlgorithm);
+  const macIntegrity = macPrimaryAsset?.integrityValue || t('algorithmUnavailable', integrityAlgorithm);
   const linuxIntegrity = linuxPrimaryAsset?.integrityValue || t('algorithmUnavailable', integrityAlgorithm);
 
   setText('release-title', model.title || t('latestStableBuild'));
@@ -1026,11 +1070,16 @@ function applyReleaseModel(model, options) {
   setText('verify-command', buildVerifyCommand(primaryAsset.name || model.setupFileName || 'installer.exe'));
   setText('download-windows-file', windowsAsset?.name || '');
   setText('download-windows-size', formatBytes(windowsAsset?.sizeBytes));
+  setText('download-mac-file', macPrimaryAsset?.name || '');
+  setText('download-mac-size', formatBytes(macPrimaryAsset?.sizeBytes));
+  setText('download-mac-zip-size', formatBytes(macZipAsset?.sizeBytes));
   setText('download-linux-file', linuxPrimaryAsset?.name || '');
   setText('download-linux-size', formatBytes(linuxPrimaryAsset?.sizeBytes));
   setText('download-linux-deb-size', formatBytes(linuxDebAsset?.sizeBytes));
   setText('release-sha-inline-windows', windowsIntegrity);
   setText('verify-command-windows', buildVerifyCommand(windowsAsset?.name || 'installer.exe'));
+  setText('release-sha-inline-mac', macIntegrity);
+  setText('verify-command-mac', buildShasumCommand(macPrimaryAsset?.name || 'Glyfana.dmg'));
   setText('release-sha-inline-linux', linuxIntegrity);
   setText('verify-command-linux', buildSha256sumCommand(linuxPrimaryAsset?.name || 'Glyfana.AppImage'));
   renderReleaseSummary(
@@ -1041,15 +1090,21 @@ function applyReleaseModel(model, options) {
 
   setLink('.js-download', primaryAsset.downloadUrl || model.downloadUrl || '');
   setLink('.js-download-windows', windowsAsset?.downloadUrl || '');
+  setLink('.js-download-mac', macPrimaryAsset?.downloadUrl || '');
+  setLink('.js-download-mac-dmg', macDmgAsset?.downloadUrl || macPrimaryAsset?.downloadUrl || '');
+  setLink('.js-download-mac-zip', macZipAsset?.downloadUrl || '');
   setLink('.js-download-linux', linuxPrimaryAsset?.downloadUrl || '');
   setLink('.js-download-linux-appimage', linuxAppImageAsset?.downloadUrl || linuxPrimaryAsset?.downloadUrl || '');
   setLink('.js-download-linux-deb', linuxDebAsset?.downloadUrl || '');
   setLink('.js-release', model.releaseUrl || '');
   setLink('.js-notes', model.notesUrl || model.releaseUrl || '');
   setHidden('.download-option--windows', !windowsAsset);
+  setHidden('.download-option--mac', !macPrimaryAsset);
   setHidden('.download-option--linux', !linuxPrimaryAsset);
+  setHidden('.download-mac-zip-wrap', !macZipAsset || (macPrimaryAsset && macZipAsset.name === macPrimaryAsset.name));
   setHidden('.download-linux-deb-wrap', !linuxDebAsset || (linuxPrimaryAsset && linuxDebAsset.name === linuxPrimaryAsset.name));
   setHidden('.verify-platform--windows', !windowsAsset);
+  setHidden('.verify-platform--mac', !macPrimaryAsset);
   setHidden('.verify-platform--linux', !linuxPrimaryAsset);
   renderAssetList(model.assets || []);
 }
@@ -1346,6 +1401,14 @@ function getAnalyticsDescriptor(target) {
 
   if (link.matches('.js-download-linux-deb')) {
     return { name: 'download_click', label: 'download_linux_deb', href: link.href };
+  }
+
+  if (link.matches('.js-download-mac-zip')) {
+    return { name: 'download_click', label: 'download_mac_zip', href: link.href };
+  }
+
+  if (link.matches('.js-download-mac, .js-download-mac-dmg')) {
+    return { name: 'download_click', label: 'download_mac', href: link.href };
   }
 
   if (link.matches('.js-download-linux, .js-download-linux-appimage')) {
