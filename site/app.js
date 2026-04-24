@@ -53,7 +53,7 @@ const STRINGS = {
     previousImage: 'Previous image',
     nextImage: 'Next image',
     defaultHighlights: [
-      'Direct Windows installer download from the latest stable release.',
+      'Official Windows and Linux downloads stay attached to the latest stable release.',
       'Release notes, asset inventory, and checksum stay linked in one flow.',
       'Users can verify the published SHA256 value before install.',
     ],
@@ -94,7 +94,7 @@ const STRINGS = {
     previousImage: '이전 이미지',
     nextImage: '다음 이미지',
     defaultHighlights: [
-      '최신 안정 릴리스의 Windows 설치 파일을 바로 내려받을 수 있습니다.',
+      '최신 안정 릴리스의 Windows와 Linux 빌드를 바로 내려받을 수 있습니다.',
       '릴리스 노트, 자산 목록, 체크섬을 한 흐름 안에서 같이 확인할 수 있습니다.',
       '설치 전에 공개된 SHA256 값으로 무결성을 검증할 수 있습니다.',
     ],
@@ -106,6 +106,16 @@ function t(key, ...args) {
   return typeof entry === 'function' ? entry(...args) : entry;
 }
 
+const DEFAULT_PLATFORM_ASSET_MATCHERS = {
+  windows: [
+    { type: 'regex', value: '^glyfana[-._].*setup\\.exe$' },
+    { type: 'regex', value: 'setup\\.(exe|msi)$' },
+    { type: 'regex', value: '\\.(exe|msi)$' },
+  ],
+  linuxAppImage: [{ type: 'regex', value: '\\.appimage$' }],
+  linuxDeb: [{ type: 'regex', value: '\\.deb$' }],
+};
+
 const DEFAULT_MANIFEST = {
   productRepoUrl: 'https://github.com/Glyfana/Glyfana',
   websiteRepoUrl: '',
@@ -116,36 +126,61 @@ const DEFAULT_MANIFEST = {
     { type: 'regex', value: 'installer' },
     { type: 'regex', value: '\\.(exe|msi)$' },
   ],
+  platformAssetMatchers: DEFAULT_PLATFORM_ASSET_MATCHERS,
   integrity: {
     algorithm: 'SHA256',
-    value: '953765934C5DD589E6567369293679097CBFE4940A432B83841793E29D275514',
+    value: '2787F6A1A3AC4839BADAC31EB01BC460501DC860ACE9841D9B2F5DE2A1436AD8',
   },
   fallbackRelease: {
-    version: 'v0.1.7',
-    title: 'v0.1.7',
-    publishedAt: '2026-03-20T14:04:38Z',
-    setupFileName: 'Glyfana-0.1.7.Setup.exe',
-    sizeBytes: 84350156,
-    downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.7/Glyfana-0.1.7.Setup.exe',
-    releaseUrl: 'https://github.com/Glyfana/Glyfana/releases/tag/v0.1.7',
-    notesUrl: 'https://github.com/Glyfana/Glyfana/releases/tag/v0.1.7',
+    version: 'v0.1.8',
+    title: 'v0.1.8',
+    publishedAt: '2026-04-24T08:18:48Z',
+    setupFileName: 'Glyfana-0.1.8.Setup.exe',
+    sizeBytes: 84360458,
+    downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.8/Glyfana-0.1.8.Setup.exe',
+    releaseUrl: 'https://github.com/Glyfana/Glyfana/releases/tag/v0.1.8',
+    notesUrl: 'https://github.com/Glyfana/Glyfana/releases/tag/v0.1.8',
     assets: [
       {
-        name: 'Glyfana-0.1.7.Setup.exe',
-        sizeBytes: 84350156,
-        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.7/Glyfana-0.1.7.Setup.exe',
+        name: 'Glyfana-0.1.8.Setup.exe',
+        sizeBytes: 84360458,
+        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.8/Glyfana-0.1.8.Setup.exe',
+        integrityValue: '2787F6A1A3AC4839BADAC31EB01BC460501DC860ACE9841D9B2F5DE2A1436AD8',
         isPrimary: true,
       },
       {
-        name: 'Glyfana-0.1.7.Setup.exe.blockmap',
-        sizeBytes: 88721,
-        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.7/Glyfana-0.1.7.Setup.exe.blockmap',
+        name: 'Glyfana-0.1.8-x86_64.AppImage',
+        sizeBytes: 114267356,
+        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.8/Glyfana-0.1.8-x86_64.AppImage',
+        integrityValue: 'C420A2CDB081F84BFEBCBA8D8DE0FF349F0504CFD7EC6D477C27B4683EBF3DBA',
+        isPrimary: false,
+      },
+      {
+        name: 'Glyfana-0.1.8-amd64.deb',
+        sizeBytes: 89674692,
+        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.8/Glyfana-0.1.8-amd64.deb',
+        integrityValue: '0CA8C9B93B126BC891CE03577DBE33E590BE8B695F9525D28AC9DFDF90176004',
+        isPrimary: false,
+      },
+      {
+        name: 'Glyfana-0.1.8.Setup.exe.blockmap',
+        sizeBytes: 88849,
+        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.8/Glyfana-0.1.8.Setup.exe.blockmap',
+        integrityValue: 'B01C9ABB3CF2B2EAD53B9EB00CD94197986704713381BF545A2837FB2D7399FF',
+        isPrimary: false,
+      },
+      {
+        name: 'latest-linux.yml',
+        sizeBytes: 533,
+        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.8/latest-linux.yml',
+        integrityValue: '29F839BA02D3C6E3950B591FAF68416793C247FE91716E51AC9ABE4E74562789',
         isPrimary: false,
       },
       {
         name: 'latest.yml',
         sizeBytes: 342,
-        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.7/latest.yml',
+        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.8/latest.yml',
+        integrityValue: '1FF730AB250819E3234760CE01D4D0962C141E94D036297A8380A3F6C6246A12',
         isPrimary: false,
       },
     ],
@@ -191,6 +226,8 @@ function getRepoInfoFromGitHubUrl(repoUrl) {
 }
 
 function mergeManifest(base, override) {
+  const overridePlatformMatchers = override?.platformAssetMatchers || {};
+
   return {
     ...base,
     ...override,
@@ -198,6 +235,20 @@ function mergeManifest(base, override) {
       Array.isArray(override?.assetMatchers) && override.assetMatchers.length > 0
         ? override.assetMatchers
         : base.assetMatchers,
+    platformAssetMatchers: {
+      windows:
+        Array.isArray(overridePlatformMatchers.windows) && overridePlatformMatchers.windows.length > 0
+          ? overridePlatformMatchers.windows
+          : base.platformAssetMatchers.windows,
+      linuxAppImage:
+        Array.isArray(overridePlatformMatchers.linuxAppImage) && overridePlatformMatchers.linuxAppImage.length > 0
+          ? overridePlatformMatchers.linuxAppImage
+          : base.platformAssetMatchers.linuxAppImage,
+      linuxDeb:
+        Array.isArray(overridePlatformMatchers.linuxDeb) && overridePlatformMatchers.linuxDeb.length > 0
+          ? overridePlatformMatchers.linuxDeb
+          : base.platformAssetMatchers.linuxDeb,
+    },
     integrity: {
       ...base.integrity,
       ...(override?.integrity || {}),
@@ -528,6 +579,14 @@ function setLink(selector, href) {
   });
 }
 
+function setHidden(selector, hidden) {
+  document.querySelectorAll(selector).forEach((el) => {
+    if (el instanceof HTMLElement) {
+      el.hidden = hidden;
+    }
+  });
+}
+
 function formatDate(value) {
   if (!value) return t('pinnedMetadata');
   const date = new Date(value);
@@ -554,6 +613,11 @@ function formatBytes(value) {
 
   const digits = index === 0 ? 0 : 1;
   return `${size.toFixed(digits)} ${units[index]}`;
+}
+
+function buildSha256sumCommand(fileName) {
+  const safeName = String(fileName || 'appimage').replace(/"/g, '');
+  return `sha256sum ./${safeName}`;
 }
 
 function matchesAsset(assetName, matcher) {
@@ -588,6 +652,41 @@ function pickInstallerAsset(assets, matchers) {
   return assets.find((asset) => /\.(exe|msi)$/i.test(asset.name || '')) || assets[0];
 }
 
+function pickAssetByMatchers(assets, matchers, fallbackPattern) {
+  if (!Array.isArray(assets) || assets.length === 0) return null;
+
+  for (const matcher of matchers || []) {
+    const matchedAsset = assets.find((asset) => matchesAsset(asset.name, matcher));
+    if (matchedAsset) return matchedAsset;
+  }
+
+  if (fallbackPattern instanceof RegExp) {
+    const fallbackMatch = assets.find((asset) => fallbackPattern.test(asset.name || ''));
+    if (fallbackMatch) return fallbackMatch;
+  }
+
+  return null;
+}
+
+function extractPlatformAssets(assets, platformAssetMatchers) {
+  return {
+    windows: pickAssetByMatchers(assets, platformAssetMatchers?.windows, /\.(exe|msi)$/i),
+    linuxAppImage: pickAssetByMatchers(assets, platformAssetMatchers?.linuxAppImage, /\.appimage$/i),
+    linuxDeb: pickAssetByMatchers(assets, platformAssetMatchers?.linuxDeb, /\.deb$/i),
+  };
+}
+
+function getPrimaryReleaseAsset(platformAssets, assets) {
+  return platformAssets.windows || platformAssets.linuxAppImage || platformAssets.linuxDeb || assets[0] || null;
+}
+
+function buildPlatformSummary(platformAssets) {
+  const labels = [];
+  if (platformAssets.windows) labels.push('Windows');
+  if (platformAssets.linuxAppImage || platformAssets.linuxDeb) labels.push('Linux');
+  return labels.join(', ');
+}
+
 function buildReleaseApiUrl(repoUrl) {
   const info = getRepoInfoFromGitHubUrl(repoUrl);
   if (!info) return '';
@@ -611,18 +710,34 @@ function buildNotesUrl(productRepo, version, notesBranch) {
   return `${productRepo}/blob/${branch}/RELEASE_NOTES_${normalizedVersion}.md`;
 }
 
-function getIntegrityValue(asset) {
-  const digest = typeof asset?.digest === 'string' ? asset.digest : '';
-  if (digest.toLowerCase().startsWith('sha256:')) {
-    return digest.slice('sha256:'.length).toUpperCase();
-  }
-
-  return '';
-}
-
 function buildVerifyCommand(fileName) {
   const safeName = String(fileName || 'installer.exe').replace(/"/g, '');
   return `Get-FileHash ".\\${safeName}" -Algorithm SHA256`;
+}
+
+function normalizeIntegrityValue(value) {
+  const digest = String(value || '').trim();
+  if (!digest) return '';
+  if (/^sha256:/i.test(digest)) {
+    return digest.slice('sha256:'.length).toUpperCase();
+  }
+  return digest.toUpperCase();
+}
+
+function getIntegrityValue(asset) {
+  return normalizeIntegrityValue(asset?.integrityValue || asset?.digest);
+}
+
+function normalizeReleaseAsset(asset, releaseUrl) {
+  const sizeCandidate = Number.isFinite(asset?.sizeBytes) ? asset.sizeBytes : asset?.size;
+  return {
+    name: asset?.name || t('unnamedAsset'),
+    sizeBytes: Number.isFinite(sizeCandidate) ? sizeCandidate : null,
+    downloadUrl: asset?.downloadUrl || asset?.browser_download_url || releaseUrl || '',
+    releaseUrl: asset?.releaseUrl || releaseUrl || '',
+    isPrimary: Boolean(asset?.isPrimary),
+    integrityValue: getIntegrityValue(asset),
+  };
 }
 
 function renderAssetList(assets) {
@@ -878,28 +993,64 @@ function setCommonLinks(productRepo) {
 
 function applyReleaseModel(model, options) {
   const integrityAlgorithm = options?.integrityAlgorithm || 'SHA256';
-  const hasIntegrity = Boolean(model.integrityValue);
-  const integrityValue = hasIntegrity ? model.integrityValue : t('algorithmUnavailable', integrityAlgorithm);
-  const installerName = model.setupFileName || t('noPublicInstallerPublished');
+  const platformAssets = model.platformAssets || {};
+  const windowsAsset = platformAssets.windows || null;
+  const linuxAppImageAsset = platformAssets.linuxAppImage || null;
+  const linuxDebAsset = platformAssets.linuxDeb || null;
+  const linuxPrimaryAsset = linuxAppImageAsset || linuxDebAsset || null;
+  const primaryAsset =
+    getPrimaryReleaseAsset(platformAssets, Array.isArray(model.assets) ? model.assets : []) || {
+      name: model.setupFileName || '',
+      sizeBytes: model.sizeBytes,
+      downloadUrl: model.downloadUrl || '',
+      integrityValue: normalizeIntegrityValue(model.integrityValue),
+    };
+  const hasIntegrity = Boolean(primaryAsset.integrityValue || model.integrityValue);
+  const integrityValue = hasIntegrity
+    ? primaryAsset.integrityValue || normalizeIntegrityValue(model.integrityValue)
+    : t('algorithmUnavailable', integrityAlgorithm);
+  const installerName = primaryAsset.name || model.setupFileName || t('noPublicInstallerPublished');
+  const platformSummary = buildPlatformSummary(platformAssets) || t('unknown');
+  const windowsIntegrity = windowsAsset?.integrityValue || t('algorithmUnavailable', integrityAlgorithm);
+  const linuxIntegrity = linuxPrimaryAsset?.integrityValue || t('algorithmUnavailable', integrityAlgorithm);
 
   setText('release-title', model.title || t('latestStableBuild'));
   setText('release-version', model.version || t('latest'));
   setText('release-date', formatDate(model.publishedAt));
-  setText('release-size', formatBytes(model.sizeBytes));
+  setText('release-size', formatBytes(primaryAsset.sizeBytes ?? model.sizeBytes));
+  setText('release-platforms', platformSummary);
   setText('installer-name', installerName);
   setText('installer-name-inline', installerName);
   setText('release-sha', integrityValue);
   setText('release-sha-inline', integrityValue);
-  setText('verify-command', buildVerifyCommand(model.setupFileName || 'installer.exe'));
+  setText('verify-command', buildVerifyCommand(primaryAsset.name || model.setupFileName || 'installer.exe'));
+  setText('download-windows-file', windowsAsset?.name || '');
+  setText('download-windows-size', formatBytes(windowsAsset?.sizeBytes));
+  setText('download-linux-file', linuxPrimaryAsset?.name || '');
+  setText('download-linux-size', formatBytes(linuxPrimaryAsset?.sizeBytes));
+  setText('download-linux-deb-size', formatBytes(linuxDebAsset?.sizeBytes));
+  setText('release-sha-inline-windows', windowsIntegrity);
+  setText('verify-command-windows', buildVerifyCommand(windowsAsset?.name || 'installer.exe'));
+  setText('release-sha-inline-linux', linuxIntegrity);
+  setText('verify-command-linux', buildSha256sumCommand(linuxPrimaryAsset?.name || 'Glyfana.AppImage'));
   renderReleaseSummary(
     Array.isArray(model.summaryItems) && model.summaryItems.length > 0
       ? model.summaryItems
       : t('defaultHighlights'),
   );
 
-  setLink('.js-download', model.downloadUrl || '');
+  setLink('.js-download', primaryAsset.downloadUrl || model.downloadUrl || '');
+  setLink('.js-download-windows', windowsAsset?.downloadUrl || '');
+  setLink('.js-download-linux', linuxPrimaryAsset?.downloadUrl || '');
+  setLink('.js-download-linux-appimage', linuxAppImageAsset?.downloadUrl || linuxPrimaryAsset?.downloadUrl || '');
+  setLink('.js-download-linux-deb', linuxDebAsset?.downloadUrl || '');
   setLink('.js-release', model.releaseUrl || '');
   setLink('.js-notes', model.notesUrl || model.releaseUrl || '');
+  setHidden('.download-option--windows', !windowsAsset);
+  setHidden('.download-option--linux', !linuxPrimaryAsset);
+  setHidden('.download-linux-deb-wrap', !linuxDebAsset || (linuxPrimaryAsset && linuxDebAsset.name === linuxPrimaryAsset.name));
+  setHidden('.verify-platform--windows', !windowsAsset);
+  setHidden('.verify-platform--linux', !linuxPrimaryAsset);
   renderAssetList(model.assets || []);
 }
 
@@ -912,26 +1063,31 @@ function fallbackReleaseToModel(manifest, productRepo) {
   const setupFileName = fallback.setupFileName || '';
   const sizeBytes = Number.isFinite(fallback.sizeBytes) ? fallback.sizeBytes : null;
   const assets = Array.isArray(fallback.assets)
-    ? fallback.assets.map((asset) => ({
-        name: asset.name || setupFileName || t('installerDefault'),
-        sizeBytes: Number.isFinite(asset.sizeBytes) ? asset.sizeBytes : null,
-        downloadUrl: asset.downloadUrl || downloadUrl,
-        releaseUrl,
-        isPrimary: (asset.name || '') === setupFileName,
-      }))
+    ? fallback.assets.map((asset) =>
+        normalizeReleaseAsset(
+          {
+            ...asset,
+            isPrimary: asset.isPrimary ?? (asset.name || '') === setupFileName,
+          },
+          releaseUrl,
+        ),
+      )
     : [];
+  const platformAssets = extractPlatformAssets(assets, manifest.platformAssetMatchers);
+  const primaryAsset = getPrimaryReleaseAsset(platformAssets, assets);
 
   return {
     title: fallback.title || t('currentStableBuild'),
     version: fallback.version || t('pinnedRelease'),
     publishedAt: fallback.publishedAt || '',
-    setupFileName,
-    sizeBytes,
-    downloadUrl,
+    setupFileName: primaryAsset?.name || setupFileName,
+    sizeBytes: primaryAsset?.sizeBytes ?? sizeBytes,
+    downloadUrl: primaryAsset?.downloadUrl || downloadUrl,
     releaseUrl,
     notesUrl,
-    integrityValue: String(manifest.integrity?.value || '').trim(),
+    integrityValue: primaryAsset?.integrityValue || normalizeIntegrityValue(manifest.integrity?.value),
     assets,
+    platformAssets,
     summaryItems: [],
   };
 }
@@ -986,13 +1142,17 @@ async function loadLatestReleaseModel(manifest, productRepo) {
 
   const release = await response.json();
   const assets = Array.isArray(release.assets) ? release.assets : [];
-  const installerAsset = pickInstallerAsset(assets, manifest.assetMatchers);
-  const mappedAssets = assets.map((asset) => ({
-    name: asset.name || t('unnamedAsset'),
-    sizeBytes: Number.isFinite(asset.size) ? asset.size : null,
-    downloadUrl: asset.browser_download_url || release.html_url || '',
-    releaseUrl: release.html_url || '',
-    isPrimary: Boolean(installerAsset && asset.id === installerAsset.id),
+  const mappedAssets = assets.map((asset) => normalizeReleaseAsset(asset, release.html_url || ''));
+  const platformAssets = extractPlatformAssets(mappedAssets, manifest.platformAssetMatchers);
+  const installerAsset =
+    getPrimaryReleaseAsset(platformAssets, mappedAssets) || pickInstallerAsset(mappedAssets, manifest.assetMatchers);
+  const normalizedAssets = mappedAssets.map((asset) => ({
+    ...asset,
+    isPrimary: Boolean(
+      installerAsset &&
+        asset.name === installerAsset.name &&
+        asset.downloadUrl === installerAsset.downloadUrl,
+    ),
   }));
 
   return {
@@ -1000,12 +1160,13 @@ async function loadLatestReleaseModel(manifest, productRepo) {
     version: release.tag_name || release.name || t('latest'),
     publishedAt: release.published_at || release.created_at || '',
     setupFileName: installerAsset?.name || manifest.fallbackRelease?.setupFileName || '',
-    sizeBytes: Number.isFinite(installerAsset?.size) ? installerAsset.size : null,
-    downloadUrl: installerAsset?.browser_download_url || release.html_url || `${productRepo}/releases/latest`,
+    sizeBytes: Number.isFinite(installerAsset?.sizeBytes) ? installerAsset.sizeBytes : null,
+    downloadUrl: installerAsset?.downloadUrl || release.html_url || `${productRepo}/releases/latest`,
     releaseUrl: release.html_url || `${productRepo}/releases/latest`,
     notesUrl: release.html_url || `${productRepo}/releases/latest`,
-    integrityValue: getIntegrityValue(installerAsset),
-    assets: mappedAssets,
+    integrityValue: installerAsset?.integrityValue || '',
+    assets: normalizedAssets,
+    platformAssets,
     summaryItems: extractSummaryItems(release.body, productRepo, release.html_url),
   };
 }
@@ -1181,6 +1342,18 @@ function getAnalyticsDescriptor(target) {
       label: link.dataset.label || 'screenshot',
       href: link.href,
     };
+  }
+
+  if (link.matches('.js-download-linux-deb')) {
+    return { name: 'download_click', label: 'download_linux_deb', href: link.href };
+  }
+
+  if (link.matches('.js-download-linux, .js-download-linux-appimage')) {
+    return { name: 'download_click', label: 'download_linux', href: link.href };
+  }
+
+  if (link.matches('.js-download-windows')) {
+    return { name: 'download_click', label: 'download_windows', href: link.href };
   }
 
   if (link.matches('.js-download')) {

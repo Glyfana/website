@@ -20,36 +20,88 @@
       "value": "\\.(exe|msi)$"
     }
   ],
+  "platformAssetMatchers": {
+    "windows": [
+      {
+        "type": "regex",
+        "value": "^glyfana[-._].*setup\\.exe$"
+      },
+      {
+        "type": "regex",
+        "value": "setup\\.(exe|msi)$"
+      },
+      {
+        "type": "regex",
+        "value": "\\.(exe|msi)$"
+      }
+    ],
+    "linuxAppImage": [
+      {
+        "type": "regex",
+        "value": "\\.appimage$"
+      }
+    ],
+    "linuxDeb": [
+      {
+        "type": "regex",
+        "value": "\\.deb$"
+      }
+    ]
+  },
   "integrity": {
     "algorithm": "SHA256",
-    "value": "953765934C5DD589E6567369293679097CBFE4940A432B83841793E29D275514"
+    "value": "2787F6A1A3AC4839BADAC31EB01BC460501DC860ACE9841D9B2F5DE2A1436AD8"
   },
   "fallbackRelease": {
-    "version": "v0.1.7",
-    "title": "v0.1.7",
-    "publishedAt": "2026-03-20T14:04:38Z",
-    "setupFileName": "Glyfana-0.1.7.Setup.exe",
-    "sizeBytes": 84350156,
-    "downloadUrl": "https://github.com/Glyfana/Glyfana/releases/download/v0.1.7/Glyfana-0.1.7.Setup.exe",
-    "releaseUrl": "https://github.com/Glyfana/Glyfana/releases/tag/v0.1.7",
-    "notesUrl": "https://github.com/Glyfana/Glyfana/releases/tag/v0.1.7",
+    "version": "v0.1.8",
+    "title": "v0.1.8",
+    "publishedAt": "2026-04-24T08:18:48Z",
+    "setupFileName": "Glyfana-0.1.8.Setup.exe",
+    "sizeBytes": 84360458,
+    "downloadUrl": "https://github.com/Glyfana/Glyfana/releases/download/v0.1.8/Glyfana-0.1.8.Setup.exe",
+    "releaseUrl": "https://github.com/Glyfana/Glyfana/releases/tag/v0.1.8",
+    "notesUrl": "https://github.com/Glyfana/Glyfana/releases/tag/v0.1.8",
     "assets": [
       {
-        "name": "Glyfana-0.1.7.Setup.exe",
-        "sizeBytes": 84350156,
-        "downloadUrl": "https://github.com/Glyfana/Glyfana/releases/download/v0.1.7/Glyfana-0.1.7.Setup.exe",
+        "name": "Glyfana-0.1.8.Setup.exe",
+        "sizeBytes": 84360458,
+        "downloadUrl": "https://github.com/Glyfana/Glyfana/releases/download/v0.1.8/Glyfana-0.1.8.Setup.exe",
+        "integrityValue": "2787F6A1A3AC4839BADAC31EB01BC460501DC860ACE9841D9B2F5DE2A1436AD8",
         "isPrimary": true
       },
       {
-        "name": "Glyfana-0.1.7.Setup.exe.blockmap",
-        "sizeBytes": 88721,
-        "downloadUrl": "https://github.com/Glyfana/Glyfana/releases/download/v0.1.7/Glyfana-0.1.7.Setup.exe.blockmap",
+        "name": "Glyfana-0.1.8-x86_64.AppImage",
+        "sizeBytes": 114267356,
+        "downloadUrl": "https://github.com/Glyfana/Glyfana/releases/download/v0.1.8/Glyfana-0.1.8-x86_64.AppImage",
+        "integrityValue": "C420A2CDB081F84BFEBCBA8D8DE0FF349F0504CFD7EC6D477C27B4683EBF3DBA",
+        "isPrimary": false
+      },
+      {
+        "name": "Glyfana-0.1.8-amd64.deb",
+        "sizeBytes": 89674692,
+        "downloadUrl": "https://github.com/Glyfana/Glyfana/releases/download/v0.1.8/Glyfana-0.1.8-amd64.deb",
+        "integrityValue": "0CA8C9B93B126BC891CE03577DBE33E590BE8B695F9525D28AC9DFDF90176004",
+        "isPrimary": false
+      },
+      {
+        "name": "Glyfana-0.1.8.Setup.exe.blockmap",
+        "sizeBytes": 88849,
+        "downloadUrl": "https://github.com/Glyfana/Glyfana/releases/download/v0.1.8/Glyfana-0.1.8.Setup.exe.blockmap",
+        "integrityValue": "B01C9ABB3CF2B2EAD53B9EB00CD94197986704713381BF545A2837FB2D7399FF",
+        "isPrimary": false
+      },
+      {
+        "name": "latest-linux.yml",
+        "sizeBytes": 533,
+        "downloadUrl": "https://github.com/Glyfana/Glyfana/releases/download/v0.1.8/latest-linux.yml",
+        "integrityValue": "29F839BA02D3C6E3950B591FAF68416793C247FE91716E51AC9ABE4E74562789",
         "isPrimary": false
       },
       {
         "name": "latest.yml",
         "sizeBytes": 342,
-        "downloadUrl": "https://github.com/Glyfana/Glyfana/releases/download/v0.1.7/latest.yml",
+        "downloadUrl": "https://github.com/Glyfana/Glyfana/releases/download/v0.1.8/latest.yml",
+        "integrityValue": "1FF730AB250819E3234760CE01D4D0962C141E94D036297A8380A3F6C6246A12",
         "isPrimary": false
       }
     ]

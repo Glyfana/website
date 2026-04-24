@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="build-id" content="20260312-showcase-lightbox" />
+    <meta name="build-id" content="20260424-multiplatform-downloads" />
     <meta name="manifest-path" content="../release-manifest.json" />
     <meta name="screenshots-path" content="../screenshots-manifest.json" />
-    <title>Glyfana | Windows 로컬 Markdown 에디터</title>
+    <title>Glyfana | 로컬 파일 기반 Markdown 에디터</title>
     <meta
       name="description"
-      content="Glyfana는 로컬 파일을 그대로 다루는 Windows용 Markdown 에디터입니다. 무료 다운로드와 SHA256 검증 정보를 제공합니다."
+      content="Glyfana는 로컬 파일을 그대로 다루는 Windows·Linux용 Markdown 에디터입니다. 공식 다운로드와 SHA256 검증 정보를 제공합니다."
     />
     <meta name="robots" content="index,follow" />
     <meta name="theme-color" content="#0b7b75" />
@@ -24,10 +24,10 @@
     <meta property="og:site_name" content="Glyfana" />
     <meta property="og:locale" content="ko_KR" />
     <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:title" content="Glyfana | Windows 로컬 Markdown 에디터" />
+    <meta property="og:title" content="Glyfana | 로컬 파일 기반 Markdown 에디터" />
     <meta
       property="og:description"
-      content="로컬 파일을 그대로 다루는 Windows용 Markdown 에디터. 공식 다운로드와 SHA256 검증 정보를 확인하세요."
+      content="로컬 파일을 그대로 다루는 Windows·Linux용 Markdown 에디터. 공식 다운로드와 SHA256 검증 정보를 확인하세요."
     />
     <meta property="og:url" content="https://glyfana.github.io/website/ko/" />
     <meta
@@ -36,18 +36,18 @@
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Glyfana Windows 로컬 Markdown 에디터 미리보기" />
+    <meta property="og:image:alt" content="Glyfana 로컬 파일 기반 Markdown 에디터 미리보기" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Glyfana | Windows 로컬 Markdown 에디터" />
+    <meta name="twitter:title" content="Glyfana | 로컬 파일 기반 Markdown 에디터" />
     <meta
       name="twitter:description"
-      content="로컬 파일을 그대로 다루는 Windows용 Markdown 에디터. 공식 다운로드와 SHA256 검증 정보를 확인하세요."
+      content="로컬 파일을 그대로 다루는 Windows·Linux용 Markdown 에디터. 공식 다운로드와 SHA256 검증 정보를 확인하세요."
     />
     <meta
       name="twitter:image"
       content="https://glyfana.github.io/website/assets/og-ko.png?v=20260312-showcase-lightbox"
     />
-    <meta name="twitter:image:alt" content="Glyfana Windows 로컬 Markdown 에디터 미리보기" />
+    <meta name="twitter:image:alt" content="Glyfana 로컬 파일 기반 Markdown 에디터 미리보기" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -55,7 +55,7 @@
       rel="stylesheet"
     />
     <script src="../locale-router.js?v=20260312-showcase-lightbox"></script>
-    <link rel="stylesheet" href="../styles.css?v=20260312-showcase-lightbox" />
+    <link rel="stylesheet" href="../styles.css?v=20260424-multiplatform-downloads" />
   </head>
   <body id="top">
     <div class="page-noise" aria-hidden="true"></div>
@@ -99,7 +99,7 @@
     <main class="layout">
       <section class="hero reveal">
         <div class="hero__copy">
-          <p class="eyebrow">Windows용 파일 기반 Markdown 에디터</p>
+          <p class="eyebrow">Windows, Linux용 파일 기반 Markdown 에디터</p>
           <h1>로컬 파일을 그대로 다루는 Markdown 에디터</h1>
           <p class="hero__desc">
             클라우드 없이, 복잡한 설정 없이, 안전하게 작성하세요.
@@ -117,28 +117,51 @@
         </div>
 
         <aside class="release-panel" aria-live="polite" data-state="live">
-          <h2>Windows용 무료 다운로드</h2>
-          <div class="actions actions--tight">
-            <a
-              class="btn btn--primary js-download"
-              href="https://github.com/Glyfana/Glyfana/releases/download/v0.1.7/Glyfana-0.1.7.Setup.exe"
-              target="_blank"
-              rel="noreferrer"
-            >Windows용 무료 다운로드</a>
+          <h2>무료 다운로드</h2>
+          <div class="download-options">
+            <article class="download-option download-option--windows">
+              <p class="download-option__label">Windows</p>
+              <a
+                class="btn btn--primary js-download js-download-windows"
+                href="https://github.com/Glyfana/Glyfana/releases/download/v0.1.8/Glyfana-0.1.8.Setup.exe"
+                target="_blank"
+                rel="noreferrer"
+              >Windows용 무료 다운로드</a>
+              <p class="download-option__meta"><code id="download-windows-file">Glyfana-0.1.8.Setup.exe</code> · <span id="download-windows-size">80.5 MB</span></p>
+            </article>
+            <article class="download-option download-option--linux">
+              <p class="download-option__label">Linux</p>
+              <a
+                class="btn js-download-linux"
+                href="https://github.com/Glyfana/Glyfana/releases/download/v0.1.8/Glyfana-0.1.8-x86_64.AppImage"
+                target="_blank"
+                rel="noreferrer"
+              >Linux 다운로드</a>
+              <p class="download-option__meta"><code id="download-linux-file">Glyfana-0.1.8-x86_64.AppImage</code> · <span id="download-linux-size">109.0 MB</span></p>
+              <p class="download-option__sub download-linux-deb-wrap">
+                <a
+                  class="text-link js-download-linux-deb"
+                  href="https://github.com/Glyfana/Glyfana/releases/download/v0.1.8/Glyfana-0.1.8-amd64.deb"
+                  target="_blank"
+                  rel="noreferrer"
+                >Ubuntu 계열용 .deb</a>
+                <span id="download-linux-deb-size">85.5 MB</span>
+              </p>
+            </article>
           </div>
-          <p class="release-panel__trust">설치 후 바로 사용 가능 · GitHub에서 검증 가능</p>
+          <p class="release-panel__trust">Windows와 Linux에서 바로 시작 · GitHub에서 검증 가능</p>
           <div class="stat-grid">
             <div class="stat">
               <span class="stat__label">버전</span>
-              <strong id="release-version">v0.1.7</strong>
+              <strong id="release-version">v0.1.8</strong>
             </div>
             <div class="stat">
               <span class="stat__label">게시일</span>
-              <strong id="release-date">2026년 3월 20일</strong>
+              <strong id="release-date">2026년 4월 24일</strong>
             </div>
             <div class="stat">
-              <span class="stat__label">파일 크기</span>
-              <strong id="release-size">80.4 MB</strong>
+              <span class="stat__label">지원 플랫폼</span>
+              <strong id="release-platforms">Windows, Linux</strong>
             </div>
           </div>
         </aside>
@@ -180,23 +203,34 @@
             <p class="verify-card__meta">
               <a
                 class="text-link js-notes"
-                href="https://github.com/Glyfana/Glyfana/releases/tag/v0.1.7"
+                href="https://github.com/Glyfana/Glyfana/releases/tag/v0.1.8"
                 target="_blank"
                 rel="noreferrer"
               >릴리스 노트 보기</a>
             </p>
-            <p class="verify-card__meta">설치 마법사에서 언어와 설치 경로를 선택할 수 있습니다.</p>
+            <p class="verify-card__meta">Windows는 설치 마법사로, Linux는 AppImage 또는 .deb로 바로 시작할 수 있습니다.</p>
           </article>
 
           <article class="verify-card">
             <h3>SHA256 확인</h3>
-            <p class="verify-card__copy">다운로드한 파일의 해시를 바로 비교할 수 있습니다.</p>
-            <p class="verify-card__meta">SHA256 <code id="release-sha-inline">953765934C5DD589E6567369293679097CBFE4940A432B83841793E29D275514</code></p>
-            <p class="verify-card__meta">PowerShell <code id="verify-command">Get-FileHash ".\Glyfana-0.1.7.Setup.exe" -Algorithm SHA256</code></p>
-            <p class="verify-card__meta">
-              현재 공개 설치 파일은 코드 서명이 없어 첫 실행 시 Windows SmartScreen 경고가 나타날 수 있습니다.
-              안내가 뜨면 <strong>추가 정보</strong> → <strong>실행</strong>을 선택하세요.
-            </p>
+            <p class="verify-card__copy">다운로드한 파일의 해시를 운영체제별로 바로 비교할 수 있습니다.</p>
+            <div class="verify-platforms">
+              <div class="verify-platform verify-platform--windows">
+                <h4>Windows</h4>
+                <p class="verify-card__meta">SHA256 <code id="release-sha-inline-windows">2787F6A1A3AC4839BADAC31EB01BC460501DC860ACE9841D9B2F5DE2A1436AD8</code></p>
+                <p class="verify-card__meta">PowerShell <code id="verify-command-windows">Get-FileHash ".\Glyfana-0.1.8.Setup.exe" -Algorithm SHA256</code></p>
+                <p class="verify-card__meta">
+                  현재 공개 설치 파일은 코드 서명이 없어 첫 실행 시 Windows SmartScreen 경고가 나타날 수 있습니다.
+                  안내가 뜨면 <strong>추가 정보</strong> → <strong>실행</strong>을 선택하세요.
+                </p>
+              </div>
+              <div class="verify-platform verify-platform--linux">
+                <h4>Linux</h4>
+                <p class="verify-card__meta">SHA256 <code id="release-sha-inline-linux">C420A2CDB081F84BFEBCBA8D8DE0FF349F0504CFD7EC6D477C27B4683EBF3DBA</code></p>
+                <p class="verify-card__meta">Terminal <code id="verify-command-linux">sha256sum ./Glyfana-0.1.8-x86_64.AppImage</code></p>
+                <p class="verify-card__meta">AppImage는 실행 권한을 준 뒤 바로 실행할 수 있고, .deb는 Ubuntu 계열에서 설치할 수 있습니다.</p>
+              </div>
+            </div>
           </article>
         </div>
       </section>
@@ -217,7 +251,7 @@
           </details>
           <details class="faq-item">
             <summary>현재 지원하는 플랫폼은 무엇인가요?</summary>
-            <p>현재 공개 설치 파일은 Windows용입니다.</p>
+            <p>현재 공개 설치 파일은 Windows와 Linux용입니다.</p>
           </details>
         </div>
       </section>
@@ -227,6 +261,6 @@
       <span>(c) <span id="year"></span> Glyfana</span>
     </footer>
 
-    <script type="module" src="../app.js?v=20260312-showcase-lightbox"></script>
+    <script type="module" src="../app.js?v=20260424-multiplatform-downloads"></script>
   </body>
 </html>
