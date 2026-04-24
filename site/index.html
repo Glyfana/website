@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="build-id" content="20260312-showcase-lightbox" />
+    <meta name="build-id" content="20260424-mac-os-copy" />
     <meta name="manifest-path" content="./release-manifest.json" />
     <meta name="screenshots-path" content="./screenshots-manifest.json" />
-    <title>Glyfana Downloads | Windows Markdown Editor</title>
+    <title>Glyfana | Local file-based Markdown editor</title>
     <meta
       name="description"
-      content="Official Glyfana download page for the latest Windows installer, release notes, release assets, and integrity checks."
+      content="Glyfana is a local file-based Markdown editor for Windows, Mac OS, and Linux. Download the latest release and verify SHA256 checksums."
     />
     <meta name="robots" content="index,follow" />
     <meta name="theme-color" content="#0b7b75" />
@@ -24,10 +24,10 @@
     <meta property="og:site_name" content="Glyfana" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="ko_KR" />
-    <meta property="og:title" content="Glyfana Downloads | Windows Markdown Editor" />
+    <meta property="og:title" content="Glyfana | Local file-based Markdown editor" />
     <meta
       property="og:description"
-      content="Download the latest Glyfana Windows installer with release notes, asset inventory, and integrity checks in one place."
+      content="A local file-based Markdown editor for Windows, Mac OS, and Linux. Download the latest release and verify SHA256 checksums."
     />
     <meta property="og:url" content="https://glyfana.github.io/website/" />
     <meta
@@ -36,18 +36,18 @@
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Glyfana Windows download page with editor preview" />
+    <meta property="og:image:alt" content="Glyfana local file-based Markdown editor preview" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Glyfana Downloads | Windows Markdown Editor" />
+    <meta name="twitter:title" content="Glyfana | Local file-based Markdown editor" />
     <meta
       name="twitter:description"
-      content="Download the latest Glyfana Windows installer with release notes and integrity checks."
+      content="A local file-based Markdown editor for Windows, Mac OS, and Linux. Download the latest release and verify SHA256 checksums."
     />
     <meta
       name="twitter:image"
       content="https://glyfana.github.io/website/assets/og-en.png?v=20260312-showcase-lightbox"
     />
-    <meta name="twitter:image:alt" content="Glyfana Windows download page with editor preview" />
+    <meta name="twitter:image:alt" content="Glyfana local file-based Markdown editor preview" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -55,9 +55,9 @@
       rel="stylesheet"
     />
     <script src="./locale-router.js?v=20260312-showcase-lightbox"></script>
-    <link rel="stylesheet" href="./styles.css?v=20260312-showcase-lightbox" />
+    <link rel="stylesheet" href="./styles.css?v=20260424-mac-os-copy" />
   </head>
-  <body>
+  <body id="top">
     <div class="page-noise" aria-hidden="true"></div>
     <div class="halo halo--left" aria-hidden="true"></div>
     <div class="halo halo--right" aria-hidden="true"></div>
@@ -76,11 +76,10 @@
         <span class="menu-toggle__label">Menu</span>
       </button>
       <div class="topbar__menu" id="site-menu">
-        <nav class="nav">
-          <a href="#download">Download</a>
-          <a href="#showcase">Preview</a>
+        <nav class="nav" aria-label="Primary">
           <a href="#features">Features</a>
-          <a href="#verify">Verify</a>
+          <a href="#release">Download</a>
+          <a href="#faq">FAQ</a>
         </nav>
         <div class="topbar__tools">
           <nav class="locale-switch" aria-label="Language selector">
@@ -92,310 +91,176 @@
             href="https://github.com/Glyfana/Glyfana/releases"
             target="_blank"
             rel="noreferrer"
-          >All Releases</a>
+          >All releases</a>
         </div>
       </div>
     </header>
 
-    <main id="top" class="layout">
+    <main class="layout">
       <section class="hero reveal">
         <div class="hero__copy">
-          <p class="eyebrow">Windows Markdown Editor</p>
-          <p class="hero__kicker">Local-first writing with a calm reading surface, raw Markdown control, and recovery-aware file handling.</p>
-          <h1>Write in a quiet workspace. Ship from the same files.</h1>
+          <p class="eyebrow">File-based Markdown editor for Windows, Mac OS, and Linux</p>
+          <h1>A Markdown editor that works directly with your local files</h1>
           <p class="hero__desc">
-            Glyfana is a local-first Markdown editor for release notes, docs, and internal writing. The site shows the
-            actual product first, then keeps the latest Windows installer, release notes, and verification details
-            within reach.
+            Write without cloud sync or extra setup.
+            Keep your files local and under your control, with source mode there when you need precision.
           </p>
           <div class="hero__spotlight">
-            <div class="hero__spotlight-head">
-              <span class="hero__spotlight-label">Editor preview</span>
-              <span class="hero__spotlight-note">Real app capture</span>
-            </div>
             <img
               class="hero__spotlight-image"
               src="./assets/screenshots/editor-main.png"
-              alt="Glyfana editor showing a release notes document in the main writing workspace"
+              alt="Glyfana editor workspace"
               loading="eager"
               decoding="async"
             />
           </div>
-          <div class="hero__proof">
-            <div class="hero-proof-card">
-              <span class="hero-proof-card__label">Best for</span>
-              <strong>Release notes, docs, changelogs, and local knowledge work</strong>
-            </div>
-            <div class="hero-proof-card">
-              <span class="hero-proof-card__label">Why it stands out</span>
-              <strong>A product-first download page with source mode, screenshots, and trust signals</strong>
-            </div>
-          </div>
-          <div class="actions">
-            <a
-              class="btn btn--primary js-download"
-              href="https://github.com/Glyfana/Glyfana/releases/download/v0.1.7/Glyfana-0.1.7.Setup.exe"
-              target="_blank"
-              rel="noreferrer"
-            >Download Latest Setup</a>
-            <a class="btn btn--ghost" href="#showcase">See Product Preview</a>
-            <a class="text-link js-releases" href="https://github.com/Glyfana/Glyfana/releases" target="_blank" rel="noreferrer">Browse all releases</a>
-          </div>
-          <ul class="hero__facts">
-            <li>Local-first Markdown files with portable assets</li>
-            <li>WYSIWYG editing plus raw Markdown source mode</li>
-            <li>Installer, release notes, checksum, and asset list in one place</li>
-          </ul>
         </div>
 
-        <aside id="download" class="release-panel" aria-live="polite" data-state="loading">
-          <div class="release-panel__status">
-            <span class="status-dot" aria-hidden="true"></span>
-            <span id="release-status">Loading latest release...</span>
+        <aside class="release-panel" aria-live="polite" data-state="live">
+          <h2>Free download</h2>
+          <div class="download-options">
+            <article class="download-option download-option--windows">
+              <p class="download-option__label">Windows</p>
+              <a
+                class="btn btn--primary js-download js-download-windows"
+                href="https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/Glyfana-0.1.9.Setup.exe"
+                target="_blank"
+                rel="noreferrer"
+              >Free download for Windows</a>
+              <p class="download-option__meta"><code id="download-windows-file">Glyfana-0.1.9.Setup.exe</code> · <span id="download-windows-size">80.4 MB</span></p>
+            </article>
+            <article class="download-option download-option--mac">
+              <p class="download-option__label">Mac OS</p>
+              <a
+                class="btn js-download-mac js-download-mac-dmg"
+                href="https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/Glyfana-0.1.9-x64.dmg"
+                target="_blank"
+                rel="noreferrer"
+              >Download for Mac OS</a>
+              <p class="download-option__meta"><code id="download-mac-file">Glyfana-0.1.9-x64.dmg</code> · <span id="download-mac-size">104.2 MB</span></p>
+              <p class="download-option__sub download-mac-zip-wrap">
+                <a
+                  class="text-link js-download-mac-zip"
+                  href="https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/Glyfana-0.1.9-x64.zip"
+                  target="_blank"
+                  rel="noreferrer"
+                >Download ZIP</a>
+                <span id="download-mac-zip-size">101.2 MB</span>
+              </p>
+            </article>
+            <article class="download-option download-option--linux">
+              <p class="download-option__label">Linux</p>
+              <a
+                class="btn js-download-linux"
+                href="https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/Glyfana-0.1.9-x86_64.AppImage"
+                target="_blank"
+                rel="noreferrer"
+              >Download for Linux</a>
+              <p class="download-option__meta"><code id="download-linux-file">Glyfana-0.1.9-x86_64.AppImage</code> · <span id="download-linux-size">108.9 MB</span></p>
+              <p class="download-option__sub download-linux-deb-wrap">
+                <a
+                  class="text-link js-download-linux-deb"
+                  href="https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/Glyfana-0.1.9-amd64.deb"
+                  target="_blank"
+                  rel="noreferrer"
+                >Ubuntu .deb</a>
+                <span id="download-linux-deb-size">85.4 MB</span>
+              </p>
+            </article>
           </div>
-          <h2 id="release-title">Latest stable build</h2>
+          <p class="release-panel__trust">Start on Windows, Mac OS, or Linux. Verify every build on GitHub.</p>
           <div class="stat-grid">
             <div class="stat">
               <span class="stat__label">Version</span>
-              <strong id="release-version">-</strong>
+              <strong id="release-version">v0.1.9</strong>
             </div>
             <div class="stat">
-              <span class="stat__label">Published</span>
-              <strong id="release-date">-</strong>
+              <span class="stat__label">Release date</span>
+              <strong id="release-date">Apr 24, 2026</strong>
             </div>
             <div class="stat">
-              <span class="stat__label">Installer size</span>
-              <strong id="release-size">-</strong>
+              <span class="stat__label">Platforms</span>
+              <strong id="release-platforms">Windows, Mac OS, Linux</strong>
             </div>
-          </div>
-          <div class="release-panel__meta">
-            <p>Installer <code id="installer-name">-</code></p>
-            <p>Integrity <code id="release-sha">Pending</code></p>
-          </div>
-          <div class="actions actions--tight">
-            <a
-              class="btn btn--primary js-download"
-              href="https://github.com/Glyfana/Glyfana/releases/download/v0.1.7/Glyfana-0.1.7.Setup.exe"
-              target="_blank"
-              rel="noreferrer"
-            >Download .exe</a>
-            <a
-              class="btn js-notes"
-              href="https://github.com/Glyfana/Glyfana/releases/tag/v0.1.7"
-              target="_blank"
-              rel="noreferrer"
-            >Release Notes</a>
           </div>
         </aside>
       </section>
 
-      <section class="signal reveal">
-        <div class="signal__badge">Source of truth</div>
-        <p>
-          This page tries the live GitHub Releases API first. If the API cannot be reached, it falls back to pinned
-          metadata so the download path still stays usable.
-        </p>
-      </section>
-
-      <section id="showcase" class="showcase reveal">
-        <div class="showcase__copy">
-          <p class="eyebrow">Product Preview</p>
-          <h2>A download page should feel like a product page, not a release archive.</h2>
-          <p class="section-copy">
-            Glyfana works best when the editor is visible early. Bring the writing surface, source mode, and local-file
-            workflow forward so users understand what they are installing before they ever see a checksum.
-          </p>
-          <ul class="showcase__points">
-            <li>Readable long-form editing instead of a utility-first shell</li>
-            <li>Source mode stays one step away when structure matters</li>
-            <li>Local-file trust and shipping workflow stay tied to the writing surface</li>
-          </ul>
-        </div>
-
-        <div class="showcase__visual">
-          <div class="workspace-demo" aria-hidden="true">
-            <div class="workspace-demo__window">
-              <div class="workspace-demo__bar">
-                <div class="workspace-demo__meta">
-                  <span class="workspace-demo__dots">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                  </span>
-                  <span class="workspace-demo__label">Glyfana workspace</span>
-                </div>
-                <span class="workspace-demo__pill">Latest stable build</span>
-              </div>
-
-              <div class="workspace-demo__body">
-                <aside class="workspace-demo__sidebar">
-                  <span class="workspace-demo__sidebar-label">Recent notes</span>
-                  <div class="workspace-demo__note is-active">Release outline</div>
-                  <div class="workspace-demo__note">Installer QA</div>
-                  <div class="workspace-demo__note">Recovery checklist</div>
-                </aside>
-
-                <div class="workspace-demo__main">
-                  <div class="workspace-demo__tabs">
-                    <span class="workspace-demo__tab is-active">Markdown</span>
-                    <span class="workspace-demo__tab">Preview</span>
-                  </div>
-
-                  <div class="workspace-demo__panes">
-                    <article class="workspace-demo__editor">
-                      <span class="workspace-demo__editor-title"># Glyfana 0.1.7</span>
-                      <span class="workspace-demo__line">Publish the latest Windows installer</span>
-                      <span class="workspace-demo__line">Attach release notes and checksum</span>
-                      <span class="workspace-demo__line">Keep recovery details visible</span>
-                    </article>
-
-                    <article class="workspace-demo__preview">
-                      <span class="workspace-demo__preview-label">Preview</span>
-                      <strong>What the user sees</strong>
-                      <ul>
-                        <li>Direct setup download</li>
-                        <li>Release notes with context</li>
-                        <li>Checksum before install</li>
-                      </ul>
-                    </article>
-                  </div>
-
-                  <div class="workspace-demo__status">
-                    <span>Focused editing</span>
-                    <span>Release-ready delivery</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div id="showcase-gallery" class="showcase-gallery" hidden></div>
-        </div>
-      </section>
-
-      <section class="release-summary reveal">
-        <div class="section-head release-summary__head">
-          <p class="eyebrow">What&apos;s New</p>
-          <h2>Read the latest release changes without leaving the download page.</h2>
-          <p class="section-copy">
-            When GitHub publishes release notes, this section surfaces the most useful lines first and keeps the full
-            notes one click away.
-          </p>
-        </div>
-
-        <article class="release-summary__card">
-          <div class="release-summary__meta">
-            <span class="release-summary__label">Latest release notes</span>
-            <a
-              class="text-link js-notes"
-              href="https://github.com/Glyfana/Glyfana/releases/tag/v0.1.7"
-              target="_blank"
-              rel="noreferrer"
-            >Open full notes</a>
-          </div>
-          <ul id="release-summary-list" class="release-summary__list">
-            <li class="release-summary__empty">Loading release highlights...</li>
-          </ul>
-        </article>
-      </section>
-
       <section id="features" class="features reveal">
         <div class="section-head">
-          <p class="eyebrow">Features</p>
-          <h2>Spell out what the packaged app can actually do before asking for the install.</h2>
-          <p class="section-copy">
-            Glyfana is more than a setup file. This section explains the editor workflow, image handling, recovery,
-            update path, and verification behavior users get with the packaged build.
-          </p>
+          <p class="eyebrow">Core features</p>
+          <h2>Core features</h2>
         </div>
         <div class="feature-grid">
           <article class="card">
-            <p class="card__eyebrow">Editing Flow</p>
-            <h2>Typora-style Markdown editing with a real source mode.</h2>
-            <p>The main view stays close to the rendered document, but raw Markdown is still one toggle away when precision matters.</p>
-            <ul class="card-list">
-              <li>Milkdown and ProseMirror power the WYSIWYG writing surface</li>
-              <li>CodeMirror 6 source mode lets users drop to plain Markdown instantly</li>
-              <li>Shiki-based code block highlighting keeps technical notes readable</li>
-            </ul>
+            <p class="card__eyebrow">Writing</p>
+            <h2>Readable Markdown editing</h2>
+            <p>A clear writing view that stays easy to scan.</p>
           </article>
           <article class="card">
-            <p class="card__eyebrow">Image Workflow</p>
-            <h2>Drop, paste, and keep images next to the note instead of losing track of assets.</h2>
-            <p>Local media stays portable because Glyfana stores image files beside the document rather than hiding them in app-only storage.</p>
-            <ul class="card-list">
-              <li>Drag and drop or paste images straight into the editor</li>
-              <li>Saved files land in a sibling <code>&lt;note&gt;.assets/</code> directory</li>
-              <li>Relative paths and <code>mdlocal://</code> rendering keep previews working in dev and packaged builds</li>
-            </ul>
+            <p class="card__eyebrow">Source mode</p>
+            <h2>Source mode when you need it</h2>
+            <p>Switch to raw Markdown only when precision matters.</p>
           </article>
           <article class="card">
-            <p class="card__eyebrow">Autosave</p>
-            <h2>Saved notes and untitled drafts both get their own recovery path.</h2>
-            <p>The app uses idle autosave rules that match whether the note already belongs to a real file on disk.</p>
-            <ul class="card-list">
-              <li>Saved notes write back to disk automatically when the editor is idle</li>
-              <li>Untitled notes are preserved as draft data in the app userData folder</li>
-              <li>Crash recovery and draft restore reduce the odds of losing work between sessions</li>
-            </ul>
-          </article>
-          <article class="card">
-            <p class="card__eyebrow">File Safety</p>
-            <h2>Unsaved changes and external edits are treated as first-class conflicts.</h2>
-            <p>Glyfana does not assume the copy on disk always wins. It surfaces choices before local work gets overwritten.</p>
-            <ul class="card-list">
-              <li>Warns before closing the window or opening another file with unsaved changes</li>
-              <li>Watches for external file changes while the note is open</li>
-              <li>Lets users reload, keep editing, save as, or overwrite intentionally</li>
-            </ul>
-          </article>
-          <article class="card">
-            <p class="card__eyebrow">Updates</p>
-            <h2>Release delivery continues after install with GitHub-backed app updates.</h2>
-            <p>The packaged app can keep checking the same release channel that powers this website, so users do not have to chase new builds manually.</p>
-            <ul class="card-list">
-              <li>Packaged builds can receive automatic updates from GitHub Releases</li>
-              <li>Background checks run on startup and then every hour</li>
-              <li>The Help menu and restart prompt cover manual and in-app update flows</li>
-            </ul>
-          </article>
-          <article class="card">
-            <p class="card__eyebrow">Verification</p>
-            <h2>The install page keeps the trust signals on the surface.</h2>
-            <p>Users can see what changed, which assets were published, and how to verify the build before they run the installer.</p>
-            <ul class="card-list">
-              <li>The main CTA points at the current stable <code>Setup.exe</code> build</li>
-              <li>Release notes, asset inventory, and SHA256 stay on the same page</li>
-              <li>Pinned manifest data remains available when the live GitHub API is unavailable</li>
-            </ul>
+            <p class="card__eyebrow">Local files</p>
+            <h2>Keep files and images local</h2>
+            <p>Open, edit, and save directly in your own folders.</p>
           </article>
         </div>
       </section>
 
-      <section id="install" class="install reveal">
+      <section id="release" class="verify reveal">
         <div class="section-head">
-          <p class="eyebrow">Install</p>
-          <h2>Ship a Windows installer without extra packaging infrastructure.</h2>
-          <p class="section-copy">
-            GitHub Releases remains the artifact store. This page adds a cleaner front door with download, install, and
-            verification guidance in one place.
-          </p>
+          <p class="eyebrow">Before you install</p>
+          <h2>What to check before download</h2>
         </div>
-        <div class="steps">
-          <article class="step">
-            <span class="step__index">01</span>
-            <h3>Download the current installer</h3>
-            <p>Use the primary action to fetch the latest stable <code>.exe</code> attached to the current release.</p>
+        <div class="verify__grid">
+          <article class="verify-card">
+            <h3>Release notes</h3>
+            <p class="verify-card__copy">See the latest changes before you install.</p>
+            <p class="verify-card__meta">
+              <a
+                class="text-link js-notes"
+                href="https://github.com/Glyfana/Glyfana/releases/tag/v0.1.9"
+                target="_blank"
+                rel="noreferrer"
+              >View release notes</a>
+            </p>
+            <p class="verify-card__meta">
+              Windows uses an installer, Mac OS offers DMG or ZIP, and Linux offers AppImage or .deb.
+            </p>
           </article>
-          <article class="step">
-            <span class="step__index">02</span>
-            <h3>Verify the file hash</h3>
-            <p>Compare the local SHA256 value with the published checksum before running the installer.</p>
-          </article>
-          <article class="step">
-            <span class="step__index">03</span>
-            <h3>Install and track updates</h3>
-            <p>Release notes and the full asset list stay linked so users can review every published build.</p>
+
+          <article class="verify-card">
+            <h3>SHA256 check</h3>
+            <p class="verify-card__copy">Compare the downloaded file hash for your platform.</p>
+            <div class="verify-platforms">
+              <div class="verify-platform verify-platform--windows">
+                <h4>Windows</h4>
+                <p class="verify-card__meta">SHA256 <code id="release-sha-inline-windows">2409822E41301128F8E586BB116006E9C7599B884C1D7636191854754651CDF7</code></p>
+                <p class="verify-card__meta">PowerShell <code id="verify-command-windows">Get-FileHash ".\Glyfana-0.1.9.Setup.exe" -Algorithm SHA256</code></p>
+                <p class="verify-card__meta">
+                  The current installer is not code-signed yet, so Windows SmartScreen may appear on first launch.
+                  Choose <strong>More info</strong> and then <strong>Run anyway</strong>.
+                </p>
+              </div>
+              <div class="verify-platform verify-platform--mac">
+                <h4>Mac OS</h4>
+                <p class="verify-card__meta">SHA256 <code id="release-sha-inline-mac">381AA0E27046C5A79C985452EA23F38099D1C83E8EC3675EE3A90776FADBBE90</code></p>
+                <p class="verify-card__meta">Terminal <code id="verify-command-mac">shasum -a 256 ./Glyfana-0.1.9-x64.dmg</code></p>
+                <p class="verify-card__meta">
+                  This build is not code-signed or notarized yet, so Gatekeeper may appear on first launch.
+                  Allow the app in System Settings to continue.
+                </p>
+              </div>
+              <div class="verify-platform verify-platform--linux">
+                <h4>Linux</h4>
+                <p class="verify-card__meta">SHA256 <code id="release-sha-inline-linux">4BE5F3D892C10EE95E2CD16ED32591D62F63E27BCA32D75C2C83FFDA38E545AE</code></p>
+                <p class="verify-card__meta">Terminal <code id="verify-command-linux">sha256sum ./Glyfana-0.1.9-x86_64.AppImage</code></p>
+                <p class="verify-card__meta">Use AppImage after granting execute permission, or install the .deb package on Ubuntu-based systems.</p>
+              </div>
+            </div>
           </article>
         </div>
       </section>
@@ -403,92 +268,29 @@
       <section id="faq" class="faq reveal">
         <div class="section-head">
           <p class="eyebrow">FAQ</p>
-          <h2>Answer the install questions before support has to.</h2>
-          <p class="section-copy">
-            The fastest way to reduce hesitation is to explain how Glyfana handles files, recovery, updates, and
-            verification in plain language.
-          </p>
+          <h2>FAQ</h2>
         </div>
         <div class="faq-list">
           <details class="faq-item">
-            <summary>What happens to images that I paste into a note?</summary>
-            <p>
-              Glyfana can paste or drop local images directly into the editor. For saved notes, image files are written
-              into a sibling <code>&lt;note&gt;.assets/</code> folder and referenced with relative paths so the note stays portable.
-            </p>
+            <summary>Do I need a cloud account?</summary>
+            <p>No. You can open and save local Markdown files directly.</p>
           </details>
           <details class="faq-item">
-            <summary>What happens if I close the app with unsaved changes?</summary>
-            <p>
-              The app warns before closing or switching files when local changes are still dirty. Saved notes use idle
-              autosave, and untitled notes are preserved as drafts in the app data folder for later restore.
-            </p>
+            <summary>Can I open existing Markdown files?</summary>
+            <p>Yes. Existing <code>.md</code> files open as they are.</p>
           </details>
           <details class="faq-item">
-            <summary>What if the same file changes outside Glyfana?</summary>
-            <p>
-              Glyfana watches for external file changes and opens a conflict flow instead of silently overwriting your
-              work. Users can reload from disk, keep editing, save as a new file, or overwrite intentionally.
-            </p>
+            <summary>Which platforms are available now?</summary>
+            <p>Current public builds are for Windows, Mac OS, and Linux.</p>
           </details>
-          <details class="faq-item">
-            <summary>How do updates arrive after install?</summary>
-            <p>
-              Packaged builds can check GitHub Releases on startup and then every hour. Users can also trigger a manual
-              check from the Help menu and restart from the in-app update prompt when a new build is ready.
-            </p>
-          </details>
-          <details class="faq-item">
-            <summary>How should I verify the installer before running it?</summary>
-            <p>
-              Download the <code>Setup.exe</code>, compute its SHA256 value with the PowerShell command in the verify
-              section, and compare the result with the published checksum on this page.
-            </p>
-          </details>
-        </div>
-      </section>
-
-      <section id="verify" class="verify reveal">
-        <div class="section-head">
-          <p class="eyebrow">Verify</p>
-          <h2>Make the build easy to trust.</h2>
-          <p class="section-copy">
-            Put the checksum, PowerShell verification command, and every published asset in front of the user before the install starts.
-          </p>
-        </div>
-        <div class="verify__grid">
-          <article class="verify-card">
-            <h3>Integrity</h3>
-            <p class="verify-card__copy">Use PowerShell to compare the installer hash with the published SHA256 value.</p>
-            <p class="verify-card__meta">SHA256 <code id="release-sha-inline">Pending</code></p>
-            <p class="verify-card__meta">
-              PowerShell <code id="verify-command">Get-FileHash ".\installer.exe" -Algorithm SHA256</code>
-            </p>
-          </article>
-
-          <article class="verify-card">
-            <div class="verify-card__head">
-              <h3>Release assets</h3>
-              <a
-                class="text-link js-releases"
-                href="https://github.com/Glyfana/Glyfana/releases"
-                target="_blank"
-                rel="noreferrer"
-              >Open all releases</a>
-            </div>
-            <ul id="asset-list" class="asset-list">
-              <li class="asset-list__empty">Loading release assets...</li>
-            </ul>
-          </article>
         </div>
       </section>
     </main>
 
     <footer class="footer">
       <span>(c) <span id="year"></span> Glyfana</span>
-      <span id="repo-status">Release repo: pending</span>
     </footer>
 
-    <script type="module" src="./app.js?v=20260312-showcase-lightbox"></script>
+    <script type="module" src="./app.js?v=20260424-mac-os-copy"></script>
   </body>
 </html>

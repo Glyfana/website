@@ -53,7 +53,7 @@ const STRINGS = {
     previousImage: 'Previous image',
     nextImage: 'Next image',
     defaultHighlights: [
-      'Official Windows, macOS, and Linux downloads stay attached to the latest stable release.',
+      'Official Windows, Mac OS, and Linux downloads stay attached to the latest stable release.',
       'Release notes, asset inventory, and checksum stay linked in one flow.',
       'Users can verify the published SHA256 value before install.',
     ],
@@ -94,7 +94,7 @@ const STRINGS = {
     previousImage: '이전 이미지',
     nextImage: '다음 이미지',
     defaultHighlights: [
-      '최신 안정 릴리스의 Windows, macOS, Linux 빌드를 바로 내려받을 수 있습니다.',
+      '최신 안정 릴리스의 Windows, Mac OS, Linux 빌드를 바로 내려받을 수 있습니다.',
       '릴리스 노트, 자산 목록, 체크섬을 한 흐름 안에서 같이 확인할 수 있습니다.',
       '설치 전에 공개된 SHA256 값으로 무결성을 검증할 수 있습니다.',
     ],
@@ -722,7 +722,7 @@ function getPrimaryReleaseAsset(platformAssets, assets) {
 function buildPlatformSummary(platformAssets) {
   const labels = [];
   if (platformAssets.windows) labels.push('Windows');
-  if (platformAssets.macDmg || platformAssets.macZip) labels.push('macOS');
+  if (platformAssets.macDmg || platformAssets.macZip) labels.push('Mac OS');
   if (platformAssets.linuxAppImage || platformAssets.linuxDeb) labels.push('Linux');
   return labels.join(', ');
 }
