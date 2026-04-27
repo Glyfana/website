@@ -9,6 +9,14 @@ const MANIFEST_PATH =
 const SCREENSHOT_MANIFEST_PATH =
   document.querySelector('meta[name="screenshots-path"]')?.getAttribute('content')?.trim() ||
   './screenshots-manifest.json';
+const ANALYTICS_ENDPOINT_RAW =
+  document.querySelector('meta[name="analytics-endpoint"]')?.getAttribute('content')?.trim() || '';
+const ANALYTICS_ENDPOINT = /^__GLYFANA_[A-Z0-9_]+__$/.test(ANALYTICS_ENDPOINT_RAW)
+  ? ''
+  : ANALYTICS_ENDPOINT_RAW;
+const ANALYTICS_SITE =
+  document.querySelector('meta[name="analytics-site"]')?.getAttribute('content')?.trim() ||
+  'glyfana-website';
 const manifestUrl = new URL(MANIFEST_PATH, window.location.href);
 manifestUrl.searchParams.set('v', BUILD_ID);
 const MANIFEST_URL = manifestUrl.toString();
@@ -213,8 +221,55 @@ const showcaseLightboxState = {
   lastTrigger: null,
 };
 
+const analyticsState = {
+  pageViewTracked: false,
+};
+
 function normalizeRepoUrl(value) {
   return String(value || '').trim().replace(/\/+$/, '').replace(/\.git$/, '');
+}
+
+function getReferrerHost(referrer) {
+  try {
+    return referrer ? new URL(referrer).host : '';
+  } catch {
+    return '';
+  }
+}
+
+function sendFirstPartyAnalytics(payload) {
+  if (!ANALYTICS_ENDPOINT) return;
+
+  const body = JSON.stringify({
+    site: ANALYTICS_SITE,
+    path: window.location.pathname,
+    pageHref: window.location.href,
+    referrerHost: getReferrerHost(document.referrer),
+    buildId: BUILD_ID,
+    title: document.title,
+    ...payload,
+  });
+
+  try {
+    if (typeof navigator.sendBeacon === 'function') {
+      const blob = new Blob([body], { type: 'application/json' });
+      if (navigator.sendBeacon(ANALYTICS_ENDPOINT, blob)) {
+        return;
+      }
+    }
+  } catch {}
+
+  try {
+    fetch(ANALYTICS_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body,
+      keepalive: true,
+      mode: 'cors',
+    }).catch(() => {});
+  } catch {}
 }
 
 function getRepoInfoFromPagesUrl() {
@@ -1348,6 +1403,11 @@ function trackEvent(name, props = {}) {
 
   const payload = { ...props, lang: PAGE_LANG };
 
+  sendFirstPartyAnalytics({
+    name,
+    ...payload,
+  });
+
   window.dispatchEvent(
     new CustomEvent('glyfana:analytics', {
       detail: {
@@ -1519,9 +1579,18 @@ async function init() {
   }
 }
 
+function trackPageView() {
+  if (analyticsState.pageViewTracked) return;
+  analyticsState.pageViewTracked = true;
+  trackEvent('page_view', {
+    label: window.location.pathname,
+  });
+}
+
 setYear();
 wireAnalytics();
 wireMobileMenu();
 wireShowcaseInteractions();
 wireRevealAnimations();
+trackPageView();
 init();

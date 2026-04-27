@@ -29,6 +29,7 @@ The product copy on this site is based on the main app repository and the packag
 - An Electron-based capture script that can regenerate real product screenshots from the local Glyfana app
 - Open Graph images, sitemap, and robots metadata for sharing and indexing
 - Analytics hooks for CTA, asset, FAQ, and locale interactions when a provider is attached
+- Optional first-party `sendBeacon()` delivery to a custom collector when `ANALYTICS_ENDPOINT` is configured
 - A pinned fallback manifest so the page still works when the live GitHub API is unavailable
 
 ## Page Sections

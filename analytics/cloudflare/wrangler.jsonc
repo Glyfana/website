@@ -1,0 +1,15 @@
+{
+  "name": "glyfana-website-analytics",
+  "main": "src/index.mjs",
+  "compatibility_date": "2026-04-28",
+  "vars": {
+    "ALLOWED_ORIGINS": "https://glyfana.github.io"
+  },
+  "d1_databases": [
+    {
+      "binding": "ANALYTICS_DB",
+      "database_name": "glyfana-analytics",
+      "database_id": "replace-with-your-d1-database-id"
+    }
+  ]
+}
