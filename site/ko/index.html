@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="build-id" content="20260502-focus-copy" />
+    <meta name="build-id" content="20260502-verify-details" />
     <meta name="manifest-path" content="../release-manifest.json" />
     <meta name="screenshots-path" content="../screenshots-manifest.json" />
     <meta name="analytics-endpoint" content="__GLYFANA_ANALYTICS_ENDPOINT__" />
@@ -57,7 +57,7 @@
       rel="stylesheet"
     />
     <script src="../locale-router.js?v=20260312-showcase-lightbox"></script>
-    <link rel="stylesheet" href="../styles.css?v=20260502-trust-cards" />
+    <link rel="stylesheet" href="../styles.css?v=20260502-verify-details" />
   </head>
   <body id="top">
     <div class="page-noise" aria-hidden="true"></div>
@@ -244,27 +244,27 @@
             <h3>SHA256 확인</h3>
             <p class="verify-card__copy">다운로드 파일의 해시를 운영체제별로 비교하세요.</p>
             <div class="verify-platforms">
-              <div class="verify-platform verify-platform--windows">
-                <h4>Windows</h4>
+              <details class="verify-platform verify-platform--windows">
+                <summary><span>Windows</span><span>SHA256</span></summary>
                 <p class="verify-card__meta">SHA256 <code id="release-sha-inline-windows">2409822E41301128F8E586BB116006E9C7599B884C1D7636191854754651CDF7</code></p>
                 <p class="verify-card__meta">PowerShell <code id="verify-command-windows">Get-FileHash ".\Glyfana-0.1.9.Setup.exe" -Algorithm SHA256</code></p>
                 <p class="verify-card__meta">
                   현재 공개 설치 파일은 코드 서명이 없어 첫 실행 시 Windows SmartScreen 경고가 나타날 수 있습니다.
                   안내가 뜨면 <strong>추가 정보</strong> → <strong>실행</strong>을 선택하세요.
                 </p>
-              </div>
-              <div class="verify-platform verify-platform--mac">
-                <h4>Mac OS</h4>
+              </details>
+              <details class="verify-platform verify-platform--mac">
+                <summary><span>Mac OS</span><span>SHA256</span></summary>
                 <p class="verify-card__meta">SHA256 <code id="release-sha-inline-mac">381AA0E27046C5A79C985452EA23F38099D1C83E8EC3675EE3A90776FADBBE90</code></p>
                 <p class="verify-card__meta">Terminal <code id="verify-command-mac">shasum -a 256 ./Glyfana-0.1.9-x64.dmg</code></p>
                 <p class="verify-card__meta">현재 빌드는 코드 서명과 노터라이즈가 없어 첫 실행 시 Gatekeeper 안내가 나타날 수 있습니다. 시스템 설정에서 열기를 허용하세요.</p>
-              </div>
-              <div class="verify-platform verify-platform--linux">
-                <h4>Linux</h4>
+              </details>
+              <details class="verify-platform verify-platform--linux">
+                <summary><span>Linux</span><span>SHA256</span></summary>
                 <p class="verify-card__meta">SHA256 <code id="release-sha-inline-linux">4BE5F3D892C10EE95E2CD16ED32591D62F63E27BCA32D75C2C83FFDA38E545AE</code></p>
                 <p class="verify-card__meta">Terminal <code id="verify-command-linux">sha256sum ./Glyfana-0.1.9-x86_64.AppImage</code></p>
                 <p class="verify-card__meta">AppImage는 실행 권한을 준 뒤 바로 실행할 수 있고, .deb는 Ubuntu 계열에서 설치할 수 있습니다.</p>
-              </div>
+              </details>
             </div>
           </article>
         </div>
