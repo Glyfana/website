@@ -831,6 +831,7 @@ function applyRecommendedDownload(platformAssets) {
   document.querySelectorAll('.download-option').forEach((option) => {
     const isRecommended = option instanceof HTMLElement && option.dataset.platform === targetPlatform;
     option.classList.toggle('is-recommended', isRecommended);
+    option.style.order = isRecommended ? '-1' : '';
     const badge = option.querySelector('.download-option__badge');
     if (badge instanceof HTMLElement) {
       badge.hidden = !isRecommended;
