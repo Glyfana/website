@@ -1677,4 +1677,11 @@ wireMobileMenu();
 wireShowcaseInteractions();
 wireRevealAnimations();
 trackPageView();
+applyRecommendedDownload({
+  windows: true,
+  macDmg: true,
+  macZip: true,
+  linuxAppImage: true,
+  linuxDeb: true,
+});
 init();
