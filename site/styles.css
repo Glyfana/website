@@ -485,7 +485,8 @@ body {
 .text-link:focus-visible,
 .locale-switch__link:focus-visible,
 .menu-toggle:focus-visible,
-.faq-item summary:focus-visible {
+.faq-item summary:focus-visible,
+.verify-platform summary:focus-visible {
   outline: 3px solid rgba(125, 211, 252, 0.4);
   outline-offset: 3px;
 }
@@ -1540,6 +1541,7 @@ body.is-lightbox-open {
   justify-content: space-between;
   gap: 12px;
   padding-right: 24px;
+  border-radius: 12px;
   cursor: pointer;
   list-style: none;
   color: var(--ink);
