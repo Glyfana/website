@@ -807,8 +807,9 @@ function detectPreferredDownloadPlatform() {
   const platform = String(navigator.userAgentData?.platform || navigator.platform || '').toLowerCase();
   const userAgent = String(navigator.userAgent || '').toLowerCase();
   const target = `${platform} ${userAgent}`;
+  const isTouchMac = /mac/.test(platform) && Number(navigator.maxTouchPoints || 0) > 1;
 
-  if (/android|iphone|ipad|ipod|mobile/.test(target)) return null;
+  if (/android|iphone|ipad|ipod|mobile/.test(target) || isTouchMac) return null;
   if (/win/.test(target)) return 'windows';
   if (/mac|darwin/.test(target)) return 'mac';
   if (/linux|x11/.test(target) && !/android/.test(target)) return 'linux';
