@@ -31,6 +31,7 @@ const STRINGS = {
     pending: 'Pending',
     noReleaseAssets: 'No release assets were published for the current release.',
     installerBadge: 'Installer',
+    sizeUnavailable: 'Size unavailable',
     releaseRepoLabel: 'Release repo',
     siteRepoLabel: 'Site repo',
     dataLabel: 'Data',
@@ -72,6 +73,7 @@ const STRINGS = {
     pending: '대기 중',
     noReleaseAssets: '현재 공개된 릴리스 자산이 없습니다.',
     installerBadge: '설치 파일',
+    sizeUnavailable: '크기 미확인',
     releaseRepoLabel: '릴리스 저장소',
     siteRepoLabel: '사이트 저장소',
     dataLabel: '데이터',
@@ -298,6 +300,10 @@ function getRepoInfoFromGitHubUrl(repoUrl) {
 
 function mergeManifest(base, override) {
   const overridePlatformMatchers = override?.platformAssetMatchers || {};
+  const overrideAssets =
+    Array.isArray(override?.fallbackRelease?.assets) && override.fallbackRelease.assets.length > 0
+      ? mergeFallbackAssets(base.fallbackRelease.assets, override.fallbackRelease.assets)
+      : base.fallbackRelease.assets;
 
   return {
     ...base,
@@ -335,12 +341,27 @@ function mergeManifest(base, override) {
     fallbackRelease: {
       ...base.fallbackRelease,
       ...(override?.fallbackRelease || {}),
-      assets:
-        Array.isArray(override?.fallbackRelease?.assets) && override.fallbackRelease.assets.length > 0
-          ? override.fallbackRelease.assets
-          : base.fallbackRelease.assets,
+      assets: overrideAssets,
     },
   };
+}
+
+function normalizeAssetName(value) {
+  return String(value || '').trim().toLowerCase();
+}
+
+function mergeFallbackAssets(baseAssets, overrideAssets) {
+  const baseByName = new Map(
+    (Array.isArray(baseAssets) ? baseAssets : [])
+      .filter((asset) => asset?.name)
+      .map((asset) => [normalizeAssetName(asset.name), asset]),
+  );
+
+  return (Array.isArray(overrideAssets) ? overrideAssets : []).map((asset) => {
+    const baseAsset = baseByName.get(normalizeAssetName(asset?.name));
+    const integrityValue = asset?.integrityValue || asset?.digest || baseAsset?.integrityValue || baseAsset?.digest || '';
+    return integrityValue ? { ...asset, integrityValue } : asset;
+  });
 }
 
 async function loadManifest() {
@@ -679,7 +700,7 @@ function formatDate(value) {
 }
 
 function formatBytes(value) {
-  if (!Number.isFinite(value) || value <= 0) return t('pending');
+  if (!Number.isFinite(value) || value <= 0) return t('sizeUnavailable');
 
   const units = ['B', 'KB', 'MB', 'GB'];
   let size = value;
@@ -833,6 +854,26 @@ function normalizeReleaseAsset(asset, releaseUrl) {
     isPrimary: Boolean(asset?.isPrimary),
     integrityValue: getIntegrityValue(asset),
   };
+}
+
+function buildKnownIntegrityMap(manifest) {
+  const known = new Map();
+  const assets = manifest?.fallbackRelease?.assets;
+  if (!Array.isArray(assets)) return known;
+
+  assets.forEach((asset) => {
+    const name = normalizeAssetName(asset?.name);
+    const integrityValue = getIntegrityValue(asset);
+    if (name && integrityValue) known.set(name, integrityValue);
+  });
+
+  return known;
+}
+
+function applyKnownIntegrity(asset, knownIntegrityByName) {
+  if (!asset || asset.integrityValue) return asset;
+  const integrityValue = knownIntegrityByName.get(normalizeAssetName(asset.name));
+  return integrityValue ? { ...asset, integrityValue } : asset;
 }
 
 function renderAssetList(assets) {
@@ -1252,7 +1293,10 @@ async function loadLatestReleaseModel(manifest, productRepo) {
 
   const release = await response.json();
   const assets = Array.isArray(release.assets) ? release.assets : [];
-  const mappedAssets = assets.map((asset) => normalizeReleaseAsset(asset, release.html_url || ''));
+  const knownIntegrityByName = buildKnownIntegrityMap(manifest);
+  const mappedAssets = assets.map((asset) =>
+    applyKnownIntegrity(normalizeReleaseAsset(asset, release.html_url || ''), knownIntegrityByName),
+  );
   const platformAssets = extractPlatformAssets(mappedAssets, manifest.platformAssetMatchers);
   const installerAsset =
     getPrimaryReleaseAsset(platformAssets, mappedAssets) || pickInstallerAsset(mappedAssets, manifest.assetMatchers);

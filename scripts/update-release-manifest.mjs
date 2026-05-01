@@ -74,13 +74,40 @@ function getSha256(asset) {
   return digest.slice('sha256:'.length).toUpperCase();
 }
 
-function mapAssets(assets, installerAsset, releaseUrl) {
-  return (Array.isArray(assets) ? assets : []).map((asset) => ({
-    name: asset.name || 'Unnamed asset',
-    sizeBytes: Number.isFinite(asset.size) ? asset.size : null,
-    downloadUrl: asset.browser_download_url || releaseUrl,
-    isPrimary: Boolean(installerAsset && installerAsset.id === asset.id),
-  }));
+function normalizeAssetName(value) {
+  return String(value || '').trim().toLowerCase();
+}
+
+function buildKnownIntegrityMap(manifest) {
+  const known = new Map();
+  const fallbackAssets = manifest?.fallbackRelease?.assets;
+  if (!Array.isArray(fallbackAssets)) return known;
+
+  for (const asset of fallbackAssets) {
+    const name = normalizeAssetName(asset?.name);
+    const integrityValue = String(asset?.integrityValue || '').trim().toUpperCase();
+    if (name && integrityValue) known.set(name, integrityValue);
+  }
+
+  return known;
+}
+
+function mapAssets(assets, installerAsset, releaseUrl, currentManifest) {
+  const knownIntegrityByName = buildKnownIntegrityMap(currentManifest);
+
+  return (Array.isArray(assets) ? assets : []).map((asset) => {
+    const name = asset.name || 'Unnamed asset';
+    const integrityValue = getSha256(asset) || knownIntegrityByName.get(normalizeAssetName(name)) || '';
+    const mapped = {
+      name,
+      sizeBytes: Number.isFinite(asset.size) ? asset.size : null,
+      downloadUrl: asset.browser_download_url || releaseUrl,
+      isPrimary: Boolean(installerAsset && installerAsset.id === asset.id),
+    };
+
+    if (integrityValue) mapped.integrityValue = integrityValue;
+    return mapped;
+  });
 }
 
 async function loadManifest() {
@@ -194,7 +221,7 @@ function buildNextManifest(currentManifest, payload, productRepoUrl) {
       downloadUrl: installerAsset?.browser_download_url || releaseUrl,
       releaseUrl,
       notesUrl: releaseUrl,
-      assets: mapAssets(assets, installerAsset, releaseUrl),
+      assets: mapAssets(assets, installerAsset, releaseUrl, currentManifest),
     },
   };
 }

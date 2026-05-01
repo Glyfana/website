@@ -78,48 +78,56 @@
         "name": "Glyfana-0.1.9-amd64.deb",
         "sizeBytes": 89580088,
         "downloadUrl": "https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/Glyfana-0.1.9-amd64.deb",
+        "integrityValue": "8CD5AA45F14B1BE31AFC54AC632C19101FE1209888FF3D982BC0A9484C623A92",
         "isPrimary": false
       },
       {
         "name": "Glyfana-0.1.9-x64.dmg",
         "sizeBytes": 109315649,
         "downloadUrl": "https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/Glyfana-0.1.9-x64.dmg",
+        "integrityValue": "381AA0E27046C5A79C985452EA23F38099D1C83E8EC3675EE3A90776FADBBE90",
         "isPrimary": false
       },
       {
         "name": "Glyfana-0.1.9-x64.zip",
         "sizeBytes": 106076260,
         "downloadUrl": "https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/Glyfana-0.1.9-x64.zip",
+        "integrityValue": "B28903ACFD125B497306D3D5C81AF75EF759109129D7A1743E1BF51405F284F7",
         "isPrimary": false
       },
       {
         "name": "Glyfana-0.1.9-x86_64.AppImage",
         "sizeBytes": 114164946,
         "downloadUrl": "https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/Glyfana-0.1.9-x86_64.AppImage",
+        "integrityValue": "4BE5F3D892C10EE95E2CD16ED32591D62F63E27BCA32D75C2C83FFDA38E545AE",
         "isPrimary": false
       },
       {
         "name": "Glyfana-0.1.9.Setup.exe",
         "sizeBytes": 84275204,
         "downloadUrl": "https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/Glyfana-0.1.9.Setup.exe",
+        "integrityValue": "2409822E41301128F8E586BB116006E9C7599B884C1D7636191854754651CDF7",
         "isPrimary": true
       },
       {
         "name": "Glyfana-0.1.9.Setup.exe.blockmap",
         "sizeBytes": 88826,
         "downloadUrl": "https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/Glyfana-0.1.9.Setup.exe.blockmap",
+        "integrityValue": "19727BE10AE1598FBE1A392A8FD097F968789A505D3C9E1CFB28CA2CADC4A1EB",
         "isPrimary": false
       },
       {
         "name": "latest-linux.yml",
         "sizeBytes": 533,
         "downloadUrl": "https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/latest-linux.yml",
+        "integrityValue": "A89583C89D8C23D443BBA77A8B34B4FB7015A376D4DE1D4A5D37DEEC50E3C815",
         "isPrimary": false
       },
       {
         "name": "latest.yml",
         "sizeBytes": 342,
         "downloadUrl": "https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/latest.yml",
+        "integrityValue": "51E46CBA11F3DC41D4BA1A84FC7FD1C7FB247643E7C5E9A9752E655A579491AE",
         "isPrimary": false
       }
     ]
