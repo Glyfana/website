@@ -808,6 +808,7 @@ function detectPreferredDownloadPlatform() {
   const userAgent = String(navigator.userAgent || '').toLowerCase();
   const target = `${platform} ${userAgent}`;
 
+  if (/android|iphone|ipad|ipod|mobile/.test(target)) return null;
   if (/win/.test(target)) return 'windows';
   if (/mac|darwin/.test(target)) return 'mac';
   if (/linux|x11/.test(target) && !/android/.test(target)) return 'linux';
@@ -821,9 +822,11 @@ function applyRecommendedDownload(platformAssets) {
     linux: Boolean(platformAssets.linuxAppImage || platformAssets.linuxDeb),
   };
   const preferred = detectPreferredDownloadPlatform();
-  const targetPlatform = available[preferred]
+  const targetPlatform = preferred && available[preferred]
     ? preferred
-    : ['windows', 'mac', 'linux'].find((platform) => available[platform]);
+    : preferred === null
+      ? null
+      : ['windows', 'mac', 'linux'].find((platform) => available[platform]);
 
   document.querySelectorAll('.download-option').forEach((option) => {
     const isRecommended = option instanceof HTMLElement && option.dataset.platform === targetPlatform;
