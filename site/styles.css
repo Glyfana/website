@@ -38,6 +38,28 @@ body {
     linear-gradient(180deg, var(--bg-0), var(--bg-1) 45%, var(--bg-2));
 }
 
+.skip-link {
+  position: fixed;
+  z-index: 20;
+  top: 12px;
+  left: 12px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: #e0f2fe;
+  color: #0f172a;
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+  transform: translateY(-72px);
+  transition: transform 0.16s ease;
+}
+
+.skip-link:focus-visible {
+  outline: 3px solid rgba(125, 211, 252, 0.45);
+  outline-offset: 3px;
+  transform: translateY(0);
+}
+
 .page-noise,
 .halo {
   position: fixed;
