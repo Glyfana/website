@@ -832,6 +832,10 @@ function applyRecommendedDownload(platformAssets) {
     if (badge instanceof HTMLElement) {
       badge.hidden = !isRecommended;
     }
+    const button = option.querySelector('.btn');
+    if (button instanceof HTMLElement) {
+      button.classList.toggle('btn--primary', isRecommended);
+    }
   });
 }
 
