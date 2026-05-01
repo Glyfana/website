@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="build-id" content="20260501-checksum-preserve" />
+    <meta name="build-id" content="20260502-trust-cards" />
     <meta name="manifest-path" content="./release-manifest.json" />
     <meta name="screenshots-path" content="./screenshots-manifest.json" />
     <meta name="analytics-endpoint" content="__GLYFANA_ANALYTICS_ENDPOINT__" />
@@ -57,7 +57,7 @@
       rel="stylesheet"
     />
     <script src="./locale-router.js?v=20260312-showcase-lightbox"></script>
-    <link rel="stylesheet" href="./styles.css?v=20260424-mac-os-copy" />
+    <link rel="stylesheet" href="./styles.css?v=20260502-trust-cards" />
   </head>
   <body id="top">
     <div class="page-noise" aria-hidden="true"></div>
@@ -107,6 +107,11 @@
             Write without cloud sync or extra setup.
             Keep your files local and under your control, with source mode there when you need precision.
           </p>
+          <ul class="hero__facts" aria-label="Glyfana trust points">
+            <li>No account required</li>
+            <li>Direct local-file editing</li>
+            <li>Verified on GitHub Releases</li>
+          </ul>
           <div class="hero__spotlight">
             <img
               class="hero__spotlight-image"
@@ -122,7 +127,10 @@
           <h2>Free download</h2>
           <div class="download-options">
             <article class="download-option download-option--windows">
-              <p class="download-option__label">Windows</p>
+              <p class="download-option__label">
+                <span>Windows</span>
+                <span class="download-option__badge">Recommended</span>
+              </p>
               <a
                 class="btn btn--primary js-download js-download-windows"
                 href="https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/Glyfana-0.1.9.Setup.exe"

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="build-id" content="20260501-checksum-preserve" />
+    <meta name="build-id" content="20260502-trust-cards" />
     <meta name="manifest-path" content="../release-manifest.json" />
     <meta name="screenshots-path" content="../screenshots-manifest.json" />
     <meta name="analytics-endpoint" content="__GLYFANA_ANALYTICS_ENDPOINT__" />
@@ -57,7 +57,7 @@
       rel="stylesheet"
     />
     <script src="../locale-router.js?v=20260312-showcase-lightbox"></script>
-    <link rel="stylesheet" href="../styles.css?v=20260424-mac-os-copy" />
+    <link rel="stylesheet" href="../styles.css?v=20260502-trust-cards" />
   </head>
   <body id="top">
     <div class="page-noise" aria-hidden="true"></div>
@@ -107,6 +107,11 @@
             클라우드 없이, 복잡한 설정 없이, 안전하게 작성하세요.
             파일은 로컬에 남고, 작업은 가볍게 이어집니다.
           </p>
+          <ul class="hero__facts" aria-label="Glyfana 핵심 신뢰 포인트">
+            <li>계정 없이 시작</li>
+            <li>로컬 파일 직접 편집</li>
+            <li>GitHub 릴리스 검증</li>
+          </ul>
           <div class="hero__spotlight">
             <img
               class="hero__spotlight-image"
@@ -122,7 +127,10 @@
           <h2>무료 다운로드</h2>
           <div class="download-options">
             <article class="download-option download-option--windows">
-              <p class="download-option__label">Windows</p>
+              <p class="download-option__label">
+                <span>Windows</span>
+                <span class="download-option__badge">추천</span>
+              </p>
               <a
                 class="btn btn--primary js-download js-download-windows"
                 href="https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/Glyfana-0.1.9.Setup.exe"

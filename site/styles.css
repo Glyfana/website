@@ -582,10 +582,25 @@ body {
 }
 
 .download-option {
+  position: relative;
   padding: 14px;
   border: 1px solid rgba(148, 163, 184, 0.12);
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.04);
+  transition: transform 0.16s ease, border-color 0.16s ease, background-color 0.16s ease;
+}
+
+.download-option:hover {
+  transform: translateY(-2px);
+  border-color: rgba(125, 211, 252, 0.28);
+  background: rgba(255, 255, 255, 0.065);
+}
+
+.download-option--windows {
+  border-color: rgba(125, 211, 252, 0.24);
+  background:
+    radial-gradient(circle at top right, rgba(125, 211, 252, 0.14), transparent 42%),
+    rgba(255, 255, 255, 0.055);
 }
 
 .download-option .btn {
@@ -594,12 +609,26 @@ body {
 }
 
 .download-option__label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
   margin: 0 0 12px;
   color: var(--muted);
   font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
+}
+
+.download-option__badge {
+  padding: 4px 7px;
+  border-radius: 999px;
+  border: 1px solid rgba(125, 211, 252, 0.24);
+  background: rgba(125, 211, 252, 0.1);
+  color: #e0f2fe;
+  font-size: 10px;
+  letter-spacing: 0.06em;
 }
 
 .download-option__meta,
