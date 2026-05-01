@@ -803,6 +803,38 @@ function buildPlatformSummary(platformAssets) {
   return labels.join(', ');
 }
 
+function detectPreferredDownloadPlatform() {
+  const platform = String(navigator.userAgentData?.platform || navigator.platform || '').toLowerCase();
+  const userAgent = String(navigator.userAgent || '').toLowerCase();
+  const target = `${platform} ${userAgent}`;
+
+  if (/win/.test(target)) return 'windows';
+  if (/mac|darwin/.test(target)) return 'mac';
+  if (/linux|x11/.test(target) && !/android/.test(target)) return 'linux';
+  return 'windows';
+}
+
+function applyRecommendedDownload(platformAssets) {
+  const available = {
+    windows: Boolean(platformAssets.windows),
+    mac: Boolean(platformAssets.macDmg || platformAssets.macZip),
+    linux: Boolean(platformAssets.linuxAppImage || platformAssets.linuxDeb),
+  };
+  const preferred = detectPreferredDownloadPlatform();
+  const targetPlatform = available[preferred]
+    ? preferred
+    : ['windows', 'mac', 'linux'].find((platform) => available[platform]);
+
+  document.querySelectorAll('.download-option').forEach((option) => {
+    const isRecommended = option instanceof HTMLElement && option.dataset.platform === targetPlatform;
+    option.classList.toggle('is-recommended', isRecommended);
+    const badge = option.querySelector('.download-option__badge');
+    if (badge instanceof HTMLElement) {
+      badge.hidden = !isRecommended;
+    }
+  });
+}
+
 function buildReleaseApiUrl(repoUrl) {
   const info = getRepoInfoFromGitHubUrl(repoUrl);
   if (!info) return '';
@@ -1202,6 +1234,7 @@ function applyReleaseModel(model, options) {
   setHidden('.verify-platform--windows', !windowsAsset);
   setHidden('.verify-platform--mac', !macPrimaryAsset);
   setHidden('.verify-platform--linux', !linuxPrimaryAsset);
+  applyRecommendedDownload(platformAssets);
   renderAssetList(model.assets || []);
 }
 

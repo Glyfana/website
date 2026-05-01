@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="build-id" content="20260502-verify-focus" />
+    <meta name="build-id" content="20260502-platform-recommend" />
     <meta name="manifest-path" content="../release-manifest.json" />
     <meta name="screenshots-path" content="../screenshots-manifest.json" />
     <meta name="analytics-endpoint" content="__GLYFANA_ANALYTICS_ENDPOINT__" />
@@ -57,7 +57,7 @@
       rel="stylesheet"
     />
     <script src="../locale-router.js?v=20260312-showcase-lightbox"></script>
-    <link rel="stylesheet" href="../styles.css?v=20260502-verify-focus" />
+    <link rel="stylesheet" href="../styles.css?v=20260502-platform-recommend" />
   </head>
   <body id="top">
     <div class="page-noise" aria-hidden="true"></div>
@@ -117,7 +117,7 @@
         <aside class="release-panel" aria-live="polite" data-state="live">
           <h2>무료 다운로드</h2>
           <div class="download-options">
-            <article class="download-option download-option--windows">
+            <article class="download-option download-option--windows is-recommended" data-platform="windows">
               <p class="download-option__label">
                 <span>Windows</span>
                 <span class="download-option__badge">추천</span>
@@ -130,8 +130,11 @@
               >Windows용 무료 다운로드</a>
               <p class="download-option__meta"><code id="download-windows-file">Glyfana-0.1.9.Setup.exe</code> · <span id="download-windows-size">80.4 MB</span></p>
             </article>
-            <article class="download-option download-option--mac">
-              <p class="download-option__label">Mac OS</p>
+            <article class="download-option download-option--mac" data-platform="mac">
+              <p class="download-option__label">
+                <span>Mac OS</span>
+                <span class="download-option__badge" hidden>추천</span>
+              </p>
               <a
                 class="btn js-download-mac js-download-mac-dmg"
                 href="https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/Glyfana-0.1.9-x64.dmg"
@@ -149,8 +152,11 @@
                 <span id="download-mac-zip-size">101.2 MB</span>
               </p>
             </article>
-            <article class="download-option download-option--linux">
-              <p class="download-option__label">Linux</p>
+            <article class="download-option download-option--linux" data-platform="linux">
+              <p class="download-option__label">
+                <span>Linux</span>
+                <span class="download-option__badge" hidden>추천</span>
+              </p>
               <a
                 class="btn js-download-linux"
                 href="https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/Glyfana-0.1.9-x86_64.AppImage"
