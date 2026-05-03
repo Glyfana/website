@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="build-id" content="20260502-touch-aware" />
+    <meta name="build-id" content="20260503-mobile-guidance" />
     <meta name="manifest-path" content="./release-manifest.json" />
     <meta name="screenshots-path" content="./screenshots-manifest.json" />
     <meta name="analytics-endpoint" content="__GLYFANA_ANALYTICS_ENDPOINT__" />
@@ -57,7 +57,7 @@
       rel="stylesheet"
     />
     <script src="./locale-router.js?v=20260312-showcase-lightbox"></script>
-    <link rel="stylesheet" href="./styles.css?v=20260502-skip-link" />
+    <link rel="stylesheet" href="./styles.css?v=20260503-mobile-guidance" />
   </head>
   <body id="top">
     <a class="skip-link" href="#release">Skip to download</a>
@@ -176,6 +176,11 @@
               </p>
             </article>
           </div>
+          <p class="release-panel__mobile-note" hidden>
+            Desktop installers do not run on phones or tablets.
+            Open this page on your desktop, or choose a file from
+            <a class="text-link js-releases" href="https://github.com/Glyfana/Glyfana/releases" target="_blank" rel="noreferrer">all releases</a>.
+          </p>
           <p class="release-panel__trust">Ready after install · SHA256 provided</p>
           <div class="stat-grid">
             <div class="stat">
@@ -312,6 +317,6 @@
       <span>(c) <span id="year"></span> Glyfana</span>
     </footer>
 
-    <script type="module" src="./app.js?v=20260502-touch-aware"></script>
+    <script type="module" src="./app.js?v=20260503-mobile-guidance"></script>
   </body>
 </html>

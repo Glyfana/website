@@ -572,6 +572,17 @@ body {
   line-height: 1.6;
 }
 
+.release-panel__mobile-note {
+  margin: 14px 0 0;
+  padding: 12px 13px;
+  border: 1px solid rgba(125, 211, 252, 0.18);
+  border-radius: 14px;
+  background: rgba(125, 211, 252, 0.07);
+  color: #d7dded;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
 .download-options {
   margin-top: 22px;
   display: grid;

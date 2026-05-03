@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="build-id" content="20260502-touch-aware" />
+    <meta name="build-id" content="20260503-mobile-guidance" />
     <meta name="manifest-path" content="../release-manifest.json" />
     <meta name="screenshots-path" content="../screenshots-manifest.json" />
     <meta name="analytics-endpoint" content="__GLYFANA_ANALYTICS_ENDPOINT__" />
@@ -57,7 +57,7 @@
       rel="stylesheet"
     />
     <script src="../locale-router.js?v=20260312-showcase-lightbox"></script>
-    <link rel="stylesheet" href="../styles.css?v=20260502-skip-link" />
+    <link rel="stylesheet" href="../styles.css?v=20260503-mobile-guidance" />
   </head>
   <body id="top">
     <a class="skip-link" href="#release">다운로드로 바로가기</a>
@@ -176,6 +176,11 @@
               </p>
             </article>
           </div>
+          <p class="release-panel__mobile-note" hidden>
+            모바일과 태블릿에서는 데스크톱 설치 파일을 실행할 수 없습니다.
+            데스크톱에서 다시 열거나
+            <a class="text-link js-releases" href="https://github.com/Glyfana/Glyfana/releases" target="_blank" rel="noreferrer">전체 릴리스</a>에서 파일을 선택하세요.
+          </p>
           <p class="release-panel__trust">설치 후 바로 사용 · SHA256 제공</p>
           <div class="stat-grid">
             <div class="stat">
@@ -307,6 +312,6 @@
       <span>(c) <span id="year"></span> Glyfana</span>
     </footer>
 
-    <script type="module" src="../app.js?v=20260502-touch-aware"></script>
+    <script type="module" src="../app.js?v=20260503-mobile-guidance"></script>
   </body>
 </html>

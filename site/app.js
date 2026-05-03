@@ -829,6 +829,12 @@ function applyRecommendedDownload(platformAssets) {
       ? null
       : ['windows', 'mac', 'linux'].find((platform) => available[platform]);
 
+  document.querySelectorAll('.release-panel__mobile-note').forEach((note) => {
+    if (note instanceof HTMLElement) {
+      note.hidden = preferred !== null;
+    }
+  });
+
   document.querySelectorAll('.download-option').forEach((option) => {
     const isRecommended = option instanceof HTMLElement && option.dataset.platform === targetPlatform;
     option.classList.toggle('is-recommended', isRecommended);
