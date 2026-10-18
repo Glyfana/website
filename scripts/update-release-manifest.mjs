@@ -79,6 +79,7 @@ function mapAssets(assets, installerAsset, releaseUrl) {
     name: asset.name || 'Unnamed asset',
     sizeBytes: Number.isFinite(asset.size) ? asset.size : null,
     downloadUrl: asset.browser_download_url || releaseUrl,
+    integrityValue: getSha256(asset),
     isPrimary: Boolean(installerAsset && installerAsset.id === asset.id),
   }));
 }

@@ -20,6 +20,7 @@ The product copy on this site is based on the main app repository and the packag
 ## What This Website Adds
 
 - A stable download entry point for the latest Windows `Setup.exe`
+- A paid preview offer with a configurable checkout/request URL
 - Latest release notes summary parsed from the GitHub release body
 - Published asset inventory and SHA256 verification guidance on the same page
 - FAQ content that explains file handling, recovery, updates, and verification before install
@@ -48,6 +49,17 @@ The product copy on this site is based on the main app repository and the packag
 3. The release body is summarized into the `What's New` section.
 4. If the GitHub API is unavailable, the page falls back to the pinned metadata in `site/release-manifest.json`.
 5. `.github/workflows/update-release-manifest.yml` refreshes the pinned metadata every hour and commits only when the manifest changes.
+
+## Paid Preview Funnel
+
+The launch offer is controlled by `site/release-manifest.json` under `commerce`.
+
+- `priceLabel`: localized label shown in the hero and pricing sections
+- `checkoutUrl`: direct payment link once Stripe, Lemon Squeezy, Paddle, or another provider is ready
+- `requestUrl`: manual fallback link used while checkout is not connected
+- `enabled`: hides or shows the paid preview calls to action
+
+Until `checkoutUrl` is set, the page routes paid preview clicks to the configured request link.
 
 ## Repository Structure
 

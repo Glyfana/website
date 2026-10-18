@@ -10,6 +10,7 @@ This folder contains the static GitHub Pages payload for `https://glyfana.github
 ## User-Facing Sections
 
 - `Hero`: current Windows installer CTA, release link, source link, and live release metadata
+- `Pricing`: paid preview offer and checkout/request CTA
 - `Showcase`: real screenshot gallery when `screenshots-manifest.json` has items, or the built-in mockup when it is empty
 - `What's New`: structured summary extracted from the latest release notes
 - `Features`: detailed product capabilities including editing flow, image handling, autosave, conflict handling, updates, and verification
@@ -53,6 +54,7 @@ This folder contains the static GitHub Pages payload for `https://glyfana.github
 - `release-manifest.json`
   - `productRepoUrl`: repository that publishes installer assets
   - `websiteRepoUrl`: optional explicit repository URL for the site itself
+  - `commerce`: paid preview enablement, price label, checkout URL, and manual request fallback
   - `assetMatchers`: filename rules used to detect the installer asset from the latest release
   - `integrity.value`: published SHA256 for the pinned fallback build
   - `fallbackRelease`: pinned metadata used when the live API is unavailable

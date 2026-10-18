@@ -3,20 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="build-id" content="20260312-showcase-lightbox" />
+    <meta name="build-id" content="20260521-paid-preview" />
     <meta name="manifest-path" content="./release-manifest.json" />
     <meta name="screenshots-path" content="./screenshots-manifest.json" />
-    <title>Glyfana Downloads | Windows Markdown Editor</title>
+    <title>Glyfana Paid Preview | Local-first Markdown Editor</title>
     <meta
       name="description"
-      content="Official Glyfana download page for the latest Windows installer, release notes, release assets, and integrity checks."
+      content="Join the Glyfana paid preview or download the public desktop preview for a local-first Markdown editor with recovery-aware file handling."
     />
     <meta name="robots" content="index,follow" />
     <meta name="theme-color" content="#0b7b75" />
     <link rel="canonical" href="https://glyfana.github.io/website/" />
-    <link rel="icon" type="image/svg+xml" href="./assets/glyfana-emblem.svg?v=20260312-showcase-lightbox" />
-    <link rel="icon" type="image/png" sizes="512x512" href="./assets/glyfana-emblem.png?v=20260312-showcase-lightbox" />
-    <link rel="apple-touch-icon" href="./assets/glyfana-emblem.png?v=20260312-showcase-lightbox" />
+    <link rel="icon" type="image/svg+xml" href="./assets/glyfana-emblem.svg?v=20260521-paid-preview" />
+    <link rel="icon" type="image/png" sizes="512x512" href="./assets/glyfana-emblem.png?v=20260521-paid-preview" />
+    <link rel="apple-touch-icon" href="./assets/glyfana-emblem.png?v=20260521-paid-preview" />
     <link rel="alternate" hreflang="en" href="https://glyfana.github.io/website/" />
     <link rel="alternate" hreflang="ko" href="https://glyfana.github.io/website/ko/" />
     <link rel="alternate" hreflang="x-default" href="https://glyfana.github.io/website/" />
@@ -24,38 +24,38 @@
     <meta property="og:site_name" content="Glyfana" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="ko_KR" />
-    <meta property="og:title" content="Glyfana Downloads | Windows Markdown Editor" />
+    <meta property="og:title" content="Glyfana Paid Preview | Local-first Markdown Editor" />
     <meta
       property="og:description"
-      content="Download the latest Glyfana Windows installer with release notes, asset inventory, and integrity checks in one place."
+      content="Join the Glyfana paid preview or download the public desktop preview for a local-first Markdown editor."
     />
     <meta property="og:url" content="https://glyfana.github.io/website/" />
     <meta
       property="og:image"
-      content="https://glyfana.github.io/website/assets/og-en.png?v=20260312-showcase-lightbox"
+      content="https://glyfana.github.io/website/assets/og-en.png?v=20260521-paid-preview"
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Glyfana Windows download page with editor preview" />
+    <meta property="og:image:alt" content="Glyfana paid preview page with editor preview" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Glyfana Downloads | Windows Markdown Editor" />
+    <meta name="twitter:title" content="Glyfana Paid Preview | Local-first Markdown Editor" />
     <meta
       name="twitter:description"
-      content="Download the latest Glyfana Windows installer with release notes and integrity checks."
+      content="Join the Glyfana paid preview or download the public desktop preview."
     />
     <meta
       name="twitter:image"
-      content="https://glyfana.github.io/website/assets/og-en.png?v=20260312-showcase-lightbox"
+      content="https://glyfana.github.io/website/assets/og-en.png?v=20260521-paid-preview"
     />
-    <meta name="twitter:image:alt" content="Glyfana Windows download page with editor preview" />
+    <meta name="twitter:image:alt" content="Glyfana paid preview page with editor preview" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap"
       rel="stylesheet"
     />
-    <script src="./locale-router.js?v=20260312-showcase-lightbox"></script>
-    <link rel="stylesheet" href="./styles.css?v=20260312-showcase-lightbox" />
+    <script src="./locale-router.js?v=20260521-paid-preview"></script>
+    <link rel="stylesheet" href="./styles.css?v=20260521-paid-preview" />
   </head>
   <body>
     <div class="page-noise" aria-hidden="true"></div>
@@ -64,7 +64,7 @@
 
     <header class="topbar">
       <a class="brand" href="#top" aria-label="Glyfana home">
-        <img class="brand__mark" src="./assets/glyfana-emblem.svg?v=20260312-showcase-lightbox" alt="" aria-hidden="true" />
+        <img class="brand__mark" src="./assets/glyfana-emblem.svg?v=20260521-paid-preview" alt="" aria-hidden="true" />
         <span class="brand__name">Glyfana</span>
       </a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu">
@@ -77,6 +77,7 @@
       </button>
       <div class="topbar__menu" id="site-menu">
         <nav class="nav">
+          <a href="#pricing">Pricing</a>
           <a href="#download">Download</a>
           <a href="#showcase">Preview</a>
           <a href="#features">Features</a>
@@ -88,11 +89,11 @@
             <a class="locale-switch__link" href="./ko/?lang=ko">KO</a>
           </nav>
           <a
-            class="topbar__cta js-releases"
-            href="https://github.com/Glyfana/Glyfana/releases"
+            class="topbar__cta js-checkout"
+            href="https://github.com/Glyfana/Glyfana/issues/new?title=Paid%20preview%20request&body=I%20want%20Glyfana%20paid%20preview%20access.%0A%0APlatform%3A%0AUse%20case%3A"
             target="_blank"
             rel="noreferrer"
-          >All Releases</a>
+          >Paid Preview</a>
         </div>
       </div>
     </header>
@@ -100,14 +101,29 @@
     <main id="top" class="layout">
       <section class="hero reveal">
         <div class="hero__copy">
-          <p class="eyebrow">Windows Markdown Editor</p>
-          <p class="hero__kicker">Local-first writing with a calm reading surface, raw Markdown control, and recovery-aware file handling.</p>
-          <h1>Write in a quiet workspace. Ship from the same files.</h1>
+          <p class="eyebrow">Paid preview Markdown editor</p>
+          <p class="hero__kicker">A local-first editor for people who write release notes, docs, changelogs, and technical notes from real files.</p>
+          <h1>Glyfana Paid Preview</h1>
           <p class="hero__desc">
-            Glyfana is a local-first Markdown editor for release notes, docs, and internal writing. The site shows the
-            actual product first, then keeps the latest Windows installer, release notes, and verification details
-            within reach.
+            Join the early supporter track for <span id="commerce-price">$19 paid preview</span>, or download the public
+            desktop preview and evaluate the editor first. Glyfana keeps Markdown files local, stores pasted images
+            beside the note, and gives raw Markdown one-toggle access when structure matters.
           </p>
+          <div class="actions">
+            <a
+              class="btn btn--primary js-checkout"
+              href="https://github.com/Glyfana/Glyfana/issues/new?title=Paid%20preview%20request&body=I%20want%20Glyfana%20paid%20preview%20access.%0A%0APlatform%3A%0AUse%20case%3A"
+              target="_blank"
+              rel="noreferrer"
+            >Request Paid Preview</a>
+            <a
+              class="btn btn--ghost js-download"
+              href="https://github.com/Glyfana/Glyfana/releases/latest"
+              target="_blank"
+              rel="noreferrer"
+            >Download Public Preview</a>
+            <a class="btn btn--ghost" href="#showcase">See Product Preview</a>
+          </div>
           <div class="hero__spotlight">
             <div class="hero__spotlight-head">
               <span class="hero__spotlight-label">Editor preview</span>
@@ -127,19 +143,9 @@
               <strong>Release notes, docs, changelogs, and local knowledge work</strong>
             </div>
             <div class="hero-proof-card">
-              <span class="hero-proof-card__label">Why it stands out</span>
-              <strong>A product-first download page with source mode, screenshots, and trust signals</strong>
+              <span class="hero-proof-card__label">Launch offer</span>
+              <strong id="commerce-offer">Supporter license for early adopters</strong>
             </div>
-          </div>
-          <div class="actions">
-            <a
-              class="btn btn--primary js-download"
-              href="https://github.com/Glyfana/Glyfana/releases/download/v0.1.7/Glyfana-0.1.7.Setup.exe"
-              target="_blank"
-              rel="noreferrer"
-            >Download Latest Setup</a>
-            <a class="btn btn--ghost" href="#showcase">See Product Preview</a>
-            <a class="text-link js-releases" href="https://github.com/Glyfana/Glyfana/releases" target="_blank" rel="noreferrer">Browse all releases</a>
           </div>
           <ul class="hero__facts">
             <li>Local-first Markdown files with portable assets</li>
@@ -153,7 +159,7 @@
             <span class="status-dot" aria-hidden="true"></span>
             <span id="release-status">Loading latest release...</span>
           </div>
-          <h2 id="release-title">Latest stable build</h2>
+          <h2 id="release-title">Public preview download</h2>
           <div class="stat-grid">
             <div class="stat">
               <span class="stat__label">Version</span>
@@ -175,13 +181,13 @@
           <div class="actions actions--tight">
             <a
               class="btn btn--primary js-download"
-              href="https://github.com/Glyfana/Glyfana/releases/download/v0.1.7/Glyfana-0.1.7.Setup.exe"
+              href="https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/Glyfana-0.1.9.Setup.exe"
               target="_blank"
               rel="noreferrer"
-            >Download .exe</a>
+            >Download Preview</a>
             <a
               class="btn js-notes"
-              href="https://github.com/Glyfana/Glyfana/releases/tag/v0.1.7"
+              href="https://github.com/Glyfana/Glyfana/releases/tag/v0.1.9"
               target="_blank"
               rel="noreferrer"
             >Release Notes</a>
@@ -192,9 +198,42 @@
       <section class="signal reveal">
         <div class="signal__badge">Source of truth</div>
         <p>
-          This page tries the live GitHub Releases API first. If the API cannot be reached, it falls back to pinned
-          metadata so the download path still stays usable.
+          Paid preview requests are handled manually until checkout is connected. Public builds remain available from
+          GitHub Releases so users can verify the product before paying.
         </p>
+      </section>
+
+      <section id="pricing" class="pricing reveal js-commerce-enabled">
+        <div class="section-head pricing__head">
+          <p class="eyebrow">Pricing</p>
+          <h2>Start with a small paid preview instead of waiting for a perfect 1.0.</h2>
+          <p class="section-copy">
+            The first revenue test is intentionally simple: public builds stay downloadable, while early supporters fund
+            signed releases, mobile validation, and faster support loops.
+          </p>
+        </div>
+
+        <article class="pricing-card">
+          <div class="pricing-card__main">
+            <span class="pricing-card__badge">Launch offer</span>
+            <h3>$19</h3>
+            <p>Paid preview supporter license</p>
+            <ul class="pricing-card__list">
+              <li>Early adopter access to the paid preview track</li>
+              <li>Priority feedback on editor, image, and recovery workflows</li>
+              <li>Funds code signing, release polish, and mobile build verification</li>
+            </ul>
+          </div>
+          <div class="pricing-card__action">
+            <a
+              class="btn btn--primary js-checkout"
+              href="https://github.com/Glyfana/Glyfana/issues/new?title=Paid%20preview%20request&body=I%20want%20Glyfana%20paid%20preview%20access.%0A%0APlatform%3A%0AUse%20case%3A"
+              target="_blank"
+              rel="noreferrer"
+            >Request Paid Preview</a>
+            <a class="text-link js-download" href="https://github.com/Glyfana/Glyfana/releases/latest" target="_blank" rel="noreferrer">Try the public build first</a>
+          </div>
+        </article>
       </section>
 
       <section id="showcase" class="showcase reveal">
@@ -243,7 +282,7 @@
 
                   <div class="workspace-demo__panes">
                     <article class="workspace-demo__editor">
-                      <span class="workspace-demo__editor-title"># Glyfana 0.1.7</span>
+                      <span class="workspace-demo__editor-title"># Glyfana 0.1.9</span>
                       <span class="workspace-demo__line">Publish the latest Windows installer</span>
                       <span class="workspace-demo__line">Attach release notes and checksum</span>
                       <span class="workspace-demo__line">Keep recovery details visible</span>
@@ -288,7 +327,7 @@
             <span class="release-summary__label">Latest release notes</span>
             <a
               class="text-link js-notes"
-              href="https://github.com/Glyfana/Glyfana/releases/tag/v0.1.7"
+              href="https://github.com/Glyfana/Glyfana/releases/tag/v0.1.9"
               target="_blank"
               rel="noreferrer"
             >Open full notes</a>
@@ -489,6 +528,6 @@
       <span id="repo-status">Release repo: pending</span>
     </footer>
 
-    <script type="module" src="./app.js?v=20260312-showcase-lightbox"></script>
+    <script type="module" src="./app.js?v=20260521-paid-preview"></script>
   </body>
 </html>

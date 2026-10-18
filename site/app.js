@@ -116,6 +116,21 @@ const DEFAULT_PLATFORM_ASSET_MATCHERS = {
   linuxDeb: [{ type: 'regex', value: '\\.deb$' }],
 };
 
+const DEFAULT_COMMERCE = {
+  enabled: true,
+  priceLabel: {
+    en: '$19 paid preview',
+    ko: '$19 유료 프리뷰',
+  },
+  checkoutUrl: '',
+  requestUrl:
+    'https://github.com/Glyfana/Glyfana/issues/new?title=Paid%20preview%20request&body=I%20want%20Glyfana%20paid%20preview%20access.%0A%0APlatform%3A%0AUse%20case%3A',
+  offer: {
+    en: 'Supporter license for early adopters',
+    ko: '초기 사용자용 서포터 라이선스',
+  },
+};
+
 const DEFAULT_MANIFEST = {
   productRepoUrl: 'https://github.com/Glyfana/Glyfana',
   websiteRepoUrl: '',
@@ -127,60 +142,75 @@ const DEFAULT_MANIFEST = {
     { type: 'regex', value: '\\.(exe|msi)$' },
   ],
   platformAssetMatchers: DEFAULT_PLATFORM_ASSET_MATCHERS,
+  commerce: DEFAULT_COMMERCE,
   integrity: {
     algorithm: 'SHA256',
-    value: '2787F6A1A3AC4839BADAC31EB01BC460501DC860ACE9841D9B2F5DE2A1436AD8',
+    value: '2409822E41301128F8E586BB116006E9C7599B884C1D7636191854754651CDF7',
   },
   fallbackRelease: {
-    version: 'v0.1.8',
-    title: 'v0.1.8',
-    publishedAt: '2026-04-24T08:18:48Z',
-    setupFileName: 'Glyfana-0.1.8.Setup.exe',
-    sizeBytes: 84360458,
-    downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.8/Glyfana-0.1.8.Setup.exe',
-    releaseUrl: 'https://github.com/Glyfana/Glyfana/releases/tag/v0.1.8',
-    notesUrl: 'https://github.com/Glyfana/Glyfana/releases/tag/v0.1.8',
+    version: 'v0.1.9',
+    title: 'v0.1.9',
+    publishedAt: '2026-04-24T09:07:33Z',
+    setupFileName: 'Glyfana-0.1.9.Setup.exe',
+    sizeBytes: 84275204,
+    downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/Glyfana-0.1.9.Setup.exe',
+    releaseUrl: 'https://github.com/Glyfana/Glyfana/releases/tag/v0.1.9',
+    notesUrl: 'https://github.com/Glyfana/Glyfana/releases/tag/v0.1.9',
     assets: [
       {
-        name: 'Glyfana-0.1.8.Setup.exe',
-        sizeBytes: 84360458,
-        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.8/Glyfana-0.1.8.Setup.exe',
-        integrityValue: '2787F6A1A3AC4839BADAC31EB01BC460501DC860ACE9841D9B2F5DE2A1436AD8',
+        name: 'Glyfana-0.1.9-amd64.deb',
+        sizeBytes: 89580088,
+        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/Glyfana-0.1.9-amd64.deb',
+        integrityValue: '8CD5AA45F14B1BE31AFC54AC632C19101FE1209888FF3D982BC0A9484C623A92',
+        isPrimary: false,
+      },
+      {
+        name: 'Glyfana-0.1.9-x64.dmg',
+        sizeBytes: 109315649,
+        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/Glyfana-0.1.9-x64.dmg',
+        integrityValue: '381AA0E27046C5A79C985452EA23F38099D1C83E8EC3675EE3A90776FADBBE90',
+        isPrimary: false,
+      },
+      {
+        name: 'Glyfana-0.1.9-x64.zip',
+        sizeBytes: 106076260,
+        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/Glyfana-0.1.9-x64.zip',
+        integrityValue: 'B28903ACFD125B497306D3D5C81AF75EF759109129D7A1743E1BF51405F284F7',
+        isPrimary: false,
+      },
+      {
+        name: 'Glyfana-0.1.9-x86_64.AppImage',
+        sizeBytes: 114164946,
+        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/Glyfana-0.1.9-x86_64.AppImage',
+        integrityValue: '4BE5F3D892C10EE95E2CD16ED32591D62F63E27BCA32D75C2C83FFDA38E545AE',
+        isPrimary: false,
+      },
+      {
+        name: 'Glyfana-0.1.9.Setup.exe',
+        sizeBytes: 84275204,
+        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/Glyfana-0.1.9.Setup.exe',
+        integrityValue: '2409822E41301128F8E586BB116006E9C7599B884C1D7636191854754651CDF7',
         isPrimary: true,
       },
       {
-        name: 'Glyfana-0.1.8-x86_64.AppImage',
-        sizeBytes: 114267356,
-        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.8/Glyfana-0.1.8-x86_64.AppImage',
-        integrityValue: 'C420A2CDB081F84BFEBCBA8D8DE0FF349F0504CFD7EC6D477C27B4683EBF3DBA',
-        isPrimary: false,
-      },
-      {
-        name: 'Glyfana-0.1.8-amd64.deb',
-        sizeBytes: 89674692,
-        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.8/Glyfana-0.1.8-amd64.deb',
-        integrityValue: '0CA8C9B93B126BC891CE03577DBE33E590BE8B695F9525D28AC9DFDF90176004',
-        isPrimary: false,
-      },
-      {
-        name: 'Glyfana-0.1.8.Setup.exe.blockmap',
-        sizeBytes: 88849,
-        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.8/Glyfana-0.1.8.Setup.exe.blockmap',
-        integrityValue: 'B01C9ABB3CF2B2EAD53B9EB00CD94197986704713381BF545A2837FB2D7399FF',
+        name: 'Glyfana-0.1.9.Setup.exe.blockmap',
+        sizeBytes: 88826,
+        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/Glyfana-0.1.9.Setup.exe.blockmap',
+        integrityValue: '19727BE10AE1598FBE1A392A8FD097F968789A505D3C9E1CFB28CA2CADC4A1EB',
         isPrimary: false,
       },
       {
         name: 'latest-linux.yml',
         sizeBytes: 533,
-        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.8/latest-linux.yml',
-        integrityValue: '29F839BA02D3C6E3950B591FAF68416793C247FE91716E51AC9ABE4E74562789',
+        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/latest-linux.yml',
+        integrityValue: 'A89583C89D8C23D443BBA77A8B34B4FB7015A376D4DE1D4A5D37DEEC50E3C815',
         isPrimary: false,
       },
       {
         name: 'latest.yml',
         sizeBytes: 342,
-        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.8/latest.yml',
-        integrityValue: '1FF730AB250819E3234760CE01D4D0962C141E94D036297A8380A3F6C6246A12',
+        downloadUrl: 'https://github.com/Glyfana/Glyfana/releases/download/v0.1.9/latest.yml',
+        integrityValue: '51E46CBA11F3DC41D4BA1A84FC7FD1C7FB247643E7C5E9A9752E655A579491AE',
         isPrimary: false,
       },
     ],
@@ -253,6 +283,21 @@ function mergeManifest(base, override) {
       ...base.integrity,
       ...(override?.integrity || {}),
     },
+    commerce: {
+      ...DEFAULT_COMMERCE,
+      ...(base.commerce || {}),
+      ...(override?.commerce || {}),
+      priceLabel: {
+        ...DEFAULT_COMMERCE.priceLabel,
+        ...(base.commerce?.priceLabel || {}),
+        ...(override?.commerce?.priceLabel || {}),
+      },
+      offer: {
+        ...DEFAULT_COMMERCE.offer,
+        ...(base.commerce?.offer || {}),
+        ...(override?.commerce?.offer || {}),
+      },
+    },
     fallbackRelease: {
       ...base.fallbackRelease,
       ...(override?.fallbackRelease || {}),
@@ -320,7 +365,7 @@ async function loadScreenshotManifest() {
 
 function resolveShowcaseAssetUrl(path) {
   try {
-    return new URL(String(path || '').trim(), window.location.href).toString();
+    return new URL(String(path || '').trim(), SCREENSHOT_MANIFEST_URL).toString();
   } catch {
     return '';
   }
@@ -991,6 +1036,20 @@ function setCommonLinks(productRepo) {
   setLink('.js-releases', productRepo ? `${productRepo}/releases` : '');
 }
 
+function applyCommerceModel(manifest) {
+  const commerce = {
+    ...DEFAULT_COMMERCE,
+    ...(manifest?.commerce || {}),
+  };
+  const enabled = commerce.enabled !== false;
+  const commerceUrl = String(commerce.checkoutUrl || commerce.requestUrl || '').trim();
+
+  setHidden('.js-commerce-enabled', !enabled);
+  setLink('.js-checkout', enabled ? commerceUrl : '');
+  setText('commerce-price', localizeManifestValue(commerce.priceLabel, DEFAULT_COMMERCE.priceLabel.en));
+  setText('commerce-offer', localizeManifestValue(commerce.offer, DEFAULT_COMMERCE.offer.en));
+}
+
 function applyReleaseModel(model, options) {
   const integrityAlgorithm = options?.integrityAlgorithm || 'SHA256';
   const platformAssets = model.platformAssets || {};
@@ -1360,6 +1419,10 @@ function getAnalyticsDescriptor(target) {
     return { name: 'download_click', label: 'download_setup', href: link.href };
   }
 
+  if (link.matches('.js-checkout')) {
+    return { name: 'checkout_click', label: 'paid_preview', href: link.href };
+  }
+
   if (link.matches('.js-release')) {
     return { name: 'release_click', label: 'view_release', href: link.href };
   }
@@ -1422,6 +1485,7 @@ async function init() {
   const websiteRepo = normalizeRepoUrl(manifest.websiteRepoUrl) || getRepoUrlFromPagesUrl();
 
   if (!productRepo) {
+    applyCommerceModel(manifest);
     setReleaseStatus('fallback', t('configureProductRepo'));
     setCommonLinks('');
     updateRepoStatus('', websiteRepo, t('configurationRequired'));
@@ -1431,6 +1495,7 @@ async function init() {
     return;
   }
 
+  applyCommerceModel(manifest);
   setCommonLinks(productRepo);
   applyReleaseModel(fallbackReleaseToModel(manifest, productRepo), {
     integrityAlgorithm: manifest.integrity?.algorithm,
